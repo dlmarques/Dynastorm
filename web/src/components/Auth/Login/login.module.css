@@ -1,0 +1,47 @@
+.container{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-container{
+    width: 100vw;
+    height: calc(100vh - 150px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../../../assets/backgrounds/game_background_1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.form-control{
+    background-color: #141414;
+    width: 500px;
+    height: 350px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 20px;
+}
+
+.form-control h3{
+    font-size: 2vw;
+    text-align: center;
+    font-weight: 500;
+    user-select: none;
+    color: #fff;
+}
+
+.form-control a{
+    font-size: 1vw;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 300;
+    user-select: none;
+    color: #fff;
+}

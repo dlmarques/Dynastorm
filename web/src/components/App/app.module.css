@@ -1,0 +1,18 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.content{
+    height: calc(100vh - 150px);
+    width: 100%;
+    background: url('../../assets/backgrounds/game_background_2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
