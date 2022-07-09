@@ -6,6 +6,7 @@ const cors = require('cors')
 
 //import routes
 const authRoute = require("./routes/auth");
+const userRoute = require("./routes/user");
 
 
 dotenv.config();
@@ -20,6 +21,8 @@ mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopol
 app.use(express.json())
 
 //route middlewares
-app.use("/api/user", authRoute)
+app.use("/api/auth", authRoute)
+app.use("/api/user", userRoute)
+
 
 app.listen(3001, () => console.log('server running'))

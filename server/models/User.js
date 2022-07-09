@@ -58,6 +58,16 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 0
   },
+  new: {
+    type: Boolean,
+    required: true,
+    min: 0
+  },
+  perk: {
+    type: String,
+    required: true,
+    min: 1
+  },
   date: {
     type: Date,
     default: Date.now,

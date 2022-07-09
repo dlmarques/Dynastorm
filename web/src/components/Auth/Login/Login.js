@@ -22,7 +22,7 @@ const Login = () => {
   const loginHandler = async (e) => {
     e.preventDefault();
 
-    let response = axios.post("http://localhost:3001/api/user/login", {
+    let response = axios.post("http://localhost:3001/api/auth/login", {
       email: email,
       password: password,
     });

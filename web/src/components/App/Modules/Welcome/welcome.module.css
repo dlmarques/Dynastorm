@@ -1,0 +1,30 @@
+.welcome-container{
+    width: 100vw;
+    height: 100vh;
+    background: url('../../../../assets/backgrounds/game_background_4.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.welcome{ 
+    width: 70%;
+    height: 60%;
+    background-color: #000;
+    border-radius: 15px;
+}
+.welcome h2{
+    color: #fff;
+    font-size: 3rem;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.perks-list{
+    padding-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}

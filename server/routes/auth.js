@@ -36,6 +36,8 @@ router.post("/register", async (req, res) => {
     hp: 100,
     money: 5000,
     xp: 0,
+    new: true,
+    perk: " ",
   });
   try {
     await user.save();
@@ -78,6 +80,10 @@ router.post("/getUserData", async (req, res) => {
     res.status(400).send(err)
   }
 });
+
+router.get('/testServer', (req, res) => {
+  res.send('server is ok!')
+})
 
 
 module.exports = router;

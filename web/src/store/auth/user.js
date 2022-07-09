@@ -13,7 +13,11 @@ const userSlice = createSlice({
             health: null,
             money: null,
             xp: null,
-        }
+            isNew: null,
+            perk: null,
+            perkImage: null
+        },
+        
     }, 
     reducers: {
         setUser(state, action) {
@@ -28,7 +32,15 @@ const userSlice = createSlice({
                 state.user.health = user.health
                 state.user.money = user.money
                 state.user.xp = user.xp
+                state.user.isNew = user.isNew
+                state.user.perk = user.perk
             }
+        },
+        welcome(state) {
+            state.user.isNew = false;
+        },
+        setPerkImage(state, action){
+            state.user.perkImage = action.payload
         }
     }
 })

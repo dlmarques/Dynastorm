@@ -9,23 +9,39 @@
 
 .profile {
   width: 100%;
-  height: calc(600px / 4);
+  height: 200px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   padding-top: 30px;
 }
 
-.profile img {
-  height: 90%;
+.avatar {
+  height: 70%;
   border-radius: 50%;
   border: 2px solid rgb(0, 255, 30);
 }
 
+.profile-text{
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
 .profile h3 {
   color: #fff;
-  font-size: 1.7rem;
+  font-size: 2rem;
+  padding-top: 10px;
+}
+
+.perkImage{
+  height: 100%;
+  border-radius: none;
+  border-radius: 50%;
 }
 
 .bars {
@@ -34,27 +50,30 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 5px;
   width: 100%;
-  height: calc(600px / 4);
+  height: 200px;
+  padding-bottom: 20px;
+}
+
+.bars label {
+  color: #fff;
 }
 
 .stats {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 30px;
   width: 100%;
-  height: calc(600px / 4);
-}
-.row {
-  width: 100%;
+  height: 200px;
 }
 
 .stats-info {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
+  gap: 5px;
 }
 
 .stats-info svg {
@@ -112,5 +131,5 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(600px / 4);
+  height: 200px;
 }
