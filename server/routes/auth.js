@@ -81,9 +81,5 @@ router.post("/getUserData", async (req, res) => {
   }
 });
 
-router.get('/testServer', (req, res) => {
-  res.send('server is ok!')
-})
-
 
 module.exports = router;

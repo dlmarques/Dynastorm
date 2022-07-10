@@ -8,6 +8,9 @@ import Header from "../../App/Layout/Topbar/Header";
 import Input from "../../App/Components/Input/Input";
 import styles from "./register.module.css";
 import AvatarsBox from "./components/AvatarsBox";
+import { errorActions } from "../../../store/ui/error";
+import Error from "../../App/Components/Error/Error";
+import { avatarActions } from "../../../store/ui/avatars";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -16,13 +19,20 @@ const Register = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [finished, setFinished] = useState(false);
+  const error = useSelector(state => state.error.error)
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isShown = useSelector(state => state.avatars.isShown)
 
   useEffect(() => {
     localStorage.authToken
       ? dispatch(authActions.login())
       : dispatch(authActions.logout());
   }, []);
+
+
+  const avatarBoxHandler = () => {
+    dispatch(avatarActions.toggle())
+  }
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -41,6 +51,7 @@ const Register = () => {
       }
     } catch (err) {
       console.error(err);
+      dispatch(errorActions.setError(err.response.data))
     }
   };
 
@@ -48,13 +59,13 @@ const Register = () => {
     <>
       {isLoggedIn ? <Navigate to="/app/home" /> : null}
       {finished ? <Navigate to="/" /> : null}
-      <div className={styles.container}>
+      <div className={!error ? styles.container : styles.blur}>
         <Header title="Dynastorm" />
         <div className={styles["register-container"]}>
           <form className={styles["form-control"]} onSubmit={registerHandler}>
             <h2>Register</h2>
-            <h3>Choose your avatar</h3>
-            <AvatarsBox setAvatar={setAvatar} icon={avatar} />
+            <Button type='button' onClick={avatarBoxHandler}>Select an avatar</Button>
+            {isShown ?  <AvatarsBox setAvatar={setAvatar} icon={avatar} /> : null }
             <Input
               type="text"
               placeholder="Username"
@@ -84,6 +95,7 @@ const Register = () => {
           </form>
         </div>
       </div>
+      {error && <Error/>}
     </>
   );
 };

@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --config ./jest.config.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,10 +42,34 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "moduleNameMapper": {
+      "^image![a-zA-Z0-9$_-]+$": "GlobalImageStub",
+      "^[./a-zA-Z0-9$_-]+\\.png$": "RelativeImageStub"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "collectCoverage": true,
+    "verbose": true,
+    "modulePathIgnorePatterns": [
+      "rpmbuild"
+    ],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react/",
+      "<rootDir>/node_modules/react-dom/",
+      "<rootDir>/node_modules/react-addons-test-utils/",
+      "<rootDir>/node_modules/fbjs",
+      "<rootDir>/node_modules/core-js"
+    ]
+  },
   "devDependencies": {
     "@reduxjs/toolkit": "^1.8.3",
+    "@types/jest": "^28.1.4",
     "axios": "^0.27.2",
     "jest": "^28.1.2",
-    "react-redux": "^8.0.2"
+    "react-redux": "^8.0.2",
+    "ts-jest": "^28.0.5",
+    "typescript": "^4.7.4"
   }
 }

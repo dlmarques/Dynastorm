@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require('cors')
 
 //import routes
+const testRoute = require('./routes/test')
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 
@@ -21,6 +22,7 @@ mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopol
 app.use(express.json())
 
 //route middlewares
+app.use("/api", testRoute)
 app.use("/api/auth", authRoute)
 app.use("/api/user", userRoute)
 

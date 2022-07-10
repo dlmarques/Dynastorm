@@ -4,15 +4,17 @@ import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
 import styles from "./login.module.css";
 import { authActions } from '../../../store/auth/auth'
+import {errorActions} from '../../../store/ui/error'
 import Input from "../../App/Components/Input/Input";
 import Button from "../../App/Components/Button/Button";
 import Header from "../../App/Layout/Topbar/Header";
+import Error from "../../App/Components/Error/Error";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [loginError, setLoginError] = useState(false);
+  const error = useSelector(state => state.error.error)
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn) 
 
   useEffect(() => {
@@ -37,17 +39,18 @@ const Login = () => {
         console.log("User/Password combination does not exist.");
         setEmail("");
         setPassword("");
+        dispatch(errorActions.setError(error.response.data))
       }
     } catch (error) {
       console.error(error.response.data)
-      setLoginError(error.response.data)
+      dispatch(errorActions.setError(error.response.data))
     }
   };
 
   return (
     <>
       {isLoggedIn ? <Navigate to="/app/home" /> : null}
-      <div className={styles.container}>
+      <div className={!error ? styles.container : styles.blur}>
         <Header title='Dynastorm'/>
         <div className={styles["login-container"]}>
           <form className={styles["form-control"]} onSubmit={loginHandler}>
@@ -57,6 +60,7 @@ const Login = () => {
               placeholder="Email"
               name="email"
               id="email"
+              role='emailInput'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -68,11 +72,13 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button type="submit">Submit</Button>
+            <Button role='loginButton' type="submit">Submit</Button>
             <Link to='/register'>Create an account!</Link>
           </form>
         </div>
       </div>
+      {error &&
+          <Error/>}
     </>
   );
 };

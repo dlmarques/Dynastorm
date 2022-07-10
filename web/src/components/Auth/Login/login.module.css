@@ -1,8 +1,10 @@
 .container{
     height: 100vh;
     width: 100vw;
+    transition: all .2s ease-in-out;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
@@ -29,12 +31,24 @@
     padding-bottom: 20px;
 }
 
+@media all and (max-width:768px){
+    .form-control{
+        width: 400px;
+    }    
+}
+
 .form-control h3{
     font-size: 2.5rem;
     text-align: center;
     font-weight: 500;
     user-select: none;
     color: #fff;
+}
+
+@media all and (max-width: 768px){
+    .form-control h3{
+        font-size: 2rem;
+    }
 }
 
 .form-control a{
@@ -45,3 +59,24 @@
     user-select: none;
     color: #fff;
 }
+
+@media all and (max-width: 768px){
+    .form-control a{
+        font-size: 1.25rem;
+    }
+}
+
+
+.blur{
+    filter: blur(5px);
+    transform: scale(1.1);
+    transition: all .1s ease-in-out;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
