@@ -64,9 +64,10 @@ const Register = () => {
         <div className={styles["register-container"]}>
           <form className={styles["form-control"]} onSubmit={registerHandler}>
             <h2>Register</h2>
-            <Button type='button' onClick={avatarBoxHandler}>Select an avatar</Button>
-            {isShown ?  <AvatarsBox setAvatar={setAvatar} icon={avatar} /> : null }
+            <Button type='button' onClick={avatarBoxHandler}>{isShown ? 'Close avatars box' : 'Select an avatar'}</Button>
+            {isShown ?  <AvatarsBox data-testid='avatars' setAvatar={setAvatar} icon={avatar} /> : null }
             <Input
+              data-testid="usernameInput"
               type="text"
               placeholder="Username"
               name="username"
@@ -75,6 +76,7 @@ const Register = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
             <Input
+              data-testid="emailInput"
               type="email"
               placeholder="Email"
               name="email"
@@ -83,6 +85,7 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <Input
+              data-testid="passwordInput"
               type="password"
               placeholder="Password"
               name="password"
@@ -90,7 +93,7 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button type="submit">Register</Button>
+            <Button data-testid='registerButton' type="submit">Register</Button>
             <Link to="/">Already have an account?</Link>
           </form>
         </div>

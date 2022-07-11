@@ -10,11 +10,11 @@ const Perk = ({image}) => {
 
     
         useEffect(() => {
-        if(image.includes('magic')){
+        if(image && image.includes('magic')){
             setPerkName('magic')
-        }else if(image.includes('speed')){
+        }else if(image && image.includes('speed')){
             setPerkName('speed')
-        }else if(image.includes('strength')){
+        }else if(image && image.includes('strength')){
             setPerkName('strength')
         }else{
             setPerkName('')

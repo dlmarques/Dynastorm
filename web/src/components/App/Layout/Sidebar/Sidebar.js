@@ -18,11 +18,6 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
 
-
-  useEffect(() => {
- 
-  }, [])
-
   const endSession = () => {
     logout(dispatch);
   };
@@ -30,14 +25,14 @@ const Sidebar = () => {
   return (
     <div className={styles["profile-bar"]}>
       <div className={styles.profile}>
-        <img src={user.avatar} alt="avatar profile bar" className={styles.avatar} />
+        <img src={user && user.avatar} alt="avatar profile bar" className={styles.avatar} />
         <span className={styles['profile-text']}>
-        <h3>@{user.name}</h3>
+        <h3>@{user && user.name}</h3>
         {user &&
-        user.perkImage === 'strength' ?
+       user && user.perkImage === 'strength' ?
         <img src={strength} alt="perkImage" className={styles.perkImage}/>
         :
-        user.perkImage === 'magic' ?
+        user && user.perkImage === 'magic' ?
         <img src={magic} alt="perkImage" className={styles.perkImage}/>
         :
         <img src={speed} alt="perkImage" className={styles.perkImage}/>
@@ -50,7 +45,7 @@ const Sidebar = () => {
           id="hp"
           min="0"
           max="100"
-          value={user.health}
+          value={user && user.health}
           className={styles.hp}
         />
         <label>XP</label>
@@ -58,27 +53,27 @@ const Sidebar = () => {
           id="xp"
           min="0"
           max="100"
-          value={user.xp}
+          value={user && user.xp}
           className={styles.xp}
         />
       </div>
       <div className={styles.stats}>
         <span className={styles["stats-info"]}>
           <GiBiceps style={{ color: "#ff8400" }} />
-          <strong>{Math.round(user.strength)}</strong>
+          <strong>{user && Math.round(user.strength)}</strong>
         </span>
         <span className={styles["stats-info"]}>
           <RiMagicFill style={{ color: "#ad27f5" }} />
-          <strong>{Math.round(user.magic)}</strong>
+          <strong>{user && Math.round(user.magic)}</strong>
         </span>
 
         <span className={styles["stats-info"]}>
           <BsLightningFill style={{ color: "yellow" }} />
-          <strong>{Math.round(user.stamina)}</strong>
+          <strong>{user && Math.round(user.stamina)}</strong>
         </span>
         <span className={styles["stats-info"]}>
           <GiTabiBoot style={{ color: "#006eff" }} />
-          <strong>{Math.round(user.speed)}</strong>
+          <strong>{user && Math.round(user.speed)}</strong>
         </span>
       </div>
       <div className={styles.logout}>

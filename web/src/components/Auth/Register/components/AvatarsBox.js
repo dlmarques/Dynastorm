@@ -5,7 +5,7 @@ import avatars from '../../../../assets/avatars/avatars'
 
 const AvatarsBox = ({setAvatar, icon}) => {
   return (
-    <div className={styles["avatar-container"]}>
+    <div data-testid='avatars' className={styles["avatar-container"]}>
       {avatars &&
         avatars.map((avatar, id) => <Avatar key={id} image={avatar} setAvatar={setAvatar} icon={icon} />)}
     </div>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
 import styles from "./login.module.css";
-import { authActions } from '../../../store/auth/auth'
-import {errorActions} from '../../../store/ui/error'
+import { authActions } from "../../../store/auth/auth";
+import { errorActions } from "../../../store/ui/error";
 import Input from "../../App/Components/Input/Input";
 import Button from "../../App/Components/Button/Button";
 import Header from "../../App/Layout/Topbar/Header";
@@ -14,11 +14,13 @@ const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const error = useSelector(state => state.error.error)
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn) 
+  const error = useSelector((state) => state.error.error);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   useEffect(() => {
-    localStorage.authToken ? dispatch(authActions.login()) : dispatch(authActions.logout());
+    localStorage.authToken
+      ? dispatch(authActions.login())
+      : dispatch(authActions.logout());
   }, []);
 
   const loginHandler = async (e) => {
@@ -31,19 +33,19 @@ const Login = () => {
 
     try {
       const loginResponse = await response;
-      const authToken = loginResponse.data.authToken
-      if(authToken){
-        localStorage.setItem("authToken", authToken) 
-        dispatch(authActions.login())
-      }else{
+      const authToken = loginResponse.data.authToken;
+      if (authToken) {
+        localStorage.setItem("authToken", authToken);
+        dispatch(authActions.login());
+      } else {
         console.log("User/Password combination does not exist.");
         setEmail("");
         setPassword("");
-        dispatch(errorActions.setError(error.response.data))
+        dispatch(errorActions.setError(error.response.data));
       }
     } catch (error) {
-      console.error(error.response.data)
-      dispatch(errorActions.setError(error.response.data))
+      console.error(error.response.data);
+      dispatch(errorActions.setError(error.response.data));
     }
   };
 
@@ -51,20 +53,22 @@ const Login = () => {
     <>
       {isLoggedIn ? <Navigate to="/app/home" /> : null}
       <div className={!error ? styles.container : styles.blur}>
-        <Header title='Dynastorm'/>
+        <Header title="Dynastorm" />
         <div className={styles["login-container"]}>
           <form className={styles["form-control"]} onSubmit={loginHandler}>
             <h3>Log in</h3>
             <Input
+              data-testid="emailInput"
               type="email"
               placeholder="Email"
               name="email"
               id="email"
-              role='emailInput'
+              role="emailInput"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <Input
+              data-testid="passwordInput"
               type="password"
               placeholder="Password"
               name="password"
@@ -72,13 +76,14 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button role='loginButton' type="submit">Submit</Button>
-            <Link to='/register'>Create an account!</Link>
+            <Button data-testid="loginButton" role="loginButton" type="submit">
+              Submit
+            </Button>
+            <Link to="/register">Create an account!</Link>
           </form>
         </div>
       </div>
-      {error &&
-          <Error/>}
+      {error && <Error />}
     </>
   );
 };
