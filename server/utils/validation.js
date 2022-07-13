@@ -25,6 +25,7 @@ const saveItemValidation = data => {
     itemName: Joi.string().required(),
     itemSkill: Joi.string().required(),
     quantity: Joi.number().required(),
+    price: Joi.number().required(),
   })
   return schema.validate(data)
 }

@@ -24,6 +24,7 @@ const Item = ({ img }) => {
       itemName: item.name,
       itemSkill: item.skill,
       quantity: quantity,
+      price: quantity * item.price
     });
 
     try {

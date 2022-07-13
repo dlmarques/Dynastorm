@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Inventory = require("../models/Inventory");
+const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const { saveItemValidation } = require("../utils/validation");
 
@@ -11,12 +12,15 @@ router.post("/addItem", async (req, res) => {
 
   const id = jwt.decode(req.body.token, process.env.JWT_TOKEN);
   const item = await Inventory.findOne({ id: id });
-
+  const user = await User.findOne({_id: id})
 
   if(item && req.body.itemName === item.itemName){
       try{
         await Inventory.findByIdAndUpdate({_id : item._id}, {$set : {quantity : item.quantity + req.body.quantity}})
-        res.send("success")
+         if(user){
+          await User.findOneAndUpdate({_id: id}, {$set: {money: user.money - req.body.price}})
+          res.send('inserted')
+         } 
       }catch(err){
         res.send(err)
       }
