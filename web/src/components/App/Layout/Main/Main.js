@@ -8,7 +8,7 @@ import Inventory from "../../Modules/Inventory/Inventory";
 import Healer from "../../Modules/Healer/Healer";
 import FeaturesBar from "../FeaturesBar/FeaturesBar";
 
-import styles from "./main.module.css";
+import styles from "./main.module.scss";
 
 const Main = () => {
 

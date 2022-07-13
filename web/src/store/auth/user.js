@@ -15,9 +15,12 @@ const userSlice = createSlice({
             xp: null,
             isNew: null,
             perk: null,
-            perkImage: null
+            perkImage: null,
         },
-        
+        level: {
+            level: null,
+            tier: null
+        }
     }, 
     reducers: {
         setUser(state, action) {
@@ -34,6 +37,13 @@ const userSlice = createSlice({
                 state.user.xp = user.xp
                 state.user.isNew = user.isNew
                 state.user.perk = user.perk
+            }
+        },
+        setLevel(state, action) {
+            const level = action.payload;
+            if(level){
+                state.level.level = level.level
+                state.level.tier = level.tier
             }
         },
         welcome(state) {

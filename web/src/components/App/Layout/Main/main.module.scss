@@ -1,0 +1,27 @@
+.main-container{
+position: relative;
+background-color: #141414;
+border-radius: 15px;
+width: 55vw;
+height: 600px;
+display: flex;
+justify-content: center;
+
+
+@media (max-width:1024px){
+    width: 90vw;
+    display: flex;
+    align-items: center;
+}
+
+}
+
+.content{
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+
+    @media (max-width:1024px){
+        padding-left: 120px;
+    }
+}

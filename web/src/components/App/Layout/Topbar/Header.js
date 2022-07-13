@@ -1,7 +1,14 @@
 import React from "react";
-import styles from "./header.module.css";
+import styles from "./header.module.scss";
+
+import { useDispatch } from "react-redux";
+
 
 const Header = (props) => {
+  const dispatch = useDispatch()
+
+
+
   return (
     <header className={styles.topbar}>
       <h1 className={styles.logo}>{props.title}</h1>

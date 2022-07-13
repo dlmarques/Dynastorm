@@ -76,7 +76,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button data-testid="loginButton" role="loginButton" type="submit">
+            <Button auth={true} data-testid="loginButton" role="loginButton" type="submit">
               Submit
             </Button>
             <Link to="/register">Create an account!</Link>

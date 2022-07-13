@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import styles from './featuresbar.module.css'
+import styles from './featuresbar.module.scss'
 
 
 const FeaturesBar = () => {
