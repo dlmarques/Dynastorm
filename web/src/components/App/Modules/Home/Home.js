@@ -15,8 +15,7 @@ const Home = () => {
       </div>
       <div className={styles.row}>
         Coming soon...
-      </div>
-      
+      </div>  
     </div>
   )
 }
