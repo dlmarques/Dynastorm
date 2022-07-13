@@ -19,19 +19,20 @@ const Item = ({ img }) => {
 
   const buyItem = async () => {
     const authToken = localStorage.getItem('authToken')
+    const price = item.price * quantity;
     let response = axios.post("http://localhost:3001/api/inventory/addItem", {
       token: authToken,
       itemName: item.name,
       itemSkill: item.skill,
       quantity: quantity,
-      price: quantity * item.price
+      price: price
     });
 
     try {
       const registerResponse = await response;
+      dispatch(shopSliceActions.buy())
       if (registerResponse.data === "success") {
         console.log('success')
-        dispatch(shopSliceActions.buy())
       }
       setQuantity(1)
     } catch (err) {

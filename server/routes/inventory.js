@@ -34,7 +34,10 @@ router.post("/addItem", async (req, res) => {
       quantity: req.body.quantity,
     });
     await newItem.save();
-    res.send("success");
+    if(user){
+      await User.findOneAndUpdate({_id: id}, {$set: {money: user.money - req.body.price}})
+      res.send('inserted')
+     } 
   } catch (err) {
     res.status(400).send(err);
   }

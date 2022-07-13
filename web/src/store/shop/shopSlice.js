@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const shopSlice = createSlice({
     name: 'shopSlice',
     initialState: {
-        purchased: false,
+        purchased: 1,
         item: {
             name: null,
             price: null,
@@ -12,9 +12,8 @@ const shopSlice = createSlice({
     },
     reducers: {
         buy(state) {
-            state.purchased = !state.purchased
+            state.purchased++
         },
-        resetPurchase(){},
         setItem(state, action) {
             const item = action.payload
             if(item){

@@ -20,6 +20,7 @@ const App = () => {
   const user = useSelector((state) => state.user.user);
   const isNew = useSelector((state) => state.user.user.isNew);
   const mobileMenu = useSelector((state) => state.mobileMenu.isOpened);
+  const change = useSelector(state => state.shop.purchased)
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -64,7 +65,7 @@ const App = () => {
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [change]);
 
   return (
     <>
