@@ -8,6 +8,8 @@ const cors = require('cors')
 const testRoute = require('./routes/test')
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
+const inventoryRoute = require("./routes/inventory");
+
 
 
 dotenv.config();
@@ -25,6 +27,8 @@ app.use(express.json())
 app.use("/api", testRoute)
 app.use("/api/auth", authRoute)
 app.use("/api/user", userRoute)
+app.use("/api/inventory", inventoryRoute)
+
 
 
 app.listen(3001, () => console.log('server running'))
