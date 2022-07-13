@@ -10,7 +10,17 @@ router.post("/addItem", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   const id = jwt.decode(req.body.token, process.env.JWT_TOKEN);
+  const item = await Inventory.findOne({ id: id });
 
+
+  if(item && req.body.itemName === item.itemName){
+      try{
+        await Inventory.findByIdAndUpdate({_id : item._id}, {$set : {quantity : item.quantity + req.body.quantity}})
+        res.send("success")
+      }catch(err){
+        res.send(err)
+      }
+  }else{
   try {
     //Create new item
     const newItem = new Inventory({
@@ -24,6 +34,7 @@ router.post("/addItem", async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
+}
 });
 
 module.exports = router;
