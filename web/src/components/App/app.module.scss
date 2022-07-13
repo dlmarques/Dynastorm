@@ -7,7 +7,7 @@
 
     .mobile-trigger{
         display: none;
-        @media (max-width:1024px){
+        @media (max-width:1440px){
             display: block;
         }
     }
@@ -23,5 +23,6 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    overflow: hidden;
 }
 
