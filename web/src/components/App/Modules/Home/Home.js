@@ -13,6 +13,9 @@ const Home = () => {
       <Level/>
       <PerkImage styles={styles["img-container"]} imageStyle={styles.perkImage} user={user}/>
       </div>
+      <div className={styles.row}>
+        Coming soon...
+      </div>
       
     </div>
   )
