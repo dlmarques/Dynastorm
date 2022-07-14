@@ -17,6 +17,14 @@ const inventorySchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  price: {
+    type: Number,
+    required: true,
+  },
+  percentage: {
+    type: Number,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,

@@ -12,15 +12,10 @@ const shopSlice = createSlice({
   },
   reducers: {
     buy(state) {
-      state.purchased++;
+      ++state.purchased;
     },
-    setItem(state, action) {
-      const item = action.payload;
-      if (item) {
-        state.item.name = item.name;
-        state.item.price = item.price;
-        state.item.percentage = item.percentage;
-      }
+    sell(state) {
+      --state.purchased;
     },
   },
 });

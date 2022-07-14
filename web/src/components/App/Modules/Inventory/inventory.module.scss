@@ -1,27 +1,28 @@
-.store-container {
-  padding-top: 25px;
+.inventory-container {
+  color: #fff;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-row-gap: 5px;
   justify-items: center;
-  grid-row-gap: 20px;
+  align-items: center;
+  grid-row-gap: 25px;
+  padding-top: 25px;
   @media (max-width: 1440px) {
     height: 100%;
-    padding-top: 30px;
-    padding-bottom: 20px;
-  }
-  @media (max-width: 1300px) {
     grid-template-columns: repeat(3, 1fr);
-    grid-row-gap: 20px;
     overflow: scroll;
   }
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
+    padding-top: 25px;
+    padding-bottom: 25px;
   }
   @media (max-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
   }
-  @media (max-width: 425px) {
-    padding-right: 20px;
+
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+    font-weight: 500;
   }
 }

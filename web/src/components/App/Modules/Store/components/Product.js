@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 const Product = ({ img, quantity, item, setItem }) => {
   useEffect(() => {
     if (img) {
-      if (img.includes("magic")) {
+      if (img.includes("Magic")) {
         if (img.includes("50")) {
           setItem({
             name: "Magic Book",
@@ -13,13 +13,13 @@ const Product = ({ img, quantity, item, setItem }) => {
           });
         } else if (img.includes("100")) {
           setItem({
-            name: "Super Magic Book",
+            name: "Super Magic",
             skill: "magic",
             percentage: 100,
             price: 1000,
           });
         }
-      } else if (img.includes("speed")) {
+      } else if (img.includes("Boots")) {
         if (img.includes("50")) {
           setItem({
             name: "Speed Boots",
@@ -29,13 +29,13 @@ const Product = ({ img, quantity, item, setItem }) => {
           });
         } else if (img.includes("100")) {
           setItem({
-            name: "Ultimate Speed Boots",
+            name: "Ultimate Boots",
             skill: "speed",
             percentage: 100,
             price: 1000,
           });
         }
-      } else if (img.includes("stamina")) {
+      } else if (img.includes("Stamina")) {
         if (img.includes("50")) {
           setItem({
             name: "StaminaHerb",
@@ -51,7 +51,7 @@ const Product = ({ img, quantity, item, setItem }) => {
             price: 1000,
           });
         }
-      } else if (img.includes("strength")) {
+      } else if (img.includes("Strength")) {
         if (img.includes("100")) {
           setItem({
             name: "Super Strength ",
@@ -61,7 +61,7 @@ const Product = ({ img, quantity, item, setItem }) => {
           });
         } else if (img.includes("50")) {
           setItem({
-            name: "Strength skill",
+            name: "Strength Skill",
             skill: "strength",
             percentage: 50,
             price: 500,
