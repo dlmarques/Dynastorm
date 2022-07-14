@@ -28,12 +28,7 @@ describe("Login component", () => {
     const passwordInput = screen.getByTestId("passwordInput");
     const loginButton = screen.getByTestId("loginButton");
     waitFor(() =>
-      expect(
-        emailInput,
-        passwordInput,
-        loginButton
-      ).toBeInTheDocument()
+      expect(emailInput, passwordInput, loginButton).toBeInTheDocument()
     );
   });
-
 });

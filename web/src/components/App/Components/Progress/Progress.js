@@ -1,6 +1,6 @@
 import React from "react";
 
-const Progress = props => {
+const Progress = (props) => {
   return (
     <>
       <label>{props.label}</label>

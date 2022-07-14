@@ -19,9 +19,9 @@ const Register = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [finished, setFinished] = useState(false);
-  const error = useSelector(state => state.error.error)
+  const error = useSelector((state) => state.error.error);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const isShown = useSelector(state => state.avatars.isShown)
+  const isShown = useSelector((state) => state.avatars.isShown);
 
   useEffect(() => {
     localStorage.authToken
@@ -29,10 +29,9 @@ const Register = () => {
       : dispatch(authActions.logout());
   }, []);
 
-
   const avatarBoxHandler = () => {
-    dispatch(avatarActions.toggle())
-  }
+    dispatch(avatarActions.toggle());
+  };
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -51,7 +50,7 @@ const Register = () => {
       }
     } catch (err) {
       console.error(err);
-      dispatch(errorActions.setError(err.response.data))
+      dispatch(errorActions.setError(err.response.data));
     }
   };
 
@@ -64,8 +63,16 @@ const Register = () => {
         <div className={styles["register-container"]}>
           <form className={styles["form-control"]} onSubmit={registerHandler}>
             <h2>Register</h2>
-            <Button auth={true} type='button' onClick={avatarBoxHandler}>{isShown ? 'Close avatars box' : 'Select an avatar'}</Button>
-            {isShown ?  <AvatarsBox data-testid='avatars' setAvatar={setAvatar} icon={avatar} /> : null }
+            <Button auth={true} type="button" onClick={avatarBoxHandler}>
+              {isShown ? "Close avatars box" : "Select an avatar"}
+            </Button>
+            {isShown ? (
+              <AvatarsBox
+                data-testid="avatars"
+                setAvatar={setAvatar}
+                icon={avatar}
+              />
+            ) : null}
             <Input
               data-testid="usernameInput"
               type="text"
@@ -93,12 +100,14 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button auth={true} data-testid='registerButton' type="submit">Register</Button>
+            <Button auth={true} data-testid="registerButton" type="submit">
+              Register
+            </Button>
             <Link to="/">Already have an account?</Link>
           </form>
         </div>
       </div>
-      {error && <Error/>}
+      {error && <Error />}
     </>
   );
 };

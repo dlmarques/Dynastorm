@@ -1,181 +1,175 @@
-.mobile-menu{
-    background-color: #141414;
-    height: calc(100vh - 149px);
-    width: 350px;
-    z-index: 99;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    transition: all .5s ease-in-out;
-    display: none;
+.mobile-menu {
+  background-color: #141414;
+  height: calc(100vh - 149px);
+  width: 350px;
+  z-index: 99;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transition: all 0.5s ease-in-out;
+  display: none;
 
-    @media (max-width:1440px){
+  @media (max-width: 1440px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: 425px) {
+    width: 280px;
+  }
+
+  .close {
+    font-size: 2.5rem;
+    color: #eee;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  .profile-bar {
+    border-radius: 15px;
+    background-color: #141414;
+    height: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    h4 {
+      color: #eee;
+      font-weight: 500;
+      font-size: 1.5rem;
+      padding-bottom: 20px;
+      text-align: center;
+    }
+
+    .profile {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 30px;
+    }
+
+    .avatar {
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid rgb(0, 255, 30);
+    }
+
+    .profile-text {
+      height: 50px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .profile h3 {
+      color: #fff;
+      font-size: 1.8rem;
+      padding-top: 10px;
+    }
+
+    .perkImage {
+      height: 50px;
+      border-radius: none;
+      border-radius: 50%;
+    }
+
+    .bars {
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 100%;
+      height: 200px;
+      padding-bottom: 20px;
+    }
+
+    .bars label {
+      color: #fff;
+    }
+
+    .stats {
+      padding-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-row-gap: 30px;
+      width: 100%;
+      height: 200px;
+    }
+
+    .stats-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .stats-info svg {
+      color: #fff;
+      font-size: 45px;
+    }
+
+    .stats-info strong {
+      color: #fff;
+      font-size: 1.5rem;
+    }
+
+    .hp {
+      width: 60%;
+      border-radius: 15px;
+      color: rgb(0, 255, 30);
+      background-color: rgb(0, 255, 30);
+    }
+
+    .hp::-webkit-progress-bar {
+      border-radius: 15px;
+    }
+
+    .hp::-webkit-progress-value {
+      border-radius: 15px;
+      background-color: rgb(0, 255, 30);
+    }
+    .hp::-moz-progress-bar {
+      border-radius: 15px;
+      color: rgb(0, 255, 30);
+    }
+
+    .xp {
+      width: 60%;
+      border-radius: 15px;
+      color: rgb(0, 136, 255);
+      background-color: rgb(0, 136, 255);
+    }
+
+    .xp::-webkit-progress-bar {
+      border-radius: 15px;
+    }
+
+    .xp::-webkit-progress-value {
+      border-radius: 15px;
+      background-color: rgb(0, 136, 255);
+    }
+    .xp::-moz-progress-bar {
+      border-radius: 15px;
+      color: rgb(0, 136, 255);
+    }
+
+    .logout {
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 200px;
+      height: 200px;
+      margin: auto;
+      button {
+        width: 100%;
+      }
     }
-    @media (max-width:425px){
-      width: 280px;
-    }
-
-    .close{
-      font-size: 2.5rem;
-      color: #eee;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-    }
-
-    .profile-bar {
-        border-radius: 15px;
-        background-color: #141414;
-        height: 600px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        h4{
-          color: #eee;
-          font-weight: 500;
-          font-size: 1.5rem;
-          padding-bottom: 20px;
-          text-align: center;
-        }
-
-         
-      .profile {
-        width: 100%;
-        height: 200px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding-top: 30px;
-      }
-      
-      .avatar {
-        height: 100px;
-        border-radius: 50%;
-        border: 2px solid rgb(0, 255, 30);
-      }
-      
-      .profile-text{
-        height: 50px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-      }
-      
-      .profile h3 {
-        color: #fff;
-        font-size: 1.8rem;
-        padding-top: 10px;
-      }
-      
-      .perkImage{
-        height: 50px;
-        border-radius: none;
-        border-radius: 50%;
-      }
-
-      
-      
-      .bars {
-        padding-top: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        width: 100%;
-        height: 200px;
-        padding-bottom: 20px;
-      }
-      
-      .bars label {
-        color: #fff;
-      }
-      
-      .stats {
-        padding-top: 10px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-row-gap: 30px;
-        width: 100%;
-        height: 200px;
-      
-      }
-      
-      .stats-info {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 5px;
-      }
-      
-      .stats-info svg {
-        color: #fff;
-        font-size: 45px;
-      }
-      
-      .stats-info strong {
-        color: #fff;
-        font-size: 1.5rem;
-      }
-      
-      .hp {
-        width: 60%;
-        border-radius: 15px;
-        color: rgb(0, 255, 30);
-        background-color: rgb(0, 255, 30);
-      }
-      
-      .hp::-webkit-progress-bar {
-        border-radius: 15px;
-      }
-      
-      .hp::-webkit-progress-value {
-        border-radius: 15px;
-        background-color: rgb(0, 255, 30);
-      }
-      .hp::-moz-progress-bar {
-        border-radius: 15px;
-        color: rgb(0, 255, 30);
-      }
-      
-      .xp {
-        width: 60%;
-        border-radius: 15px;
-        color: rgb(0, 136, 255);
-        background-color: rgb(0, 136, 255);
-      }
-      
-      .xp::-webkit-progress-bar {
-        border-radius: 15px;
-      }
-      
-      .xp::-webkit-progress-value {
-        border-radius: 15px;
-        background-color: rgb(0, 136, 255);
-      }
-      .xp::-moz-progress-bar {
-        border-radius: 15px;
-        color: rgb(0, 136, 255);
-      }
-      
-      .logout {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 200px;
-        height: 200px;
-        margin: auto;
-        button{
-          width: 100%;
-        }
-      }
-
-      }
-           
+  }
 }

@@ -62,24 +62,22 @@ router.post("/login", async (req, res) => {
   if (!validPass) return res.status(400).send("Invalid password");
 
   //Create and assign a token
-  const token = jwt.sign({ _id: user._id }, process.env.JWT_TOKEN)
-  if(token){
-    return res.status(200).json({authToken: token})
+  const token = jwt.sign({ _id: user._id }, process.env.JWT_TOKEN);
+  if (token) {
+    return res.status(200).json({ authToken: token });
   }
   res.send("logged in!");
 });
 
 router.post("/getUserData", async (req, res) => {
-
-  const decodedToken = jwt.decode(req.body.token, process.env.JWT_TOKEN)
-  try{
+  const decodedToken = jwt.decode(req.body.token, process.env.JWT_TOKEN);
+  try {
     const user = await User.findOne({ _id: decodedToken });
     if (!user) return res.status(400).send("User does not exist!");
-    res.send(user)
-  }catch(err){
-    res.status(400).send(err)
+    res.send(user);
+  } catch (err) {
+    res.status(400).send(err);
   }
 });
-
 
 module.exports = router;

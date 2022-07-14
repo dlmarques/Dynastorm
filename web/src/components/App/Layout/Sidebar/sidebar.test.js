@@ -10,8 +10,6 @@ test("should sidebar render", async () => {
   const mockStore = configureStore();
   let store = mockStore(intialState);
 
-
-
   render(
     <Provider store={store}>
       <Sidebar title="Dynastorm" />

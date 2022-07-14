@@ -1,25 +1,25 @@
-.avatar{
-    height: 40px;
-    width: 40px;
-    transition: all .3s;
+.avatar {
+  height: 40px;
+  width: 40px;
+  transition: all 0.3s;
 }
 
-.avatar-active{
-    height: 40px;
-    width: 40px;
-    transition: all .3s;
-    outline: 1px solid #fff;
+.avatar-active {
+  height: 40px;
+  width: 40px;
+  transition: all 0.3s;
+  outline: 1px solid #fff;
 }
 
-.avatar-active img{
-    height: 100%;
-    cursor: pointer;
+.avatar-active img {
+  height: 100%;
+  cursor: pointer;
 }
 
-.avatar:hover{
-    outline: 1px solid #fff;
+.avatar:hover {
+  outline: 1px solid #fff;
 }
-.avatar img{
-    height: 100%;
-    cursor: pointer;
+.avatar img {
+  height: 100%;
+  cursor: pointer;
 }

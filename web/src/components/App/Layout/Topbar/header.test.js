@@ -2,17 +2,9 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import Header from "./Header";
 
-  test("should header render", async () => {
-    render(
-          <Header title='Dynastorm' />
-    );
+test("should header render", async () => {
+  render(<Header title="Dynastorm" />);
 
-    const logo = screen.getByText('Dynastorm')
-    waitFor(() =>
-      expect(
-        logo
-      ).toBeInTheDocument()
-    );
-  });
-
-
+  const logo = screen.getByText("Dynastorm");
+  waitFor(() => expect(logo).toBeInTheDocument());
+});

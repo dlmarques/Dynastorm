@@ -11,20 +11,18 @@ import FeaturesBar from "../FeaturesBar/FeaturesBar";
 import styles from "./main.module.scss";
 
 const Main = () => {
-
-
   return (
     <>
       <main className={styles["main-container"]}>
         <FeaturesBar />
         <div className={styles.content}>
           <Routes>
-            <Route path='home' element={<Home/>} />
-            <Route path='store' element={<Store/>} />
-            <Route path='missions' element={<Missions/>} />
-            <Route path='battles' element={<Battles/>} />
-            <Route path='inventory' element={<Inventory/>} />
-            <Route path='healer' element={<Healer/>} />
+            <Route path="home" element={<Home />} />
+            <Route path="store" element={<Store />} />
+            <Route path="missions" element={<Missions />} />
+            <Route path="battles" element={<Battles />} />
+            <Route path="inventory" element={<Inventory />} />
+            <Route path="healer" element={<Healer />} />
           </Routes>
         </div>
       </main>

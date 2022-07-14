@@ -8,13 +8,12 @@ import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
 
-
 describe("App component", () => {
   //create mock store
   const user = {
     isNew: false,
-    name: 'user',
-  }
+    name: "user",
+  };
   const intialState = { user: user };
   const mockStore = configureStore();
   let store = mockStore(intialState);
@@ -23,13 +22,13 @@ describe("App component", () => {
 
   test("should app component render", async () => {
     render(
-        <Router location={history.location} navigator={history}>
-          <Provider store={store}>
-            <App />
-          </Provider>
-        </Router>
-      );
-      const title = await screen.findByText('dynastorm', {exact: false})
-      waitFor(() => expect(title).toBeInTheDocument())
+      <Router location={history.location} navigator={history}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </Router>
+    );
+    const title = await screen.findByText("dynastorm", { exact: false });
+    waitFor(() => expect(title).toBeInTheDocument());
   });
 });

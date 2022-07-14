@@ -13,6 +13,8 @@ import Welcome from "./Modules/Welcome/Welcome";
 import Delayed from "../../utils/Delayed";
 import MobileMenu from "./Layout/MobileMenu/MobileMenu";
 import Trigger from "./Components/Trigger/Trigger";
+import Error from "./Components/Error/Error";
+
 import { mobileMenuActions } from "../../store/ui/mobileMenu";
 
 const App = () => {
@@ -20,7 +22,8 @@ const App = () => {
   const user = useSelector((state) => state.user.user);
   const isNew = useSelector((state) => state.user.user.isNew);
   const mobileMenu = useSelector((state) => state.mobileMenu.isOpened);
-  const change = useSelector(state => state.shop.purchased)
+  const change = useSelector((state) => state.shop.purchased);
+  const error = useSelector((state) => state.error.error);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -81,13 +84,14 @@ const App = () => {
               <Main />
               <Sidebar />
             </div>
-            <div className={styles['mobile-trigger']}>
+            <div className={styles["mobile-trigger"]}>
               <Trigger
                 icon={<HiOutlineMenuAlt2 />}
                 action={mobileMenuActions.open()}
               />
             </div>
           </div>
+          {error && <Error />}
           {mobileMenu && <MobileMenu active={mobileMenu} />}
         </Delayed>
       )}

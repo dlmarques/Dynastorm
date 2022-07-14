@@ -51,7 +51,7 @@ describe("Register component", () => {
     );
 
     //Act
-    const avatarButton = screen.getByText("Select an avatar", {exact: false});
+    const avatarButton = screen.getByText("Select an avatar", { exact: false });
     userEvent.click(avatarButton);
 
     //Assert

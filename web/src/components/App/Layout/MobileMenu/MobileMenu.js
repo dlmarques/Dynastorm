@@ -1,6 +1,6 @@
 import React from "react";
-import 'animate.css';
-import './mobilemenu.scss'
+import "animate.css";
+import "./mobilemenu.scss";
 import { useDispatch, useSelector } from "react-redux";
 import PerkImage from "../../Components/PerkImage/PerkImage";
 import Progress from "../../Components/Progress/Progress";
@@ -14,7 +14,6 @@ import Button from "../../Components/Button/Button";
 import { logout } from "../../../../store/auth/thunk";
 import { mobileMenuActions } from "../../../../store/ui/mobileMenu";
 
-
 const MobileMenu = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
@@ -24,35 +23,35 @@ const MobileMenu = () => {
   };
 
   const closeMenu = () => {
-    dispatch(mobileMenuActions.close())
-  }
+    dispatch(mobileMenuActions.close());
+  };
 
   return (
-    <div className='mobile-menu'>
-      <CgClose onClick={closeMenu} className='close' />
+    <div className="mobile-menu">
+      <CgClose onClick={closeMenu} className="close" />
       <div className="profile-bar">
-        <div className='profile'>
+        <div className="profile">
           <img
             src={user && user.avatar}
             alt="avatar profile bar"
-            className='avatar'
+            className="avatar"
           />
           <PerkImage
             sidebar={true}
             styles="profile-text"
-            imageStyle='perkImage'
+            imageStyle="perkImage"
             user={user}
           />
         </div>
         {user && <h4>${user.money}</h4>}
-        <div className='bars'>
+        <div className="bars">
           <Progress
             label="HP"
             id="hp"
             min="0"
             max="100"
             value={user && user.health}
-            styles='hp'
+            styles="hp"
           />
           <Progress
             label="XP"
@@ -60,10 +59,10 @@ const MobileMenu = () => {
             min="0"
             max="100"
             value={user && user.xp}
-            styles='xp'
+            styles="xp"
           />
         </div>
-        <div className='stats'>
+        <div className="stats">
           <Stats
             styles="stats-info"
             icon={<GiBiceps style={{ color: "#ff8400" }} />}
@@ -85,7 +84,7 @@ const MobileMenu = () => {
             value={user && Math.round(user.speed)}
           />
         </div>
-        <div className='logout'>
+        <div className="logout">
           <Button onClick={endSession}>Logout</Button>
         </div>
       </div>
