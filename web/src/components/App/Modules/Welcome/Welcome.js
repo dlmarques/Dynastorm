@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../Layout/Topbar/Header";
-import styles from "./welcome.module.css";
+import styles from "./welcome.module.scss";
 
 import skills from "../../../../assets/skills/skills";
 import Perk from "./components/Perk";

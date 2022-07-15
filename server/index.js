@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 //import routes
-const testRoute = require("./routes/test");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const inventoryRoute = require("./routes/inventory");
@@ -24,7 +23,6 @@ mongoose.connect(
 app.use(express.json());
 
 //route middlewares
-app.use("/api", testRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/inventory", inventoryRoute);

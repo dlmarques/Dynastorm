@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 import { shopSliceActions } from "../../../../../store/shop/shopSlice";
 import { storeItems } from "../../../../../assets/storeItems/storeItems";
+import Button from "../../../Components/Button/Button";
 
 const InventoryItem = ({ name, skill, quantity, price, id }) => {
   const dispatch = useDispatch();
@@ -34,7 +35,9 @@ const InventoryItem = ({ name, skill, quantity, price, id }) => {
         <h1>{name}</h1>
         <h2>{skill}</h2>
         <h3>Qt: {quantity}</h3>
-        <button onClick={sellItem}>Sell item for ${price / 2}</button>
+        <Button btn="inventoryBtn" onClick={sellItem}>
+          Sell: ${price / 2}
+        </Button>
       </div>
     </div>
   );

@@ -8,14 +8,14 @@ const Product = ({ img, quantity, item, setItem }) => {
           setItem({
             name: "Magic Book",
             skill: "magic",
-            percentage: 50,
+            boost: 150,
             price: 500,
           });
         } else if (img.includes("100")) {
           setItem({
             name: "Super Magic",
             skill: "magic",
-            percentage: 100,
+            boost: 200,
             price: 1000,
           });
         }
@@ -24,14 +24,14 @@ const Product = ({ img, quantity, item, setItem }) => {
           setItem({
             name: "Speed Boots",
             skill: "speed",
-            percentage: 50,
+            boost: 150,
             price: 500,
           });
         } else if (img.includes("100")) {
           setItem({
             name: "Ultimate Boots",
             skill: "speed",
-            percentage: 100,
+            boost: 200,
             price: 1000,
           });
         }
@@ -40,14 +40,14 @@ const Product = ({ img, quantity, item, setItem }) => {
           setItem({
             name: "StaminaHerb",
             skill: "stamina",
-            percentage: 50,
+            boost: 150,
             price: 500,
           });
         } else if (img.includes("100")) {
           setItem({
             name: "Stamina Powered",
             skill: "stamina",
-            percentage: 100,
+            boost: 200,
             price: 1000,
           });
         }
@@ -56,14 +56,14 @@ const Product = ({ img, quantity, item, setItem }) => {
           setItem({
             name: "Super Strength ",
             skill: "strength",
-            percentage: 100,
+            boost: 200,
             price: 1000,
           });
         } else if (img.includes("50")) {
           setItem({
             name: "Strength Skill",
             skill: "strength",
-            percentage: 50,
+            boost: 150,
             price: 500,
           });
         }
@@ -73,10 +73,10 @@ const Product = ({ img, quantity, item, setItem }) => {
 
   return (
     <>
-      <img src={img} alt="store item" onClick={(e) => console.log(e)} />
+      <img src={img} alt="store item" />
       <h2>{item.name}</h2>
       <h3>
-        Increase your {item.skill} by {item.percentage}%
+        Increase your {item.skill} by {item.boost}%
       </h3>
       <h3>{item.price && `$${item.price * quantity}`}</h3>
     </>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./perk.module.css";
+import styles from "./perk.module.scss";
 import { userActions } from "../../../../../store/auth/user";
 
 const Perk = ({ image }) => {

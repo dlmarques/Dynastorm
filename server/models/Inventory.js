@@ -21,7 +21,7 @@ const inventorySchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  percentage: {
+  boost: {
     type: Number,
     required: true,
   },

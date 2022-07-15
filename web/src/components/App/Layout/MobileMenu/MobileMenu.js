@@ -85,7 +85,9 @@ const MobileMenu = () => {
           />
         </div>
         <div className="logout">
-          <Button onClick={endSession}>Logout</Button>
+          <Button btn="mobileBtn" onClick={endSession}>
+            Logout
+          </Button>
         </div>
       </div>
     </div>

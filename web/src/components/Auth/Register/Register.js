@@ -63,7 +63,7 @@ const Register = () => {
         <div className={styles["register-container"]}>
           <form className={styles["form-control"]} onSubmit={registerHandler}>
             <h2>Register</h2>
-            <Button auth={true} type="button" onClick={avatarBoxHandler}>
+            <Button btn="btnAuth" type="button" onClick={avatarBoxHandler}>
               {isShown ? "Close avatars box" : "Select an avatar"}
             </Button>
             {isShown ? (
@@ -100,7 +100,7 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button auth={true} data-testid="registerButton" type="submit">
+            <Button btn="btnAuth" data-testid="registerButton" type="submit">
               Register
             </Button>
             <Link to="/">Already have an account?</Link>

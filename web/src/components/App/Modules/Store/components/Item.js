@@ -15,7 +15,7 @@ const Item = ({ img }) => {
   const [item, setItem] = useState({
     name: null,
     skill: null,
-    percentage: null,
+    boost: null,
     price: null,
   });
   const user = useSelector((state) => state.user.user);
@@ -30,7 +30,7 @@ const Item = ({ img }) => {
       itemSkill: item.skill,
       quantity: quantity,
       price: price,
-      percentage: item.percentage / 100,
+      boost: item.boost,
     });
 
     if (user.money >= price) {

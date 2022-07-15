@@ -77,7 +77,9 @@ const Sidebar = () => {
         />
       </div>
       <div className={styles.logout}>
-        <Button onClick={endSession}>Logout</Button>
+        <Button btn="sidebarBtn" onClick={endSession}>
+          Logout
+        </Button>
       </div>
     </div>
   );

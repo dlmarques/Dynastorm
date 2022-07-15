@@ -77,10 +77,10 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <Button
-              auth={true}
               data-testid="loginButton"
               role="loginButton"
               type="submit"
+              btn="btnAuth"
             >
               Submit
             </Button>

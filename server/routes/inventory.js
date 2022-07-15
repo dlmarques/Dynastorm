@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Inventory = require("../models/Inventory");
+const { decreaseRuleOf3, increaseRuleOf3 } = require("../utils/ruleOf3");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const { saveItemValidation } = require("../utils/validation");
@@ -27,26 +28,50 @@ router.post("/addItem", async (req, res) => {
           { _id: id },
           { $set: { money: user.money - req.body.price } }
         );
-        const percentage = req.body.percentage;
+        const boost = req.body.boost;
         if (req.body.itemSkill === "magic") {
           await User.findOneAndUpdate(
             { _id: id },
-            { $set: { magic: user.magic + user.magic * percentage } }
+            {
+              $set: {
+                magic: increaseRuleOf3(user.magic, boost, req.body.quantity),
+              },
+            }
           );
         } else if (req.body.itemSkill === "speed") {
           await User.findOneAndUpdate(
             { _id: id },
-            { $set: { speed: user.speed + user.speed * percentage } }
+            {
+              $set: {
+                speed: increaseRuleOf3(user.speed, boost, req.body.quantity),
+              },
+            }
           );
         } else if (req.body.itemSkill === "stamina") {
           await User.findOneAndUpdate(
             { _id: id },
-            { $set: { stamina: user.stamina + user.stamina * percentage } }
+            {
+              $set: {
+                stamina: increaseRuleOf3(
+                  user.stamina,
+                  boost,
+                  req.body.quantity
+                ),
+              },
+            }
           );
         } else if (req.body.itemSkill === "strength") {
           await User.findOneAndUpdate(
             { _id: id },
-            { $set: { strength: user.strength + user.strength * percentage } }
+            {
+              $set: {
+                strength: increaseRuleOf3(
+                  user.strength,
+                  boost,
+                  req.body.quantity
+                ),
+              },
+            }
           );
         } else {
           res.send("error");
@@ -62,7 +87,7 @@ router.post("/addItem", async (req, res) => {
           itemSkill: req.body.itemSkill,
           quantity: req.body.quantity,
           price: req.body.price,
-          percentage: req.body.percentage,
+          boost: req.body.boost,
         });
         await newItem.save();
         if (user) {
@@ -70,26 +95,50 @@ router.post("/addItem", async (req, res) => {
             { _id: id },
             { $set: { money: user.money - req.body.price } }
           );
-          const percentage = req.body.percentage;
+          const boost = req.body.boost;
           if (req.body.itemSkill === "magic") {
             await User.findOneAndUpdate(
               { _id: id },
-              { $set: { magic: user.magic + user.magic * percentage } }
+              {
+                $set: {
+                  magic: increaseRuleOf3(user.magic, boost, req.body.quantity),
+                },
+              }
             );
           } else if (req.body.itemSkill === "speed") {
             await User.findOneAndUpdate(
               { _id: id },
-              { $set: { speed: user.speed + user.speed * percentage } }
+              {
+                $set: {
+                  speed: increaseRuleOf3(user.speed, boost, req.body.quantity),
+                },
+              }
             );
           } else if (req.body.itemSkill === "stamina") {
             await User.findOneAndUpdate(
               { _id: id },
-              { $set: { stamina: user.stamina + user.stamina * percentage } }
+              {
+                $set: {
+                  stamina: increaseRuleOf3(
+                    user.stamina,
+                    boost,
+                    req.body.quantity
+                  ),
+                },
+              }
             );
           } else if (req.body.itemSkill === "strength") {
             await User.findOneAndUpdate(
               { _id: id },
-              { $set: { strength: user.strength + user.strength * percentage } }
+              {
+                $set: {
+                  strength: increaseRuleOf3(
+                    user.strength,
+                    boost,
+                    req.body.quantity
+                  ),
+                },
+              }
             );
           } else {
             res.send("error");
@@ -117,6 +166,7 @@ router.patch("/sellItem", async (req, res) => {
   const id = jwt.decode(req.body.token, process.env.JWT_TOKEN);
   const user = await User.findById(id);
   const item = await Inventory.findById(req.body.id);
+  const boost = item.boost;
   //if user and item exists
   if (item && user) {
     //if item quantity bigger than 1
@@ -130,7 +180,7 @@ router.patch("/sellItem", async (req, res) => {
             },
           });
           await User.findByIdAndUpdate(id, {
-            $set: { magic: user.magic - user.magic * item.percentage },
+            $set: { magic: decreaseRuleOf3(user.magic, boost) },
           });
           await Inventory.findOneAndUpdate(
             { itemName: item.itemName },
@@ -148,7 +198,7 @@ router.patch("/sellItem", async (req, res) => {
           await User.findByIdAndUpdate(id, {
             $set: {
               money: user.money + item.price / 2,
-              stamina: user.stamina - user.stamina * item.percentage,
+              stamina: decreaseRuleOf3(user.stamina, boost),
             },
           });
           await Inventory.findOneAndUpdate(
@@ -167,7 +217,7 @@ router.patch("/sellItem", async (req, res) => {
           await User.findByIdAndUpdate(id, {
             $set: {
               money: user.money + item.price / 2,
-              speed: user.speed - user.speed * item.percentage,
+              speed: decreaseRuleOf3(user.speed, boost),
             },
           });
           await Inventory.findOneAndUpdate(
@@ -186,7 +236,7 @@ router.patch("/sellItem", async (req, res) => {
           await User.findByIdAndUpdate(id, {
             $set: {
               money: user.money + item.price / 2,
-              strength: user.strength - user.strength * item.percentage,
+              strength: decreaseRuleOf3(user.strength, boost),
             },
           });
           await Inventory.findOneAndUpdate(
@@ -209,7 +259,7 @@ router.patch("/sellItem", async (req, res) => {
           await User.findByIdAndUpdate(id, {
             $set: {
               money: user.money + item.price / 2,
-              magic: user.magic - user.magic * item.percentage,
+              magic: decreaseRuleOf3(user.magic, boost),
             },
           });
           await Inventory.findByIdAndDelete(item._id);
@@ -223,7 +273,7 @@ router.patch("/sellItem", async (req, res) => {
           await User.findByIdAndUpdate(id, {
             $set: {
               money: user.money + item.price / 2,
-              stamina: user.stamina - user.stamina * item.percentage,
+              stamina: decreaseRuleOf3(user.stamina, boost),
             },
           });
           await Inventory.findByIdAndDelete(item._id);
@@ -237,7 +287,7 @@ router.patch("/sellItem", async (req, res) => {
           await User.findByIdAndUpdate(id, {
             $set: {
               money: user.money + item.price / 2,
-              speed: user.speed - user.speed * item.percentage,
+              speed: decreaseRuleOf3(user.speed, boost),
             },
           });
           await Inventory.findByIdAndDelete(item._id);
@@ -251,7 +301,7 @@ router.patch("/sellItem", async (req, res) => {
           await User.findByIdAndUpdate(id, {
             $set: {
               money: user.money + item.price / 2,
-              strength: user.strength - user.strength * item.percentage,
+              strength: decreaseRuleOf3(user.strength, boost),
             },
           });
           await Inventory.findByIdAndDelete(item._id);

@@ -17,7 +17,9 @@ const Error = () => {
       <div className={styles.errorContainer}>
         <h1>Error</h1>
         <h2>{error && error}!</h2>
-        <Button onClick={deleteError}>Close</Button>
+        <Button btn="errorBtn" onClick={deleteError}>
+          Close
+        </Button>
       </div>
     </div>
   );
