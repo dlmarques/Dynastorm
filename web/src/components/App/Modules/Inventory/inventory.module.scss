@@ -9,7 +9,6 @@
   @media (max-width: 1440px) {
     height: 100%;
     grid-template-columns: repeat(3, 1fr);
-    overflow: scroll;
   }
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);

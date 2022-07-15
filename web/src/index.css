@@ -13,3 +13,22 @@ h4 {
   overflow-y: hidden;
   overflow-x: hidden;
 }
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #212121 #ffffff;
+}
+*::-webkit-scrollbar {
+  width: 14px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #212121;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+}
