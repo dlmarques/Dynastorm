@@ -3,6 +3,7 @@ import styles from "./healer.module.scss";
 import healer from "../../../../assets/avatars/img/40.png";
 import HealerItem from "./components/HealerItem";
 import { food } from "../../../../assets/food/food";
+import CountdownTimer from "./components/CountdownTimer";
 
 const Healer = () => {
   return (
@@ -12,7 +13,8 @@ const Healer = () => {
         <img src={healer} className={styles.healer} alt="healer" />
         <h3>
           Hi, I'm the Healer of the Dynastorm Village, here you can find some
-          food to regenerate your HP.
+          food to regenerate your HP, or you can wait until the next day.
+          <CountdownTimer />
         </h3>
       </div>
       <div className={styles["list"]}>
