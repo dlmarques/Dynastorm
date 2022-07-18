@@ -8,6 +8,7 @@ const cors = require("cors");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const inventoryRoute = require("./routes/inventory");
+const healerRoute = require("./routes/healer");
 
 dotenv.config();
 
@@ -26,5 +27,6 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/inventory", inventoryRoute);
+app.use("/api/healer", healerRoute);
 
 app.listen(3001, () => console.log("server running"));
