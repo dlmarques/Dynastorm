@@ -1,0 +1,16 @@
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  img {
+    height: 150px;
+  }
+
+  h2 {
+    color: #eee;
+    font-size: 1.2rem;
+    font-weight: 300;
+    padding-bottom: 10px;
+  }
+}
