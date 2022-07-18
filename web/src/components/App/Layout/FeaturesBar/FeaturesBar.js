@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "./featuresbar.module.scss";
+import "./featuresbar.scss";
+import { links } from "./components/activeLink";
 
 const FeaturesBar = () => {
+  const [changed, setChanged] = useState(0);
+  const [url, setUrl] = useState();
+
+  useEffect(() => {
+    setUrl(window.location.href);
+  }, [changed]);
+
   return (
-    <div className={styles["navigation-bar"]}>
+    <div className="navigation-bar">
       <nav>
-        <Link to="/app/home">Home</Link>
-        <Link to="/app/store">Store</Link>
-        <Link to="/app/missions">Missions</Link>
-        <Link to="/app/battles">Battles</Link>
-        <Link to="/app/inventory">Inventory</Link>
-        <Link to="/app/healer">Healer</Link>
+        {links &&
+          links.map((link, id) => (
+            <Link
+              className={
+                url && url.includes(link) ? "feature active" : "feature"
+              }
+              key={id}
+              to={`/app/${link}`}
+              onClick={() => setChanged(changed + 1)}
+            >
+              {link}
+            </Link>
+          ))}
       </nav>
     </div>
   );

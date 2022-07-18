@@ -26,7 +26,8 @@
   }
 }
 
-.navigation-bar nav a {
+.feature {
+  text-transform: capitalize;
   height: 100%;
   width: calc(100% / 6);
   display: flex;
@@ -36,11 +37,16 @@
   color: #fff;
   transition: all 0.1s ease-in-out;
   font-size: 20px;
+
   @media (max-width: 1440px) {
     height: calc(100% / 6);
     width: 100%;
     padding: 0 10px 0 10px;
   }
+}
+
+.active {
+  color: rgb(0, 255, 30);
 }
 
 .navigation-bar nav a:hover {
