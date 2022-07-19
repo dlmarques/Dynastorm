@@ -21,6 +21,7 @@ const userSlice = createSlice({
       level: null,
       tier: null,
     },
+    missions: 0,
   },
   reducers: {
     setUser(state, action) {
@@ -51,6 +52,12 @@ const userSlice = createSlice({
     },
     setPerkImage(state, action) {
       state.user.perkImage = action.payload;
+    },
+    startMission(state) {
+      state.missions = ++state.missions;
+    },
+    endMission(state) {
+      state.busy = --state.missions;
     },
   },
 });

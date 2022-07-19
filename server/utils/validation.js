@@ -10,6 +10,13 @@ const registerValidation = (data) => {
   });
   return schema.validate(data);
 };
+const missionsValidation = (data) => {
+  const schema = Joi.object({
+    id: Joi.string().min(6),
+    token: Joi.string().min(6),
+  });
+  return schema.validate(data);
+};
 
 const loginValidation = (data) => {
   const schema = Joi.object({
@@ -34,3 +41,4 @@ const saveItemValidation = (data) => {
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.saveItemValidation = saveItemValidation;
+module.exports.missionsValidation = missionsValidation;

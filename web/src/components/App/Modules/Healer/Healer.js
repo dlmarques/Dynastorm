@@ -14,9 +14,9 @@ const Healer = () => {
         <h3>
           Hi, I'm the Healer of the Dynastorm Village, here you can find some
           food to regenerate your HP, or you can wait until the next day.
-          <CountdownTimer />
         </h3>
       </div>
+      <CountdownTimer />
       <div className={styles["list"]}>
         {food &&
           food.map((food, id) => <HealerItem key={id} id={id} img={food} />)}

@@ -24,6 +24,7 @@ const App = () => {
   const mobileMenu = useSelector((state) => state.mobileMenu.isOpened);
   const change = useSelector((state) => state.shop.purchased);
   const error = useSelector((state) => state.error.error);
+  const busy = useSelector((state) => state.user.missions);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -68,7 +69,7 @@ const App = () => {
     } catch (err) {
       console.error(err);
     }
-  }, [change]);
+  }, [change, busy]);
 
   return (
     <>

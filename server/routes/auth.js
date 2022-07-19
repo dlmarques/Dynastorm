@@ -1,9 +1,14 @@
 const router = require("express").Router();
 const User = require("../models/User");
+const Missions = require("../models/Missions");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const verifyToken = require("../utils/verifyToken");
-const { registerValidation, loginValidation } = require("../utils/validation");
+const {
+  registerValidation,
+  loginValidation,
+  missionsValidation,
+} = require("../utils/validation");
 
 router.get("/isLoggedIn", verifyToken, (req, res) => {
   res.send(true);
@@ -39,9 +44,21 @@ router.post("/register", async (req, res) => {
     new: true,
     perk: " ",
   });
+
   try {
     await user.save();
-    res.send("success");
+    const missions = new Missions({
+      id: user._id,
+      missionName: "First Mission",
+      description: "This is a first mission to test it",
+      duration: 1,
+      level: 1,
+      xpBoost: 10,
+      money: 2500,
+      status: "available",
+    });
+    await missions.save();
+    res.send("user and missions saved");
   } catch (err) {
     res.status(400).send(err);
   }

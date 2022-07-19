@@ -14,7 +14,6 @@ export function getRemainingTime() {
     .second(0)
     .millisecond(0);
   const nowDayjs = dayjs();
-  console.log(timestampDayjs);
   return {
     seconds: getRemainingSeconds(nowDayjs, timestampDayjs),
     minutes: getRemainingMinutes(nowDayjs, timestampDayjs),

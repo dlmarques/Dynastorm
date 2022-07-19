@@ -15,7 +15,10 @@
   background-color: #000;
   border-radius: 15px;
   padding: 0 30px 30px 30px;
-  overflow-y: scroll;
+
+  @media (max-width: 1200px) {
+    overflow-y: scroll;
+  }
 }
 .welcome h2 {
   color: #fff;
