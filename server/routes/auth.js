@@ -4,11 +4,7 @@ const Missions = require("../models/Missions");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const verifyToken = require("../utils/verifyToken");
-const {
-  registerValidation,
-  loginValidation,
-  missionsValidation,
-} = require("../utils/validation");
+const { registerValidation, loginValidation } = require("../utils/validation");
 
 router.get("/isLoggedIn", verifyToken, (req, res) => {
   res.send(true);
@@ -47,17 +43,98 @@ router.post("/register", async (req, res) => {
 
   try {
     await user.save();
-    const missions = new Missions({
-      id: user._id,
-      missionName: "First Mission",
-      description: "This is a first mission to test it",
-      duration: 1,
-      level: 1,
-      xpBoost: 10,
-      money: 2500,
-      status: "available",
-    });
-    await missions.save();
+    await Missions.insertMany([
+      {
+        id: user._id,
+        missionName: "First Mission",
+        description: "This is a first mission to test it",
+        duration: 1,
+        level: 1,
+        xpBoost: 10,
+        money: 500,
+        status: "available",
+      },
+      {
+        id: user._id,
+        missionName: "Second Mission",
+        description: "This is a second mission to test it",
+        duration: 1,
+        level: 1,
+        xpBoost: 10,
+        money: 500,
+        status: "available",
+      },
+      {
+        id: user._id,
+        missionName: "Third Mission",
+        description: "This is a third mission to test it",
+        duration: 1,
+        level: 1,
+        xpBoost: 10,
+        money: 500,
+        status: "available",
+      },
+      {
+        id: user._id,
+        missionName: "First Mission",
+        description: "This is a first mission to test it",
+        duration: 3,
+        level: 2,
+        xpBoost: 10,
+        money: 1000,
+        status: "available",
+      },
+      {
+        id: user._id,
+        missionName: "Second Mission",
+        description: "This is a second mission to test it",
+        duration: 3,
+        level: 2,
+        xpBoost: 10,
+        money: 1000,
+        status: "available",
+      },
+      {
+        id: user._id,
+        missionName: "Third Mission",
+        description: "This is a third mission to test it",
+        duration: 3,
+        level: 2,
+        xpBoost: 10,
+        money: 1000,
+        status: "available",
+      },
+      {
+        id: user._id,
+        missionName: "First Mission",
+        description: "This is a first mission to test it",
+        duration: 5,
+        level: 3,
+        xpBoost: 10,
+        money: 1500,
+        status: "available",
+      },
+      {
+        id: user._id,
+        missionName: "Second Mission",
+        description: "This is a second mission to test it",
+        duration: 5,
+        level: 3,
+        xpBoost: 10,
+        money: 1500,
+        status: "available",
+      },
+      {
+        id: user._id,
+        missionName: "Third Mission",
+        description: "This is a third mission to test it",
+        duration: 5,
+        level: 3,
+        xpBoost: 10,
+        money: 1500,
+        status: "available",
+      },
+    ]);
     res.send("user and missions saved");
   } catch (err) {
     res.status(400).send(err);

@@ -44,10 +44,8 @@ const Register = () => {
     });
 
     try {
-      const registerResponse = await response;
-      if (registerResponse.data === "success") {
-        setFinished(true);
-      }
+      await response;
+      setFinished(true);
     } catch (err) {
       console.error(err);
       dispatch(errorActions.setError(err.response.data));

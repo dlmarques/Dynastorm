@@ -6,6 +6,7 @@ import styles from "./missions.module.scss";
 const Missions = () => {
   const [missions, setMissions] = useState();
   const busy = useSelector((state) => state.user.missions);
+  const level = useSelector((state) => state.user.level.level);
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     fetch("http://localhost:3001/api/missions/getMissions", {
@@ -27,19 +28,21 @@ const Missions = () => {
     <div className={styles["missions-container"]}>
       <h1>Missions</h1>
       {missions &&
-        missions.map((mission, id) => (
-          <Mission
-            key={id}
-            id={mission._id}
-            name={mission.missionName}
-            description={mission.description}
-            status={mission.status}
-            xp={mission.xpBoost}
-            money={mission.money}
-            duration={mission.duration}
-            startedTime={mission.date}
-          />
-        ))}
+        missions
+          .filter((mission) => mission.level === level)
+          .map((mission, id) => (
+            <Mission
+              key={id}
+              id={mission._id}
+              name={mission.missionName}
+              description={mission.description}
+              status={mission.status}
+              xp={mission.xpBoost}
+              money={mission.money}
+              duration={mission.duration}
+              startedTime={mission.date}
+            />
+          ))}
     </div>
   );
 };

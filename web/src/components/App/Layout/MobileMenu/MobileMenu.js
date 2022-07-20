@@ -17,6 +17,7 @@ import { mobileMenuActions } from "../../../../store/ui/mobileMenu";
 const MobileMenu = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const level = useSelector((state) => state.user.level);
 
   const endSession = () => {
     logout(dispatch);
@@ -57,7 +58,7 @@ const MobileMenu = () => {
             label="XP"
             id="xp"
             min="0"
-            max="100"
+            max={level.level * 100}
             value={user && user.xp}
             styles="xp"
           />

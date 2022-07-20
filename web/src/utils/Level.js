@@ -16,20 +16,20 @@ export const setLevel = (xp) => {
   }
 };
 
-export const setTier = (lvl) => {
-  if (lvl === 1) {
+export const setTier = (xp) => {
+  if (xp <= 100) {
     return "Servant";
-  } else if (lvl === 2) {
+  } else if (xp <= 200) {
     return "Yeomen";
-  } else if (lvl === 3) {
+  } else if (xp <= 300) {
     return "Freemen";
-  } else if (lvl === 4) {
+  } else if (xp <= 400) {
     return "Peasants";
-  } else if (lvl === 5) {
+  } else if (xp <= 500) {
     return "Knight";
-  } else if (lvl === 6) {
+  } else if (xp <= 600) {
     return "King";
-  } else if (lvl === 7) {
+  } else if (xp <= 700) {
     return "Pope";
   }
 };

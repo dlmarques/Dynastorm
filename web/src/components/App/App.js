@@ -20,6 +20,7 @@ import { mobileMenuActions } from "../../store/ui/mobileMenu";
 const App = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const level = useSelector((state) => state.user.level);
   const isNew = useSelector((state) => state.user.user.isNew);
   const mobileMenu = useSelector((state) => state.mobileMenu.isOpened);
   const change = useSelector((state) => state.shop.purchased);
@@ -57,19 +58,20 @@ const App = () => {
           })
         )
       );
-    try {
-      const level = setLevel(user.xp);
-      const tier = setTier(level);
-      dispatch(
-        userActions.setLevel({
-          level: level,
-          tier: tier,
-        })
-      );
-    } catch (err) {
-      console.error(err);
-    }
+    dispatch(
+      userActions.setLevel({
+        level: setLevel(user.xp),
+        tier: setTier(user.xp),
+      })
+    );
   }, [change, busy]);
+
+  dispatch(
+    userActions.setLevel({
+      level: setLevel(user.xp),
+      tier: setTier(user.xp),
+    })
+  );
 
   return (
     <>

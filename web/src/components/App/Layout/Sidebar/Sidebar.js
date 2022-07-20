@@ -16,6 +16,7 @@ import PerkImage from "../../Components/PerkImage/PerkImage";
 const Sidebar = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const level = useSelector((state) => state.user.level);
 
   const endSession = () => {
     logout(dispatch);
@@ -49,7 +50,7 @@ const Sidebar = () => {
           label="XP"
           id="xp"
           min="0"
-          max="100"
+          max={level.level * 100}
           value={user && user.xp}
           styles={styles.xp}
         />

@@ -6,6 +6,7 @@ import Progress from "../../../Components/Progress/Progress";
 const Level = () => {
   const level = useSelector((state) => state.user.level);
   const user = useSelector((state) => state.user.user);
+
   return (
     <div className={styles["lvl-container"]}>
       <Progress
