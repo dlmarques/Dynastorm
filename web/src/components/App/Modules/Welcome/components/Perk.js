@@ -12,7 +12,7 @@ const Perk = ({ image }) => {
     if (image && image.includes("magic")) {
       setPerkName("magic");
     } else if (image && image.includes("speed")) {
-      setPerkName("speed");
+      setPerkName("magicResist");
     } else if (image && image.includes("strength")) {
       setPerkName("strength");
     } else {

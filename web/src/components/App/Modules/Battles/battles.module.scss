@@ -1,0 +1,15 @@
+.battles-container {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}

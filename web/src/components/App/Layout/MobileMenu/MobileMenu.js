@@ -7,8 +7,8 @@ import Progress from "../../Components/Progress/Progress";
 import Stats from "../Sidebar/components/Stats";
 import { GiBiceps } from "react-icons/gi";
 import { RiMagicFill } from "react-icons/ri";
-import { BsLightningFill } from "react-icons/bs";
-import { GiTabiBoot } from "react-icons/gi";
+import { BsShieldShaded } from "react-icons/bs";
+import { GiMagicPalm } from "react-icons/gi";
 import { CgClose } from "react-icons/cg";
 import Button from "../../Components/Button/Button";
 import { logout } from "../../../../store/auth/thunk";
@@ -65,24 +65,28 @@ const MobileMenu = () => {
         </div>
         <div className="stats">
           <Stats
+            name="Strength"
             styles="stats-info"
             icon={<GiBiceps style={{ color: "#ff8400" }} />}
             value={user && Math.round(user.strength)}
           />
           <Stats
+            name="Magic"
             styles="stats-info"
             icon={<RiMagicFill style={{ color: "#ad27f5" }} />}
             value={user && Math.round(user.magic)}
           />
           <Stats
+            name="Armor"
             styles="stats-info"
-            icon={<BsLightningFill style={{ color: "yellow" }} />}
-            value={user && Math.round(user.stamina)}
+            icon={<BsShieldShaded style={{ color: "#fff" }} />}
+            value={user && Math.round(user.armor)}
           />
           <Stats
+            name="Magic Resistance"
             styles="stats-info"
-            icon={<GiTabiBoot style={{ color: "#006eff" }} />}
-            value={user && Math.round(user.speed)}
+            icon={<GiMagicPalm style={{ color: "#006eff" }} />}
+            value={user && Math.round(user.magicResist)}
           />
         </div>
         <div className="logout">

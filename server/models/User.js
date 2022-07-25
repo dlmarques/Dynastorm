@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 1,
   },
-  stamina: {
+  armor: {
     type: Number,
     required: true,
     min: 1,
@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 1,
   },
-  speed: {
+  magicResist: {
     type: Number,
     required: true,
     min: 1,

@@ -7,11 +7,13 @@ import avatarSlice from "./ui/avatars";
 import modalSlice from "./ui/modal";
 import errorSlice from "./ui/error";
 import mobileMenu from "./ui/mobileMenu";
+import bossSlice from "./auth/bosses";
 
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     user: userSlice.reducer,
+    bosses: bossSlice.reducer,
     error: errorSlice.reducer,
     modal: modalSlice.reducer,
     avatars: avatarSlice.reducer,

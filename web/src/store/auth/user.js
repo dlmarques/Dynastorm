@@ -7,9 +7,9 @@ const userSlice = createSlice({
       name: "",
       avatar: "",
       strength: null,
-      stamina: null,
+      armor: null,
       magic: null,
-      speed: null,
+      magicResist: null,
       health: null,
       money: null,
       xp: null,
@@ -22,6 +22,7 @@ const userSlice = createSlice({
       tier: null,
     },
     missions: 0,
+    currentBoss: 1,
   },
   reducers: {
     setUser(state, action) {
@@ -30,9 +31,9 @@ const userSlice = createSlice({
         state.user.name = user.name;
         state.user.avatar = user.avatar;
         state.user.strength = user.strength;
-        state.user.stamina = user.stamina;
+        state.user.armor = user.armor;
         state.user.magic = user.magic;
-        state.user.speed = user.speed;
+        state.user.magicResist = user.magicResist;
         state.user.health = user.health;
         state.user.money = user.money;
         state.user.xp = user.xp;
@@ -58,6 +59,9 @@ const userSlice = createSlice({
     },
     endMission(state) {
       state.busy = --state.missions;
+    },
+    defeatBoss(state) {
+      ++state.currentBoss;
     },
   },
 });

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./app.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 
 import { userActions } from "../../store/auth/user";
+import { bossActions } from "../../store/auth/bosses";
 import { setLevel, setTier } from "../../utils/Level";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 
@@ -19,13 +20,17 @@ import { mobileMenuActions } from "../../store/ui/mobileMenu";
 
 const App = () => {
   const dispatch = useDispatch();
+  const shouldFetch = useRef(true);
   const user = useSelector((state) => state.user.user);
-  const level = useSelector((state) => state.user.level);
   const isNew = useSelector((state) => state.user.user.isNew);
   const mobileMenu = useSelector((state) => state.mobileMenu.isOpened);
   const change = useSelector((state) => state.shop.purchased);
   const error = useSelector((state) => state.error.error);
   const busy = useSelector((state) => state.user.missions);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/battles/getBosses");
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -47,9 +52,9 @@ const App = () => {
             name: actualData.username,
             avatar: actualData.avatar,
             strength: actualData.strength,
-            stamina: actualData.stamina,
+            armor: actualData.armor,
             magic: actualData.magic,
-            speed: actualData.speed,
+            magicResist: actualData.magicResist,
             health: actualData.hp,
             money: actualData.money,
             xp: actualData.xp,
@@ -65,6 +70,29 @@ const App = () => {
       })
     );
   }, [change, busy]);
+
+  useEffect(() => {
+    if (shouldFetch.current) {
+      shouldFetch.current = false;
+      fetch("http://localhost:3001/api/battles/getBosses")
+        .then((response) => response.json())
+        .then((actualData) =>
+          actualData.map((boss) => {
+            dispatch(
+              bossActions.addBosses({
+                boss: boss.boss,
+                bossName: boss.bossName,
+                strength: boss.strength,
+                armor: boss.armor,
+                magic: boss.magic,
+                magicResist: boss.magicResist,
+                hp: boss.hp,
+              })
+            );
+          })
+        );
+    }
+  }, []);
 
   dispatch(
     userActions.setLevel({

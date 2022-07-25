@@ -1,9 +1,25 @@
 import React, { useEffect } from "react";
 
-const Product = ({ img, quantity, item, setItem }) => {
+const Product = ({ img, item, setItem }) => {
   useEffect(() => {
     if (img) {
-      if (img.includes("Magic")) {
+      if (img.includes("Resistance")) {
+        if (img.includes("50")) {
+          setItem({
+            name: "Basic Magic Resistance",
+            skill: "magic resistance",
+            boost: 150,
+            price: 500,
+          });
+        } else if (img.includes("100")) {
+          setItem({
+            name: "Ultimate Magic Resistance",
+            skill: "magic resistance",
+            boost: 200,
+            price: 1000,
+          });
+        }
+      } else if (img.includes("Magic")) {
         if (img.includes("50")) {
           setItem({
             name: "Magic Book",
@@ -19,34 +35,18 @@ const Product = ({ img, quantity, item, setItem }) => {
             price: 1000,
           });
         }
-      } else if (img.includes("Boots")) {
+      } else if (img.includes("Armor")) {
         if (img.includes("50")) {
           setItem({
-            name: "Speed Boots",
-            skill: "speed",
+            name: "Armor",
+            skill: "armor",
             boost: 150,
             price: 500,
           });
         } else if (img.includes("100")) {
           setItem({
-            name: "Ultimate Boots",
-            skill: "speed",
-            boost: 200,
-            price: 1000,
-          });
-        }
-      } else if (img.includes("Stamina")) {
-        if (img.includes("50")) {
-          setItem({
-            name: "StaminaHerb",
-            skill: "stamina",
-            boost: 150,
-            price: 500,
-          });
-        } else if (img.includes("100")) {
-          setItem({
-            name: "Stamina Powered",
-            skill: "stamina",
+            name: "Super Armor",
+            skill: "armor",
             boost: 200,
             price: 1000,
           });
@@ -78,7 +78,6 @@ const Product = ({ img, quantity, item, setItem }) => {
       <h3>
         Increase your {item.skill} by {item.boost}%
       </h3>
-      <h3>{item.price && `$${item.price * quantity}`}</h3>
     </>
   );
 };

@@ -38,22 +38,22 @@ router.post("/addItem", async (req, res) => {
               },
             }
           );
-        } else if (req.body.itemSkill === "speed") {
+        } else if (req.body.itemSkill === "magic resistance") {
           await User.findOneAndUpdate(
             { _id: id },
             {
               $set: {
-                speed: increaseRuleOf3(user.speed, boost, req.body.quantity),
+                magicResist: increaseRuleOf3(user.magicResist, boost, req.body.quantity),
               },
             }
           );
-        } else if (req.body.itemSkill === "stamina") {
+        } else if (req.body.itemSkill === "armor") {
           await User.findOneAndUpdate(
             { _id: id },
             {
               $set: {
-                stamina: increaseRuleOf3(
-                  user.stamina,
+                armor: increaseRuleOf3(
+                  user.armor,
                   boost,
                   req.body.quantity
                 ),
@@ -105,22 +105,22 @@ router.post("/addItem", async (req, res) => {
                 },
               }
             );
-          } else if (req.body.itemSkill === "speed") {
+          } else if (req.body.itemSkill === "magic resistance") {
             await User.findOneAndUpdate(
               { _id: id },
               {
                 $set: {
-                  speed: increaseRuleOf3(user.speed, boost, req.body.quantity),
+                  magicResist: increaseRuleOf3(user.magicResist, boost, req.body.quantity),
                 },
               }
             );
-          } else if (req.body.itemSkill === "stamina") {
+          } else if (req.body.itemSkill === "armor") {
             await User.findOneAndUpdate(
               { _id: id },
               {
                 $set: {
-                  stamina: increaseRuleOf3(
-                    user.stamina,
+                  armor: increaseRuleOf3(
+                    user.armor,
                     boost,
                     req.body.quantity
                   ),
@@ -193,12 +193,12 @@ router.patch("/sellItem", async (req, res) => {
           res.send(err);
         }
         //if item skill equals stamina
-      } else if (item.itemSkill === "stamina") {
+      } else if (item.itemSkill === "armor") {
         try {
           await User.findByIdAndUpdate(id, {
             $set: {
               money: user.money + item.price / 2,
-              stamina: decreaseRuleOf3(user.stamina, boost),
+              armor: decreaseRuleOf3(user.armor, boost),
             },
           });
           await Inventory.findOneAndUpdate(
@@ -212,12 +212,12 @@ router.patch("/sellItem", async (req, res) => {
           res.send(err);
         }
         //if item skill equals speed
-      } else if (item.itemSkill === "speed") {
+      } else if (item.itemSkill === "magic resistance") {
         try {
           await User.findByIdAndUpdate(id, {
             $set: {
               money: user.money + item.price / 2,
-              speed: decreaseRuleOf3(user.speed, boost),
+              magicResist: decreaseRuleOf3(user.magicResist, boost),
             },
           });
           await Inventory.findOneAndUpdate(
@@ -268,12 +268,12 @@ router.patch("/sellItem", async (req, res) => {
           res.send(err);
         }
         //if item skill equals stamina
-      } else if (item.itemSkill === "stamina") {
+      } else if (item.itemSkill === "armor") {
         try {
           await User.findByIdAndUpdate(id, {
             $set: {
               money: user.money + item.price / 2,
-              stamina: decreaseRuleOf3(user.stamina, boost),
+              armor: decreaseRuleOf3(user.armor, boost),
             },
           });
           await Inventory.findByIdAndDelete(item._id);
@@ -282,12 +282,12 @@ router.patch("/sellItem", async (req, res) => {
           res.send(err);
         }
         //if item skill equals speed
-      } else if (item.itemSkill === "speed") {
+      } else if (item.itemSkill === "magic resistance") {
         try {
           await User.findByIdAndUpdate(id, {
             $set: {
               money: user.money + item.price / 2,
-              speed: decreaseRuleOf3(user.speed, boost),
+              magicResist: decreaseRuleOf3(user.magicResist, boost),
             },
           });
           await Inventory.findByIdAndDelete(item._id);

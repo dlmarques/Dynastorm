@@ -32,7 +32,11 @@ const InventoryItem = ({ name, skill, quantity, price, id }) => {
             .map((item, id) => <img key={id} src={item} alt="item" />)}
       </div>
       <div className={styles.text}>
-        <h1>{name}</h1>
+        <h1>
+          {name === "Ultimate Magic Resistance"
+            ? "Ulti Magic Resistance"
+            : name}
+        </h1>
         <h2>{skill}</h2>
         <h3>Qt: {quantity}</h3>
         <Button btn="inventoryBtn" onClick={sellItem}>

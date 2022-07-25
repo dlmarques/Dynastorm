@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./sidebar.module.scss";
 import { GiBiceps } from "react-icons/gi";
 import { RiMagicFill } from "react-icons/ri";
-import { BsLightningFill } from "react-icons/bs";
-import { GiTabiBoot } from "react-icons/gi";
+import { BsShieldShaded } from "react-icons/bs";
+import { GiMagicPalm } from "react-icons/gi";
 import { logout } from "../../../../store/auth/thunk";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -57,24 +57,28 @@ const Sidebar = () => {
       </div>
       <div className={styles.stats}>
         <Stats
+          name="Strength"
           styles={styles["stats-info"]}
           icon={<GiBiceps style={{ color: "#ff8400" }} />}
           value={user && Math.round(user.strength)}
         />
         <Stats
+          name="Magic Power"
           styles={styles["stats-info"]}
           icon={<RiMagicFill style={{ color: "#ad27f5" }} />}
           value={user && Math.round(user.magic)}
         />
         <Stats
+          name="Armor"
           styles={styles["stats-info"]}
-          icon={<BsLightningFill style={{ color: "yellow" }} />}
-          value={user && Math.round(user.stamina)}
+          icon={<BsShieldShaded style={{ color: "#fff" }} />}
+          value={user && Math.round(user.armor)}
         />
         <Stats
+          name="Magic Resistance"
           styles={styles["stats-info"]}
-          icon={<GiTabiBoot style={{ color: "#006eff" }} />}
-          value={user && Math.round(user.speed)}
+          icon={<GiMagicPalm style={{ color: "#006eff" }} />}
+          value={user && Math.round(user.magicResist)}
         />
       </div>
       <div className={styles.logout}>

@@ -38,11 +38,11 @@ router.patch("/setPerk", async (req, res) => {
         { $set: { perk: "magic" } }
       );
       res.send(increaseSkill);
-    } else if (req.body.perk === "speed") {
-      skill = user.speed;
+    } else if (req.body.perk === "magicResist") {
+      skill = user.magicResist;
       const increaseSkill = await User.findOneAndUpdate(
         { username: req.body.username },
-        { $set: { speed: skill + skill * 0.5 } }
+        { $set: { magicResist: skill + skill * 0.5 } }
       );
       await User.findOneAndUpdate(
         { username: req.body.username },
@@ -50,7 +50,7 @@ router.patch("/setPerk", async (req, res) => {
       );
       await User.findOneAndUpdate(
         { username: req.body.username },
-        { $set: { perk: "speed" } }
+        { $set: { perk: "magicResist" } }
       );
       res.send(increaseSkill);
     }

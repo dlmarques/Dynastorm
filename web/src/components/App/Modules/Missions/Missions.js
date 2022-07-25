@@ -23,7 +23,6 @@ const Missions = () => {
       .then((response) => response.json())
       .then((actualData) => setMissions(actualData));
   }, [busy]);
-  console.log(missions);
   return (
     <div className={styles["missions-container"]}>
       <h1>Missions</h1>
