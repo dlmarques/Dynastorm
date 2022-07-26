@@ -7,12 +7,13 @@ import { RiMagicFill } from "react-icons/ri";
 import { BsShieldShaded } from "react-icons/bs";
 import { GiMagicPalm } from "react-icons/gi";
 
-const Opponent = ({ bossName, stats, hp, boss }) => {
+const Opponent = ({ bossName, stats, hp, boss, id }) => {
   return (
     <div className="opponent">
       <img
         src={require(`../../../../../assets/bosses/${boss}.png`)}
         alt="boss"
+        onClick={() => console.log(id)}
       />
       <h3>{bossName && bossName}</h3>
       <Progress

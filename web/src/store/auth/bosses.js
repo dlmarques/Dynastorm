@@ -8,6 +8,7 @@ const bossSlice = createSlice({
   reducers: {
     addBosses(state, action) {
       state.bosses.push({
+        id: action.payload.id,
         boss: action.payload.boss,
         bossName: action.payload.bossName,
         strength: action.payload.strength,
@@ -15,6 +16,9 @@ const bossSlice = createSlice({
         magic: action.payload.magic,
         magicResist: action.payload.magicResist,
         hp: action.payload.hp,
+        specialItem: action.payload.specialItem,
+        boost: action.payload.boost,
+        stat: action.payload.stat,
       });
     },
   },

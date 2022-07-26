@@ -20,7 +20,8 @@ app.use(cors());
 mongoose.connect(
   process.env.DB_CONNECT,
   { useNewUrlParser: true, useUnifiedTopology: true },
-  async () =>   console.log("connected to DB"));
+  async () => console.log("connected to DB")
+);
 
 //Middleware
 app.use(express.json());
@@ -32,6 +33,5 @@ app.use("/api/inventory", inventoryRoute);
 app.use("/api/healer", healerRoute);
 app.use("/api/missions", missionsRoute);
 app.use("/api/battles", battlesRoute);
-
 
 app.listen(3001, () => console.log("server running"));

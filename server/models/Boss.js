@@ -36,6 +36,26 @@ const bossSchema = new mongoose.Schema({
     required: true,
     min: 1,
   },
+  specialItem: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
+  boost: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
+  stat: {
+    type: String,
+    required: true,
+    min: 1,
+  },
+  duration: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
   date: {
     type: Date,
     default: Date.now,

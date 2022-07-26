@@ -39,6 +39,7 @@ router.post("/register", async (req, res) => {
     xp: 0,
     new: true,
     perk: " ",
+    currentBoss: 1,
   });
 
   try {
@@ -163,7 +164,8 @@ router.post("/register", async (req, res) => {
         xpBoost: 10,
         money: 2250,
         status: "available",
-      },{
+      },
+      {
         id: user._id,
         missionName: "First Mission",
         description: "This is a first mission to test it",

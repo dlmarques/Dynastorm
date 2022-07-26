@@ -29,7 +29,7 @@ const App = () => {
   const busy = useSelector((state) => state.user.missions);
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/battles/getBosses");
+    fetch("http://localhost:3001/api/battles/createBosses");
   }, []);
 
   useEffect(() => {
@@ -60,6 +60,7 @@ const App = () => {
             xp: actualData.xp,
             isNew: actualData.new,
             perk: actualData.perk,
+            currentBoss: actualData.currentBoss,
           })
         )
       );
@@ -80,6 +81,7 @@ const App = () => {
           actualData.map((boss) => {
             dispatch(
               bossActions.addBosses({
+                id: boss._id,
                 boss: boss.boss,
                 bossName: boss.bossName,
                 strength: boss.strength,
@@ -87,6 +89,9 @@ const App = () => {
                 magic: boss.magic,
                 magicResist: boss.magicResist,
                 hp: boss.hp,
+                specialItem: boss.specialItem,
+                boost: boss.boost,
+                stat: boss.stat,
               })
             );
           })

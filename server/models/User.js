@@ -68,6 +68,11 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 1,
   },
+  currentBoss: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
   date: {
     type: Date,
     default: Date.now,

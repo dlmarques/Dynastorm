@@ -43,7 +43,11 @@ router.post("/addItem", async (req, res) => {
             { _id: id },
             {
               $set: {
-                magicResist: increaseRuleOf3(user.magicResist, boost, req.body.quantity),
+                magicResist: increaseRuleOf3(
+                  user.magicResist,
+                  boost,
+                  req.body.quantity
+                ),
               },
             }
           );
@@ -52,11 +56,7 @@ router.post("/addItem", async (req, res) => {
             { _id: id },
             {
               $set: {
-                armor: increaseRuleOf3(
-                  user.armor,
-                  boost,
-                  req.body.quantity
-                ),
+                armor: increaseRuleOf3(user.armor, boost, req.body.quantity),
               },
             }
           );
@@ -110,7 +110,11 @@ router.post("/addItem", async (req, res) => {
               { _id: id },
               {
                 $set: {
-                  magicResist: increaseRuleOf3(user.magicResist, boost, req.body.quantity),
+                  magicResist: increaseRuleOf3(
+                    user.magicResist,
+                    boost,
+                    req.body.quantity
+                  ),
                 },
               }
             );
@@ -119,11 +123,7 @@ router.post("/addItem", async (req, res) => {
               { _id: id },
               {
                 $set: {
-                  armor: increaseRuleOf3(
-                    user.armor,
-                    boost,
-                    req.body.quantity
-                  ),
+                  armor: increaseRuleOf3(user.armor, boost, req.body.quantity),
                 },
               }
             );

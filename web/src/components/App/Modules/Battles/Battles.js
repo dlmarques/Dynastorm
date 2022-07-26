@@ -7,17 +7,18 @@ import { useSelector } from "react-redux";
 
 const Battles = () => {
   const bosses = useSelector((state) => state.bosses.bosses);
-  const currentBoss = useSelector((state) => state.user.currentBoss);
+  const user = useSelector((state) => state.user.user);
   return (
     <div className={styles["battles-container"]}>
       <h1>Battles</h1>
       <div className={styles.content}>
         {bosses &&
           bosses
-            .filter((boss) => boss.boss === currentBoss)
+            .filter((boss) => boss.boss === user.currentBoss)
             .map((boss, id) => (
               <Opponent
                 key={id}
+                id={boss.id}
                 boss={boss.boss}
                 bossName={boss.bossName}
                 stats={{
