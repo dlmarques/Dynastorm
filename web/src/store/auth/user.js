@@ -17,12 +17,14 @@ const userSlice = createSlice({
       perk: null,
       perkImage: null,
       currentBoss: null,
+      busy: false,
     },
     level: {
       level: null,
       tier: null,
     },
     missions: 0,
+    battles: 0,
   },
   reducers: {
     setUser(state, action) {
@@ -60,6 +62,18 @@ const userSlice = createSlice({
     },
     endMission(state) {
       state.busy = --state.missions;
+    },
+    defeatBoss(state) {
+      ++state.user.currentBoss;
+    },
+    battle(state) {
+      ++state.battles;
+    },
+    setBusy(state) {
+      state.user.busy = true;
+    },
+    stopBusy(state) {
+      state.user.busy = false;
     },
   },
 });

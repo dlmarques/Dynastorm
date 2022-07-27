@@ -56,6 +56,16 @@ const bossSchema = new mongoose.Schema({
     required: true,
     min: 1,
   },
+  moneyReward: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
+  xpReward: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
   date: {
     type: Date,
     default: Date.now,

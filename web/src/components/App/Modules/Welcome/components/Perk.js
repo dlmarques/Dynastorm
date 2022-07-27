@@ -34,6 +34,7 @@ const Perk = ({ image }) => {
           perk: perkName,
         }),
       });
+      fetch("http://localhost:3001/api/battles/createBosses");
       dispatch(userActions.welcome());
       window.location.reload();
     } catch (error) {

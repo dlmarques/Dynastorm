@@ -20,6 +20,8 @@ router.get("/createBosses", async () => {
       boost: 200,
       stat: "magicResist",
       duration: 5,
+      moneyReward: 2500,
+      xpReward: 50,
     },
     {
       boss: 2,
@@ -33,6 +35,8 @@ router.get("/createBosses", async () => {
       boost: 250,
       stat: "magicResist",
       duration: 5,
+      moneyReward: 3500,
+      xpReward: 50,
     },
     {
       boss: 3,
@@ -46,6 +50,8 @@ router.get("/createBosses", async () => {
       boost: 300,
       stat: "strength",
       duration: 5,
+      moneyReward: 4500,
+      xpReward: 50,
     },
     {
       boss: 4,
@@ -59,6 +65,8 @@ router.get("/createBosses", async () => {
       boost: 350,
       stat: "strength",
       duration: 5,
+      moneyReward: 5500,
+      xpReward: 50,
     },
     {
       boss: 5,
@@ -72,6 +80,8 @@ router.get("/createBosses", async () => {
       boost: 400,
       stat: "armor",
       duration: 5,
+      moneyReward: 6500,
+      xpReward: 50,
     },
     {
       boss: 6,
@@ -85,6 +95,8 @@ router.get("/createBosses", async () => {
       boost: 450,
       stat: "magic",
       duration: 5,
+      moneyReward: 7500,
+      xpReward: 50,
     },
     {
       boss: 7,
@@ -98,6 +110,8 @@ router.get("/createBosses", async () => {
       boost: 500,
       stat: "magic",
       duration: 5,
+      moneyReward: 8500,
+      xpReward: 50,
     },
   ]);
 });
@@ -112,39 +126,59 @@ router.post("/fightBoss", async (req, res) => {
   const user = await User.findById(id);
   const boss = await Boss.findById(req.body.bossId);
 
-  async function fightBoss() {
-    const boost = boss.boost;
-    const skill = boss.stat;
+  if (user && boss) {
     const averageBossSkills =
       (boss.strength + boss.magic + boss.armor + boss.magicResist) * boss.hp;
     const averageUserSkills =
       (user.strength + user.magic + user.armor + user.magicResist) * user.hp;
-
-    if (averageBossSkills > averageUserSkills) {
-      await User.findByIdAndUpdate(id, { $set: { hp: 0 } });
-      res.send("defeat");
-    } else {
-      if (skill === "magic") {
-        await User.findByIdAndUpdate(id, {
-          $set: { magic: increaseRuleOf3(user.magic, boost, 1) },
-        });
-      } else if (skill === "strength") {
-        await User.findByIdAndUpdate(id, {
-          $set: { strength: increaseRuleOf3(user.strength, boost, 1) },
-        });
-      } else if (skill === "armor") {
-        await User.findByIdAndUpdate(id, {
-          $set: { armor: increaseRuleOf3(user.armor, boost, 1) },
-        });
-      } else if (skill === "magicResist") {
-        await User.findByIdAndUpdate(id, {
-          $set: { magicResist: increaseRuleOf3(user.magic, boost, 1) },
-        });
+    try {
+      if (averageBossSkills > averageUserSkills) {
+        await User.findByIdAndUpdate(id, { $set: { hp: 0 } });
+        res.send("defeat");
+      } else {
+        if (boss.stat === "magic") {
+          await User.findByIdAndUpdate(id, {
+            $set: {
+              magic: increaseRuleOf3(user.magic, boss.boost, 1),
+              currentBoss: user.currentBoss + 1,
+              money: user.money + boss.moneyReward,
+              xp: user.xp + boss.xpReward,
+            },
+          });
+        } else if (boss.stat === "strength") {
+          await User.findByIdAndUpdate(id, {
+            $set: {
+              strength: increaseRuleOf3(user.strength, boss.boost, 1),
+              currentBoss: user.currentBoss + 1,
+              money: user.money + boss.moneyReward,
+              xp: user.xp + boss.xpReward,
+            },
+          });
+        } else if (boss.stat === "armor") {
+          await User.findByIdAndUpdate(id, {
+            $set: {
+              armor: increaseRuleOf3(user.armor, boss.boost, 1),
+              currentBoss: user.currentBoss + 1,
+              money: user.money + boss.moneyReward,
+              xp: user.xp + boss.xpReward,
+            },
+          });
+        } else if (boss.stat === "magicResist") {
+          await User.findByIdAndUpdate(id, {
+            $set: {
+              magicResist: increaseRuleOf3(user.magic, boss.boost, 1),
+              currentBoss: user.currentBoss + 1,
+              money: user.money + boss.moneyReward,
+              xp: user.xp + boss.xpReward,
+            },
+          });
+        }
+        res.send("win");
       }
-      res.send("win");
+    } catch (err) {
+      res.send(err);
     }
   }
-  fightBoss();
 });
 
 module.exports = router;

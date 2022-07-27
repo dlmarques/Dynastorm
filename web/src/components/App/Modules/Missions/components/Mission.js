@@ -1,9 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Countdown from "react-countdown";
 import "./mission.scss";
-import { errorActions } from "../../../../../store/ui/error";
 import { userActions } from "../../../../../store/auth/user";
+import { errorActions } from "../../../../../store/ui/error";
 import Button from "../../../Components/Button/Button";
 
 const Mission = ({
@@ -17,25 +17,37 @@ const Mission = ({
   startedTime,
 }) => {
   const dispatch = useDispatch();
+  const busy = useSelector((state) => state.user.user.busy);
+
   const startMission = async () => {
-    const token = localStorage.getItem("authToken");
-    dispatch(userActions.startMission());
-    setTimeout(() => {
+    if (busy) {
+      dispatch(
+        errorActions.setError(
+          "You are busy right now, finish all pending tasks"
+        )
+      );
+    } else {
+      const token = localStorage.getItem("authToken");
       dispatch(userActions.startMission());
-    }, duration * 61 * 1000);
-    await fetch("http://localhost:3001/api/missions/startMission", {
-      method: "PATCH",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
-        id: id,
-        token: token,
-        startedTime: Date.now(),
-      }),
-    });
+      dispatch(userActions.setBusy());
+      setTimeout(() => {
+        dispatch(userActions.startMission());
+        dispatch(userActions.stopBusy());
+      }, duration * 61 * 1000);
+      await fetch("http://localhost:3001/api/missions/startMission", {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          id: id,
+          token: token,
+          startedTime: Date.now(),
+        }),
+      });
+    }
   };
 
   return (

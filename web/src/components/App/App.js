@@ -22,15 +22,12 @@ const App = () => {
   const dispatch = useDispatch();
   const shouldFetch = useRef(true);
   const user = useSelector((state) => state.user.user);
+  const battle = useSelector((state) => state.user.battles);
   const isNew = useSelector((state) => state.user.user.isNew);
   const mobileMenu = useSelector((state) => state.mobileMenu.isOpened);
   const change = useSelector((state) => state.shop.purchased);
   const error = useSelector((state) => state.error.error);
-  const busy = useSelector((state) => state.user.missions);
-
-  useEffect(() => {
-    fetch("http://localhost:3001/api/battles/createBosses");
-  }, []);
+  const missions = useSelector((state) => state.user.missions);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -70,7 +67,7 @@ const App = () => {
         tier: setTier(user.xp),
       })
     );
-  }, [change, busy]);
+  }, [change, missions, battle]);
 
   useEffect(() => {
     if (shouldFetch.current) {
@@ -92,12 +89,15 @@ const App = () => {
                 specialItem: boss.specialItem,
                 boost: boss.boost,
                 stat: boss.stat,
+                moneyReward: boss.moneyReward,
+                xpReward: boss.xpReward,
+                duration: boss.duration,
               })
             );
           })
         );
     }
-  }, []);
+  }, [user.currentBoss]);
 
   dispatch(
     userActions.setLevel({

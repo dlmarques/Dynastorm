@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./battles.module.scss";
 import Character from "./components/Character";
 import Opponent from "./components/Opponent";
-import Button from "../../Components/Button/Button";
 import { useSelector } from "react-redux";
+import Mid from "./components/Mid";
 
 const Battles = () => {
   const bosses = useSelector((state) => state.bosses.bosses);
@@ -30,7 +30,7 @@ const Battles = () => {
                 hp={boss.hp}
               />
             ))}
-        <Button btn="btnBattle">Fight!</Button>
+        <Mid />
         <Character />
       </div>
     </div>

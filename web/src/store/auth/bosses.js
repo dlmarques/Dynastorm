@@ -19,6 +19,9 @@ const bossSlice = createSlice({
         specialItem: action.payload.specialItem,
         boost: action.payload.boost,
         stat: action.payload.stat,
+        moneyReward: action.payload.moneyReward,
+        xpReward: action.payload.xpReward,
+        duration: action.payload.duration,
       });
     },
   },
