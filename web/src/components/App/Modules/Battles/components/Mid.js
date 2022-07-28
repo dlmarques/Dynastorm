@@ -53,12 +53,12 @@ const Mid = () => {
       } else {
         setIsActive(true);
         setStatus("pending");
-        setTimeout(request, 5000);
+        request();
         setTimeout(() => {
           setStatus("");
           setIsActive(false);
           dispatch(userActions.stopBusy());
-        }, 7000);
+        }, 6000);
       }
     }
   };
