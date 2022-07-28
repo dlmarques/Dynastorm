@@ -8,6 +8,7 @@ import modalSlice from "./ui/modal";
 import errorSlice from "./ui/error";
 import mobileMenu from "./ui/mobileMenu";
 import bossSlice from "./auth/bosses";
+import battlesSlice from "./ui/battles";
 
 const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ const store = configureStore({
     avatars: avatarSlice.reducer,
     mobileMenu: mobileMenu.reducer,
     shop: shopSlice.reducer,
+    battles: battlesSlice.reducer,
   },
 });
 

@@ -4,17 +4,18 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../../../../store/auth/user";
 import { errorActions } from "../../../../../store/ui/error";
+import { battlesActions } from "../../../../../store/ui/battles";
 import Button from "../../../Components/Button/Button";
 import swords from "../../../../../assets/random-stuff/swords.png";
 import "./mid.scss";
 
 const Mid = () => {
   const dispatch = useDispatch();
-  const [isActive, setIsActive] = useState(false);
-  const [status, setStatus] = useState();
   const boss = useSelector((state) => state.bosses.bosses);
   const user = useSelector((state) => state.user.user);
   const busy = useSelector((state) => state.user.user.busy);
+  const isActive = useSelector((state) => state.battles.isActive);
+  const status = useSelector((state) => state.battles.status);
 
   const request = () => {
     const token = localStorage.getItem("authToken");
@@ -31,13 +32,13 @@ const Mid = () => {
       .then((response) => {
         if (response.data === "win") {
           setTimeout(() => {
-            setStatus("win");
+            dispatch(battlesActions.setStatus("win"));
             dispatch(userActions.defeatBoss());
             dispatch(userActions.battle());
           }, 5000);
         } else {
           setTimeout(() => {
-            setStatus("defeat");
+            dispatch(battlesActions.setStatus("defeat"));
             dispatch(userActions.battle());
           }, 5000);
         }
@@ -55,12 +56,12 @@ const Mid = () => {
       if (user.health <= 0) {
         dispatch(errorActions.setError("You need HP to fight"));
       } else {
-        setIsActive(true);
-        setStatus("pending");
+        dispatch(battlesActions.setIsActive());
+        dispatch(battlesActions.setStatus("pending"));
         request();
         setTimeout(() => {
-          setStatus("");
-          setIsActive(false);
+          dispatch(battlesActions.setIsActive());
+          dispatch(battlesActions.setStatus(""));
           dispatch(userActions.stopBusy());
         }, 6000);
       }
