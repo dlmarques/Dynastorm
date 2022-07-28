@@ -30,12 +30,16 @@ const Mid = () => {
       })
       .then((response) => {
         if (response.data === "win") {
-          setStatus("win");
-          dispatch(userActions.defeatBoss());
-          dispatch(userActions.battle());
+          setTimeout(() => {
+            setStatus("win");
+            dispatch(userActions.defeatBoss());
+            dispatch(userActions.battle());
+          }, 5000);
         } else {
-          setStatus("defeat");
-          dispatch(userActions.battle());
+          setTimeout(() => {
+            setStatus("defeat");
+            dispatch(userActions.battle());
+          }, 5000);
         }
       });
   };

@@ -73,6 +73,11 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 1,
   },
+  busy: {
+    type: Boolean,
+    required: true,
+    min: 1,
+  },
   date: {
     type: Date,
     default: Date.now,

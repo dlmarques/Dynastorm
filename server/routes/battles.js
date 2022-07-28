@@ -131,7 +131,7 @@ router.post("/fightBoss", async (req, res) => {
       (boss.strength + boss.magic + boss.armor + boss.magicResist) * boss.hp;
     const averageUserSkills =
       (user.strength + user.magic + user.armor + user.magicResist) * user.hp;
-    async function fightBoss() {
+
       try {
         if (averageBossSkills > averageUserSkills) {
           await User.findByIdAndUpdate(id, { $set: { hp: 0 } });
@@ -179,8 +179,6 @@ router.post("/fightBoss", async (req, res) => {
       } catch (err) {
         res.send(err);
       }
-    }
-    setTimeout(fightBoss, 5000);
   }
 });
 
