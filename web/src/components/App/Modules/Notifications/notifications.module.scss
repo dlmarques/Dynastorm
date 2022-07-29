@@ -1,0 +1,13 @@
+.container {
+  background-color: #141414;
+  width: 21vw;
+  height: 21vw;
+  z-index: 99;
+  position: absolute;
+  top: 100px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

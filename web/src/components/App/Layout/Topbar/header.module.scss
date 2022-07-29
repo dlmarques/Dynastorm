@@ -24,6 +24,26 @@
   height: 55px;
   position: absolute;
   right: 50px;
+
+  .notifications {
+    display: flex;
+    justify-content: center;
+    svg {
+      color: #eee;
+      font-size: 2rem;
+      position: relative;
+    }
+
+    .dot {
+      background-color: red;
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      z-index: 99;
+      position: absolute;
+      left: 15px;
+    }
+  }
 }
 
 .menu img {
