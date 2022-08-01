@@ -11,7 +11,7 @@ schedule.scheduleJob("0 0 * * *", async () => {
     new Notification({
       id: user._id,
       title: "Healer",
-      description: `Healer regenerate your all of your hp`,
+      description: `Healer regenerate all of your hp`,
       category: "healer",
       read: false,
     }).save();

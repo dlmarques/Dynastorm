@@ -32,16 +32,23 @@ const HealerItem = ({ img, id }) => {
       heal: heal,
       price: price,
     });
-
-    if (user.health === 100) {
-      dispatch(errorActions.setError("Your HP is full"));
+    if (user.money < price) {
+      dispatch(
+        errorActions.setError(
+          "You don't have enough money, wait until next day"
+        )
+      );
     } else {
-      try {
-        const data = await response;
-        console.log(data);
-        dispatch(shopSliceActions.buy());
-      } catch (error) {
-        console.log(error);
+      if (user.health === 100) {
+        dispatch(errorActions.setError("Your HP is full"));
+      } else {
+        try {
+          const data = await response;
+          console.log(data);
+          dispatch(shopSliceActions.buy());
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
   };
