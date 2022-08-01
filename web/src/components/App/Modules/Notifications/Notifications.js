@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Notification from "./components/Notification";
 import styles from "./notifications.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { notificationsActions } from "../../../../store/ui/notifications";
 import axios from "axios";
 

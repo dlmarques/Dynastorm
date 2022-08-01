@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./app.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import schedule from "node-schedule";
 
 import { userActions } from "../../store/auth/user";
 import { bossActions } from "../../store/auth/bosses";
@@ -22,8 +23,8 @@ import { notificationsActions } from "../../store/ui/notifications";
 
 const App = () => {
   const dispatch = useDispatch();
+  const [nextDay, setNextDay] = useState(false);
   const shouldFetch = useRef(true);
-  const shouldFetchNotifications = useRef(true);
   const user = useSelector((state) => state.user.user);
   const battle = useSelector((state) => state.user.battles);
   const isNew = useSelector((state) => state.user.user.isNew);
@@ -31,9 +32,10 @@ const App = () => {
   const change = useSelector((state) => state.shop.purchased);
   const error = useSelector((state) => state.error.error);
   const missions = useSelector((state) => state.user.missions);
-  const notifications = useSelector(
-    (state) => state.notifications.notifications
-  );
+
+  schedule.scheduleJob("0 0 * * *", () => {
+    setNextDay(!nextDay);
+  });
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -73,7 +75,7 @@ const App = () => {
         tier: setTier(user.xp),
       })
     );
-  }, [change, missions, battle]);
+  }, [change, missions, battle, nextDay]);
 
   useEffect(() => {
     if (shouldFetch.current) {
@@ -118,7 +120,7 @@ const App = () => {
           }
         })
       );
-  }, [change, missions, battle]);
+  }, [change, missions, battle, nextDay]);
 
   dispatch(
     userActions.setLevel({

@@ -2,19 +2,20 @@ const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const schedule = require("node-schedule");
+const Notification = require("../models/Notification");
 
 schedule.scheduleJob("0 0 * * *", async () => {
   const users = await User.find();
   users.map(async (user) => {
     await User.findByIdAndUpdate(user._id, { $set: { hp: 100 } });
+    new Notification({
+      id: user._id,
+      title: "Healer",
+      description: `Healer regenerate your all of your hp`,
+      category: "healer",
+      read: false,
+    }).save();
   });
-  new Notification({
-    id: id,
-    title: "Healer",
-    description: `Healer regenerate your all of your hp`,
-    category: "healer",
-    read: false,
-  }).save();
 });
 
 router.patch("/heal", async (req, res) => {
