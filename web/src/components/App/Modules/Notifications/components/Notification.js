@@ -1,13 +1,16 @@
 import React from "react";
-import styles from "./notification.module.scss";
+import "./notification.scss";
 
-const Notification = () => {
+const Notification = ({ title, description, category, read }) => {
   return (
-    <div className={styles.notification}>
-      <img src="" alt="notification" />
-      <div className={styles.text}>
-        <h3>Title</h3>
-        <p>Description</p>
+    <div className="notification">
+      <img
+        src={require(`../../../../../assets/notification/${category}.png`)}
+        alt="notification"
+      />
+      <div className={read ? "text true" : "text false"}>
+        <h3>{title}</h3>
+        <p>{description}</p>
       </div>
     </div>
   );

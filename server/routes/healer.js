@@ -8,6 +8,13 @@ schedule.scheduleJob("0 0 * * *", async () => {
   users.map(async (user) => {
     await User.findByIdAndUpdate(user._id, { $set: { hp: 100 } });
   });
+  new Notification({
+    id: id,
+    title: "Healer",
+    description: `Healer regenerate your all of your hp`,
+    category: "healer",
+    read: false,
+  }).save();
 });
 
 router.patch("/heal", async (req, res) => {

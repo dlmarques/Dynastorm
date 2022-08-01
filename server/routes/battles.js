@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Boss = require("../models/Boss");
 const User = require("../models/User");
+const Notification = require("../models/Notification");
 const jwt = require("jsonwebtoken");
 const { increaseRuleOf3 } = require("../utils/ruleOf3");
 
@@ -132,53 +133,67 @@ router.post("/fightBoss", async (req, res) => {
     const averageUserSkills =
       (user.strength + user.magic + user.armor + user.magicResist) * user.hp;
 
-      try {
-        if (averageBossSkills > averageUserSkills) {
-          await User.findByIdAndUpdate(id, { $set: { hp: 0 } });
-          res.send("defeat");
-        } else {
-          if (boss.stat === "magic") {
-            await User.findByIdAndUpdate(id, {
-              $set: {
-                magic: increaseRuleOf3(user.magic, boss.boost, 1),
-                currentBoss: user.currentBoss + 1,
-                money: user.money + boss.moneyReward,
-                xp: user.xp + boss.xpReward,
-              },
-            });
-          } else if (boss.stat === "strength") {
-            await User.findByIdAndUpdate(id, {
-              $set: {
-                strength: increaseRuleOf3(user.strength, boss.boost, 1),
-                currentBoss: user.currentBoss + 1,
-                money: user.money + boss.moneyReward,
-                xp: user.xp + boss.xpReward,
-              },
-            });
-          } else if (boss.stat === "armor") {
-            await User.findByIdAndUpdate(id, {
-              $set: {
-                armor: increaseRuleOf3(user.armor, boss.boost, 1),
-                currentBoss: user.currentBoss + 1,
-                money: user.money + boss.moneyReward,
-                xp: user.xp + boss.xpReward,
-              },
-            });
-          } else if (boss.stat === "magicResist") {
-            await User.findByIdAndUpdate(id, {
-              $set: {
-                magicResist: increaseRuleOf3(user.magic, boss.boost, 1),
-                currentBoss: user.currentBoss + 1,
-                money: user.money + boss.moneyReward,
-                xp: user.xp + boss.xpReward,
-              },
-            });
-          }
-          res.send("win");
+    try {
+      if (averageBossSkills > averageUserSkills) {
+        await User.findByIdAndUpdate(id, { $set: { hp: 0 } });
+        new Notification({
+          id: id,
+          title: "Battles",
+          description: `You lose the battle against ${boss.bossName}`,
+          category: "battles",
+          read: false,
+        }).save();
+        res.send("defeat");
+      } else {
+        if (boss.stat === "magic") {
+          await User.findByIdAndUpdate(id, {
+            $set: {
+              magic: increaseRuleOf3(user.magic, boss.boost, 1),
+              currentBoss: user.currentBoss + 1,
+              money: user.money + boss.moneyReward,
+              xp: user.xp + boss.xpReward,
+            },
+          });
+        } else if (boss.stat === "strength") {
+          await User.findByIdAndUpdate(id, {
+            $set: {
+              strength: increaseRuleOf3(user.strength, boss.boost, 1),
+              currentBoss: user.currentBoss + 1,
+              money: user.money + boss.moneyReward,
+              xp: user.xp + boss.xpReward,
+            },
+          });
+        } else if (boss.stat === "armor") {
+          await User.findByIdAndUpdate(id, {
+            $set: {
+              armor: increaseRuleOf3(user.armor, boss.boost, 1),
+              currentBoss: user.currentBoss + 1,
+              money: user.money + boss.moneyReward,
+              xp: user.xp + boss.xpReward,
+            },
+          });
+        } else if (boss.stat === "magicResist") {
+          await User.findByIdAndUpdate(id, {
+            $set: {
+              magicResist: increaseRuleOf3(user.magic, boss.boost, 1),
+              currentBoss: user.currentBoss + 1,
+              money: user.money + boss.moneyReward,
+              xp: user.xp + boss.xpReward,
+            },
+          });
         }
-      } catch (err) {
-        res.send(err);
+        new Notification({
+          id: id,
+          title: "Battles",
+          description: `You won the battle against ${boss.bossName}`,
+          category: "battles",
+          read: false,
+        }).save();
+        res.send("win");
       }
+    } catch (err) {
+      res.send(err);
+    }
   }
 });
 

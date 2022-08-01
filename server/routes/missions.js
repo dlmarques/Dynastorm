@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const Notification = require("../models/Notification");
 const Missions = require("../models/Missions");
 
 router.post("/getMissions", async (req, res) => {
@@ -29,6 +30,13 @@ router.patch("/startMission", async (req, res) => {
     await Missions.findByIdAndUpdate(req.body.id, {
       $set: { status: "completed" },
     });
+    new Notification({
+      id: id,
+      title: "Missions",
+      description: `You have completed the ${mission.missionName}`,
+      category: "missions",
+      read: false,
+    }).save();
   }
   if (mission && user) {
     setTimeout(endMission, mission.duration * 60 * 1000);

@@ -40,7 +40,7 @@ router.post("/register", async (req, res) => {
     new: true,
     perk: " ",
     currentBoss: 1,
-    busy: false
+    busy: false,
   });
 
   try {
