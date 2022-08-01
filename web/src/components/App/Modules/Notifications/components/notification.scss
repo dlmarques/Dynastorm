@@ -11,6 +11,7 @@
   }
 
   .text.true {
+    padding-left: 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -20,6 +21,7 @@
     }
   }
   .text.false {
+    padding-left: 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -27,5 +29,10 @@
     p {
       font-weight: 500;
     }
+  }
+
+  span {
+    font-size: 0.9rem;
+    font-weight: 300;
   }
 }

@@ -144,10 +144,7 @@ const App = () => {
               <Sidebar />
             </div>
             <div className={styles["mobile-trigger"]}>
-              <Trigger
-                icon={<HiOutlineMenuAlt2 />}
-                action={mobileMenuActions.open()}
-              />
+              <Trigger />
             </div>
           </div>
           {error && <Error />}

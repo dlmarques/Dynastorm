@@ -6,6 +6,7 @@ import Notifications from "../../Modules/Notifications/Notifications";
 import { useDispatch, useSelector } from "react-redux";
 import { notificationsActions } from "../../../../store/ui/notifications";
 import axios from "axios";
+
 const Header = (props) => {
   const dispatch = useDispatch();
   const newNotifications = useSelector(

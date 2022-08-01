@@ -32,6 +32,9 @@
       color: #eee;
       font-size: 2rem;
       position: relative;
+      @media (max-width: 1440px) {
+        display: none;
+      }
     }
 
     .dot {
@@ -42,6 +45,9 @@
       z-index: 99;
       position: absolute;
       left: 15px;
+      @media (max-width: 1440px) {
+        display: none;
+      }
     }
   }
 }

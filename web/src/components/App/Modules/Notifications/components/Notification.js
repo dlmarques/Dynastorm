@@ -1,7 +1,8 @@
 import React from "react";
 import "./notification.scss";
 
-const Notification = ({ title, description, category, read }) => {
+const Notification = ({ title, description, category, read, date }) => {
+  console.log(new Date(date).getHours());
   return (
     <div className="notification">
       <img
@@ -11,6 +12,10 @@ const Notification = ({ title, description, category, read }) => {
       <div className={read ? "text true" : "text false"}>
         <h3>{title}</h3>
         <p>{description}</p>
+        <span>
+          {date &&
+            new Date(date).getHours() + ":" + new Date(date).getMinutes()}
+        </span>
       </div>
     </div>
   );

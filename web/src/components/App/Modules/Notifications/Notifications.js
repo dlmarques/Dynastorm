@@ -39,6 +39,7 @@ const Notifications = () => {
               description={notification.description}
               category={notification.category}
               read={notification.read}
+              date={notification.date}
             />
           ))}
     </div>
