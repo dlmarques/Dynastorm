@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./trigger.scss";
+import "animate.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { mobileMenuActions } from "../../../../store/ui/mobileMenu";
@@ -16,18 +17,35 @@ const Trigger = () => {
     (state) => state.notifications.newNotifications
   );
   const isVisible = useSelector((state) => state.notifications.isVisible);
+  const isOpened = useSelector((state) => state.mobileMenu.isOpened);
 
   const handler = () => {
     setOpenMenu((open) => !open);
   };
 
+  const toggleMobileMenu = () => {
+    if (isVisible) {
+      dispatch(notificationsActions.close());
+    }
+    if (isOpened) {
+      dispatch(mobileMenuActions.close());
+    } else {
+      dispatch(mobileMenuActions.open());
+    }
+    setOpenMenu((open) => !open);
+  };
+
   const toggleNotifications = () => {
     const token = localStorage.getItem("authToken");
+    if (isOpened) {
+      dispatch(mobileMenuActions.close());
+    }
     if (isVisible) {
       dispatch(notificationsActions.close());
     } else {
       dispatch(notificationsActions.open());
     }
+    setOpenMenu((open) => !open);
     async function readNotifications() {
       axios.patch("http://localhost:3001/api/noti/readNotification", {
         token: token,
@@ -40,10 +58,14 @@ const Trigger = () => {
   return (
     <>
       <div className="trigger" onClick={handler}>
-        <TbGridDots />
+        <TbGridDots
+          className={
+            openMenu ? "animate__animated animate__rotateIn" : "menu-trigger"
+          }
+        />
       </div>
       <div className={openMenu ? "menu open" : "menu"}>
-        <HiOutlineMenu onClick={() => dispatch(mobileMenuActions.open())} />
+        <HiOutlineMenu onClick={toggleMobileMenu} />
         <div className="notifications">
           <IoIosNotifications onClick={toggleNotifications} />
           {newNotifications && <div className="dot"></div>}

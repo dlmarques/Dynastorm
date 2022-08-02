@@ -20,13 +20,20 @@
 .menu {
   width: 0;
   height: 0;
+  -webkit-transition: width 1s ease-in-out;
+  -moz-transition: width 1s ease-in-out;
+  -o-transition: width 1s ease-in-out;
+  transition: width 1s ease-in-out;
   svg {
     display: none;
   }
 }
 
 .menu.open {
-  transition: width 1s;
+  -webkit-transition: width 1s ease-in-out;
+  -moz-transition: width 1s ease-in-out;
+  -o-transition: width 1s ease-in-out;
+  transition: width 1s ease-in-out;
   border-radius: 15px;
   width: 300px;
   height: 60px;
@@ -41,6 +48,7 @@
   justify-content: space-evenly;
   align-items: center;
   gap: 20px;
+
   svg {
     display: block;
     color: #eee;
