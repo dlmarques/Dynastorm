@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Notification from "./components/Notification";
-import styles from "./notifications.module.scss";
+import "./notifications.scss";
 import { useDispatch } from "react-redux";
 import { notificationsActions } from "../../../../store/ui/notifications";
+import { BsArrowBarRight } from "react-icons/bs";
 import axios from "axios";
 
 const Notifications = () => {
@@ -26,23 +27,29 @@ const Notifications = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
-      {notifications &&
-        notifications
-          .sort((a, b) => {
-            return new Date(b.date) - new Date(a.date);
-          })
-          .map((notification, id) => (
-            <Notification
-              key={id}
-              title={notification.title}
-              description={notification.description}
-              category={notification.category}
-              read={notification.read}
-              date={notification.date}
-            />
-          ))}
-    </div>
+    <>
+      <div className="container">
+        <BsArrowBarRight
+          id="icon"
+          onClick={() => dispatch(notificationsActions.close())}
+        />
+        {notifications &&
+          notifications
+            .sort((a, b) => {
+              return new Date(b.date) - new Date(a.date);
+            })
+            .map((notification, id) => (
+              <Notification
+                key={id}
+                title={notification.title}
+                description={notification.description}
+                category={notification.category}
+                read={notification.read}
+                date={notification.date}
+              />
+            ))}
+      </div>
+    </>
   );
 };
 
