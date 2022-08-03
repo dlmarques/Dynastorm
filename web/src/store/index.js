@@ -10,6 +10,7 @@ import mobileMenu from "./ui/mobileMenu";
 import bossSlice from "./auth/bosses";
 import battlesSlice from "./ui/battles";
 import notificationsSlice from "./ui/notifications";
+import enemySlice from "./auth/enemy";
 
 const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ const store = configureStore({
     shop: shopSlice.reducer,
     battles: battlesSlice.reducer,
     notifications: notificationsSlice.reducer,
+    enemy: enemySlice.reducer,
   },
 });
 

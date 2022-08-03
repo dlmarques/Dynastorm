@@ -8,7 +8,7 @@ import CountdownTimer from "./components/CountdownTimer";
 const Healer = () => {
   return (
     <div className={styles["healer-container"]}>
-      <h2>Healer</h2>
+      <h1>Healer</h1>
       <div className={styles["healer-info"]}>
         <img src={healer} className={styles.healer} alt="healer" />
         <h3>

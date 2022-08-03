@@ -13,6 +13,7 @@ const healerRoute = require("./routes/healer");
 const missionsRoute = require("./routes/missions");
 const battlesRoute = require("./routes/battles");
 const notificationRoute = require("./routes/notification");
+const arenasRoute = require("./routes/arenas");
 
 dotenv.config();
 
@@ -35,5 +36,6 @@ app.use("/api/healer", healerRoute);
 app.use("/api/missions", missionsRoute);
 app.use("/api/battles", battlesRoute);
 app.use("/api/noti", notificationRoute);
+app.use("/api/arenas", arenasRoute);
 
 app.listen(3001, () => console.log("server running"));

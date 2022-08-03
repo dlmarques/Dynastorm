@@ -9,6 +9,7 @@ import Healer from "../../Modules/Healer/Healer";
 import FeaturesBar from "../FeaturesBar/FeaturesBar";
 
 import styles from "./main.module.scss";
+import Arenas from "../../Modules/Arenas/Arenas";
 
 const Main = () => {
   return (
@@ -21,6 +22,7 @@ const Main = () => {
             <Route path="store" element={<Store />} />
             <Route path="missions" element={<Missions />} />
             <Route path="battles" element={<Battles />} />
+            <Route path="arenas" element={<Arenas />} />
             <Route path="inventory" element={<Inventory />} />
             <Route path="healer" element={<Healer />} />
           </Routes>

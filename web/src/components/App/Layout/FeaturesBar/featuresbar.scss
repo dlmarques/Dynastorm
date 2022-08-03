@@ -5,6 +5,7 @@
   border-radius: 15px;
   position: absolute;
   bottom: 0;
+  z-index: 99;
   @media (max-width: 1440px) {
     width: 100px;
     height: 600px;

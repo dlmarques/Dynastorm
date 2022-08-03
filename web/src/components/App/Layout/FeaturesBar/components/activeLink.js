@@ -3,6 +3,7 @@ export const links = [
   "store",
   "missions",
   "battles",
+  "arenas",
   "inventory",
   "healer",
 ];

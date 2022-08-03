@@ -11,7 +11,7 @@ const Welcome = () => {
       <Header title="Dynastorm" />
       <div className={styles["welcome-container"]}>
         <div className={styles.welcome}>
-          <h2>Welcome, please select a perk to start</h2>
+          <h1>Welcome, please select a perk to start</h1>
           <div className={styles["perks-list"]}>
             {skills.map((skill, id) => (
               <Perk key={id} image={skill} />
