@@ -44,14 +44,7 @@ const Player = ({ name, xp, avatar, id }) => {
       <img src={avatar} alt="avatar" />
       <div className={styles.text}>
         <h2>{name}</h2>
-        <Progress
-          label="XP"
-          id="xp"
-          min="0"
-          max={playerLevel && playerLevel * 100}
-          value={xp}
-          styles={styles.xp}
-        />
+        <h3>{playerLevel && `Level ${playerLevel}`}</h3>
       </div>
     </div>
   );

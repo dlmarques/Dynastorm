@@ -13,6 +13,11 @@ router.post("/getAllUsers", async (req, res) => {
         return user.username !== currentUser.username;
       })
       .filter((user) => user.hp > 0)
+      .filter((user) => {
+        const averageSkills = user.strength + user.magic + user.armor + user.magicResist;
+        const userAverageSkills = currentUser.strength + currentUser.magic + currentUser.armor + currentUser.magicResist;
+        return averageSkills < userAverageSkills + (userAverageSkills * 0.5) && averageSkills > userAverageSkills - (userAverageSkills * 0.5)
+      })
       .map((user) => {
         return user;
       });
