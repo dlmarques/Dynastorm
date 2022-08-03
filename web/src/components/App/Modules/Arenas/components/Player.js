@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./player.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLevel } from "../../../../../utils/Level";
 import { enemyActions } from "../../../../../store/auth/enemy";
 
 const Player = ({ name, xp, avatar, id }) => {
   const dispatch = useDispatch();
   const [playerLevel, setPlayerLevel] = useState();
+  const fight = useSelector((state) => state.enemy.fight);
 
   useEffect(() => {
     setPlayerLevel(setLevel(xp));
-  }, []);
+    axios
+      .post("http://localhost:3001/api/arenas/getEnemy", {
+        id: id,
+      })
+      .then((response) => dispatch(enemyActions.setHp(response.data.hp)));
+  }, [fight]);
 
   const selectEnemy = () => {
     axios

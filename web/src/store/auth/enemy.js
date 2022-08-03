@@ -17,6 +17,7 @@ const enemySlice = createSlice({
       perkImage: null,
       level: null,
     },
+    fight: 0,
   },
   reducers: {
     setEnemy(state, action) {
@@ -35,6 +36,12 @@ const enemySlice = createSlice({
         perkImage: enemy.perkImage,
         level: enemy.level,
       };
+    },
+    fight(state) {
+      ++state.fight;
+    },
+    setHp(state, action) {
+      state.enemy.health = action.payload;
     },
   },
 });

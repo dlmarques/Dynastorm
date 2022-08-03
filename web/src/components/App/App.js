@@ -7,7 +7,6 @@ import schedule from "node-schedule";
 import { userActions } from "../../store/auth/user";
 import { bossActions } from "../../store/auth/bosses";
 import { setLevel, setTier } from "../../utils/Level";
-import { HiOutlineMenuAlt2 } from "react-icons/hi";
 
 import Main from "./Layout/Main/Main";
 import Sidebar from "./Layout/Sidebar/Sidebar";
@@ -18,7 +17,6 @@ import MobileMenu from "./Layout/MobileMenu/MobileMenu";
 import Trigger from "./Components/Trigger/Trigger";
 import Error from "./Components/Error/Error";
 
-import { mobileMenuActions } from "../../store/ui/mobileMenu";
 import { notificationsActions } from "../../store/ui/notifications";
 
 const App = () => {
@@ -32,6 +30,7 @@ const App = () => {
   const change = useSelector((state) => state.shop.purchased);
   const error = useSelector((state) => state.error.error);
   const missions = useSelector((state) => state.user.missions);
+  const fight = useSelector((state) => state.enemy.fight);
 
   schedule.scheduleJob("0 0 * * *", () => {
     setNextDay(!nextDay);
@@ -75,7 +74,7 @@ const App = () => {
         tier: setTier(user.xp),
       })
     );
-  }, [change, missions, battle, nextDay]);
+  }, [change, missions, battle, nextDay, fight]);
 
   useEffect(() => {
     if (shouldFetch.current) {
@@ -120,7 +119,7 @@ const App = () => {
           }
         })
       );
-  }, [change, missions, battle, nextDay]);
+  }, [change, missions, battle, nextDay, fight]);
 
   dispatch(
     userActions.setLevel({

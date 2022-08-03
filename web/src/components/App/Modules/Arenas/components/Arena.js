@@ -1,35 +1,44 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GiBiceps } from "react-icons/gi";
 import { RiMagicFill } from "react-icons/ri";
 import { BsShieldShaded } from "react-icons/bs";
 import { GiMagicPalm } from "react-icons/gi";
+import { enemyActions } from "../../../../../store/auth/enemy";
+import { errorActions } from "../../../../../store/ui/error";
 import Stats from "../../../Layout/Sidebar/components/Stats";
 import styles from "./arena.module.scss";
 import Progress from "../../../Components/Progress/Progress";
 import Button from "../../../Components/Button/Button";
 
 const Arena = () => {
+  const dispatch = useDispatch();
   const [result, setResult] = useState();
   const enemy = useSelector((state) => state.enemy.enemy);
+  const user = useSelector((state) => state.user.user);
 
   const attackEnemy = () => {
-    const token = localStorage.getItem("authToken");
-    axios
-      .post("http://localhost:3001/api/arenas/attackEnemy", {
-        id: enemy.id,
-        token: token,
-      })
-      .then((response) => {
-        setResult("waiting");
-        setTimeout(() => {
-          setResult(response.data === "user win" ? "win" : "lose");
-        }, 2000);
-        setTimeout(() => {
-          setResult("");
-        }, 4000);
-      });
+    if (user.health > 0) {
+      const token = localStorage.getItem("authToken");
+      axios
+        .patch("http://localhost:3001/api/arenas/attackEnemy", {
+          id: enemy.id,
+          token: token,
+        })
+        .then((response) => {
+          setResult("waiting");
+          setTimeout(() => {
+            setResult(response.data === "user win" ? "win" : "lose");
+            dispatch(enemyActions.fight());
+          }, 2000);
+          setTimeout(() => {
+            setResult("");
+          }, 4000);
+        });
+    } else {
+      dispatch(errorActions.setError("You don't have HP"));
+    }
   };
 
   return (
@@ -37,7 +46,7 @@ const Arena = () => {
       <div className={styles.enemy}>
         {enemy.avatar && <img src={enemy.avatar} alt="enemy avatar" />}
         <h2>{enemy.name && `@${enemy.name}`}</h2>
-        {enemy.health && (
+        {enemy.name && (
           <Progress
             id="hp"
             min="0"
