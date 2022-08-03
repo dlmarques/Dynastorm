@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./player.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setLevel } from "../../../../../utils/Level";
-import Progress from "../../../Components/Progress/Progress";
 import { enemyActions } from "../../../../../store/auth/enemy";
 
 const Player = ({ name, xp, avatar, id }) => {
   const dispatch = useDispatch();
   const [playerLevel, setPlayerLevel] = useState();
-  const enemy = useSelector((state) => state.enemy.enemy);
 
   useEffect(() => {
     setPlayerLevel(setLevel(xp));

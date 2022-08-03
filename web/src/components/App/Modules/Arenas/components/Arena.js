@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { GiBiceps } from "react-icons/gi";
 import { RiMagicFill } from "react-icons/ri";
@@ -10,7 +11,27 @@ import Progress from "../../../Components/Progress/Progress";
 import Button from "../../../Components/Button/Button";
 
 const Arena = () => {
+  const [result, setResult] = useState();
   const enemy = useSelector((state) => state.enemy.enemy);
+
+  const attackEnemy = () => {
+    const token = localStorage.getItem("authToken");
+    axios
+      .post("http://localhost:3001/api/arenas/attackEnemy", {
+        id: enemy.id,
+        token: token,
+      })
+      .then((response) => {
+        setResult("waiting");
+        setTimeout(() => {
+          setResult(response.data === "user win" ? "win" : "lose");
+        }, 2000);
+        setTimeout(() => {
+          setResult("");
+        }, 4000);
+      });
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.enemy}>
@@ -59,7 +80,28 @@ const Arena = () => {
             />
           )}
         </div>
-        <Button btn="arenasBtn">Attack!</Button>
+        {enemy.name && (
+          <Button
+            btn={
+              result === "win"
+                ? "arenasBtn-win"
+                : result === "lose"
+                ? "arenasBtn-lose"
+                : result === "waiting"
+                ? "arenasBtn-wait"
+                : "arenasBtn"
+            }
+            onClick={attackEnemy}
+          >
+            {result === "win"
+              ? "You win"
+              : result === "lose"
+              ? "You lose"
+              : result === "waiting"
+              ? "Wait..."
+              : "Attack!"}
+          </Button>
+        )}
       </div>
     </div>
   );
