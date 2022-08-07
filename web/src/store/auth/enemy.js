@@ -16,8 +16,10 @@ const enemySlice = createSlice({
       perk: null,
       perkImage: null,
       level: null,
+      fight: false,
     },
-    fight: 0,
+    reload: 0,
+    result: "",
   },
   reducers: {
     setEnemy(state, action) {
@@ -37,11 +39,37 @@ const enemySlice = createSlice({
         level: enemy.level,
       };
     },
-    fight(state) {
-      ++state.fight;
+    cleanEnemy(state) {
+      state.enemy = {
+        id: null,
+        name: "",
+        avatar: "",
+        strength: null,
+        armor: null,
+        magic: null,
+        magicResist: null,
+        health: null,
+        xp: null,
+        perk: null,
+        perkImage: null,
+        level: null,
+        fight: false,
+      };
+    },
+    startFight(state) {
+      state.enemy.fight = true;
+    },
+    stopFight(state) {
+      state.enemy.fight = false;
     },
     setHp(state, action) {
       state.enemy.health = action.payload;
+    },
+    reload(state) {
+      ++state.reload;
+    },
+    setResult(state, action) {
+      state.result = action.payload;
     },
   },
 });

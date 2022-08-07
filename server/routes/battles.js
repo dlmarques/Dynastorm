@@ -126,73 +126,78 @@ router.post("/fightBoss", async (req, res) => {
   const id = jwt.decode(req.body.token, process.env.JWT_TOKEN);
   const user = await User.findById(id);
   const boss = await Boss.findById(req.body.bossId);
-
   if (user && boss) {
-    const averageBossSkills =
-      (boss.strength + boss.magic + boss.armor + boss.magicResist) * boss.hp;
-    const averageUserSkills =
-      (user.strength + user.magic + user.armor + user.magicResist) * user.hp;
-
-    try {
-      if (averageBossSkills > averageUserSkills) {
-        await User.findByIdAndUpdate(id, { $set: { hp: 0 } });
-        new Notification({
-          id: id,
-          title: "Battles",
-          description: `You lose the battle against ${boss.bossName}`,
-          category: "battles",
-          read: false,
-        }).save();
-        res.send("defeat");
-      } else {
-        if (boss.stat === "magic") {
-          await User.findByIdAndUpdate(id, {
-            $set: {
-              magic: increaseRuleOf3(user.magic, boss.boost, 1),
-              currentBoss: user.currentBoss + 1,
-              money: user.money + boss.moneyReward,
-              xp: user.xp + boss.xpReward,
-            },
-          });
-        } else if (boss.stat === "strength") {
-          await User.findByIdAndUpdate(id, {
-            $set: {
-              strength: increaseRuleOf3(user.strength, boss.boost, 1),
-              currentBoss: user.currentBoss + 1,
-              money: user.money + boss.moneyReward,
-              xp: user.xp + boss.xpReward,
-            },
-          });
-        } else if (boss.stat === "armor") {
-          await User.findByIdAndUpdate(id, {
-            $set: {
-              armor: increaseRuleOf3(user.armor, boss.boost, 1),
-              currentBoss: user.currentBoss + 1,
-              money: user.money + boss.moneyReward,
-              xp: user.xp + boss.xpReward,
-            },
-          });
-        } else if (boss.stat === "magicResist") {
-          await User.findByIdAndUpdate(id, {
-            $set: {
-              magicResist: increaseRuleOf3(user.magic, boss.boost, 1),
-              currentBoss: user.currentBoss + 1,
-              money: user.money + boss.moneyReward,
-              xp: user.xp + boss.xpReward,
-            },
-          });
+    if (user.busy) {
+      res.send("busy");
+    } else {
+      const averageBossSkills =
+        (boss.strength + boss.magic + boss.armor + boss.magicResist) * boss.hp;
+      const averageUserSkills =
+        (user.strength + user.magic + user.armor + user.magicResist) * user.hp;
+        await User.findByIdAndUpdate(id, {$set: {busy: true}})
+      try {   
+        if (averageBossSkills > averageUserSkills) {
+          await User.findByIdAndUpdate(id, { $set: { hp: 0 } });
+          new Notification({
+            id: id,
+            title: "Battles",
+            description: `You lose the battle against ${boss.bossName}`,
+            category: "battles",
+            read: false,
+          }).save();
+          res.send("defeat");
+        await User.findByIdAndUpdate(id, {$set: {busy: false}})
+        } else {
+          if (boss.stat === "magic") {
+            await User.findByIdAndUpdate(id, {
+              $set: {
+                magic: increaseRuleOf3(user.magic, boss.boost, 1),
+                currentBoss: user.currentBoss + 1,
+                money: user.money + boss.moneyReward,
+                xp: user.xp + boss.xpReward,
+              },
+            });
+          } else if (boss.stat === "strength") {
+            await User.findByIdAndUpdate(id, {
+              $set: {
+                strength: increaseRuleOf3(user.strength, boss.boost, 1),
+                currentBoss: user.currentBoss + 1,
+                money: user.money + boss.moneyReward,
+                xp: user.xp + boss.xpReward,
+              },
+            });
+          } else if (boss.stat === "armor") {
+            await User.findByIdAndUpdate(id, {
+              $set: {
+                armor: increaseRuleOf3(user.armor, boss.boost, 1),
+                currentBoss: user.currentBoss + 1,
+                money: user.money + boss.moneyReward,
+                xp: user.xp + boss.xpReward,
+              },
+            });
+          } else if (boss.stat === "magicResist") {
+            await User.findByIdAndUpdate(id, {
+              $set: {
+                magicResist: increaseRuleOf3(user.magic, boss.boost, 1),
+                currentBoss: user.currentBoss + 1,
+                money: user.money + boss.moneyReward,
+                xp: user.xp + boss.xpReward,
+              },
+            });
+          }
+          new Notification({
+            id: id,
+            title: "Battles",
+            description: `You won the battle against ${boss.bossName}`,
+            category: "battles",
+            read: false,
+          }).save();
+        await User.findByIdAndUpdate(id, {$set: {busy: false}})
+          res.send("win");
         }
-        new Notification({
-          id: id,
-          title: "Battles",
-          description: `You won the battle against ${boss.bossName}`,
-          category: "battles",
-          read: false,
-        }).save();
-        res.send("win");
+      } catch (err) {
+        res.send(err);
       }
-    } catch (err) {
-      res.send(err);
     }
   }
 });

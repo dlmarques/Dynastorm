@@ -30,14 +30,14 @@ const App = () => {
   const change = useSelector((state) => state.shop.purchased);
   const error = useSelector((state) => state.error.error);
   const missions = useSelector((state) => state.user.missions);
-  const fight = useSelector((state) => state.enemy.fight);
-
+  const enemy = useSelector((state) => state.enemy.enemy);
+  const reload = useSelector((state) => state.enemy.reload);
+  const token = localStorage.getItem("authToken");
   schedule.scheduleJob("0 0 * * *", () => {
     setNextDay(!nextDay);
   });
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
     fetch("http://localhost:3001/api/auth/getUserData", {
       method: "POST",
       headers: {
@@ -74,7 +74,7 @@ const App = () => {
         tier: setTier(user.xp),
       })
     );
-  }, [change, missions, battle, nextDay, fight]);
+  }, [change, missions, battle, nextDay, enemy.fight, reload]);
 
   useEffect(() => {
     if (shouldFetch.current) {
@@ -107,7 +107,6 @@ const App = () => {
   }, [user.currentBoss]);
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
     axios
       .post("http://localhost:3001/api/noti/getNotifications", {
         token: token,
@@ -119,7 +118,13 @@ const App = () => {
           }
         })
       );
-  }, [change, missions, battle, nextDay, fight]);
+  }, [change, missions, battle, nextDay, enemy.fight, reload]);
+
+  useEffect(() => {
+    axios.patch("http://localhost:3001/api/user/stopFight", {
+      token: token,
+    });
+  }, []);
 
   dispatch(
     userActions.setLevel({

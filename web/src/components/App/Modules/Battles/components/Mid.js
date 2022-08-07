@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "animate.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,13 +13,21 @@ const Mid = () => {
   const dispatch = useDispatch();
   const boss = useSelector((state) => state.bosses.bosses);
   const user = useSelector((state) => state.user.user);
-  const busy = useSelector((state) => state.user.user.busy);
   const isActive = useSelector((state) => state.battles.isActive);
   const status = useSelector((state) => state.battles.status);
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    axios
+      .post("http://localhost:3001/api/user/checkBusy", {
+        token: token,
+      })
+      .then((response) => setBusy(response.data));
+  }, []);
 
   const request = () => {
     const token = localStorage.getItem("authToken");
-    dispatch(userActions.setBusy());
     axios
       .post("http://localhost:3001/api/battles/fightBoss", {
         token: token,
@@ -62,7 +70,6 @@ const Mid = () => {
         setTimeout(() => {
           dispatch(battlesActions.setIsActive());
           dispatch(battlesActions.setStatus(""));
-          dispatch(userActions.stopBusy());
         }, 6000);
       }
     }

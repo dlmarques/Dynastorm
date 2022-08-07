@@ -18,6 +18,7 @@ const userSlice = createSlice({
       perkImage: null,
       currentBoss: null,
       busy: false,
+      fighting: false,
     },
     level: {
       level: null,
@@ -42,6 +43,7 @@ const userSlice = createSlice({
         state.user.isNew = user.isNew;
         state.user.perk = user.perk;
         state.user.currentBoss = user.currentBoss;
+        state.user.busy = user.busy;
       }
     },
     setLevel(state, action) {
@@ -58,10 +60,10 @@ const userSlice = createSlice({
       state.user.perkImage = action.payload;
     },
     startMission(state) {
-      state.missions = ++state.missions;
+      ++state.missions;
     },
     endMission(state) {
-      state.busy = --state.missions;
+      --state.missions;
     },
     defeatBoss(state) {
       ++state.user.currentBoss;
@@ -74,6 +76,12 @@ const userSlice = createSlice({
     },
     stopBusy(state) {
       state.user.busy = false;
+    },
+    startFight(state) {
+      state.user.fighting = true;
+    },
+    stopFight(state) {
+      state.user.fighting = false;
     },
   },
 });

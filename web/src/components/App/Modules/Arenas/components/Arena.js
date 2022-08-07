@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { GiBiceps } from "react-icons/gi";
@@ -14,30 +14,19 @@ import Button from "../../../Components/Button/Button";
 
 const Arena = () => {
   const dispatch = useDispatch();
-  const [result, setResult] = useState();
   const enemy = useSelector((state) => state.enemy.enemy);
   const user = useSelector((state) => state.user.user);
 
-  const attackEnemy = () => {
+  const startFight = () => {
     if (user.health > 0) {
       const token = localStorage.getItem("authToken");
-      axios
-        .patch("http://localhost:3001/api/arenas/attackEnemy", {
-          id: enemy.id,
-          token: token,
-        })
-        .then((response) => {
-          setResult("waiting");
-          setTimeout(() => {
-            setResult(response.data === "user win" ? "win" : "lose");
-            dispatch(enemyActions.fight());
-          }, 2000);
-          setTimeout(() => {
-            setResult("");
-          }, 4000);
-        });
+      axios.patch("http://localhost:3001/api/arenas/startFight", {
+        id: enemy.id,
+        token: token,
+      });
+      dispatch(enemyActions.startFight());
     } else {
-      dispatch(errorActions.setError("You don't have HP"));
+      dispatch(errorActions.setError("You don't have hp"));
     }
   };
 
@@ -89,28 +78,11 @@ const Arena = () => {
             />
           )}
         </div>
-        {enemy.name && (
-          <Button
-            btn={
-              result === "win"
-                ? "arenasBtn-win"
-                : result === "lose"
-                ? "arenasBtn-lose"
-                : result === "waiting"
-                ? "arenasBtn-wait"
-                : "arenasBtn"
-            }
-            onClick={attackEnemy}
-          >
-            {result === "win"
-              ? "You win"
-              : result === "lose"
-              ? "You lose"
-              : result === "waiting"
-              ? "Wait..."
-              : "Attack!"}
+        {enemy.name && !enemy.fight ? (
+          <Button btn="arenasBtn" onClick={startFight}>
+            Start Fight
           </Button>
-        )}
+        ) : null}
       </div>
     </div>
   );

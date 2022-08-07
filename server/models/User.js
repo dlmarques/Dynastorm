@@ -78,6 +78,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 1,
   },
+  fighting: {
+    type: Boolean,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,

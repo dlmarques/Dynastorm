@@ -28,3 +28,14 @@
     }
   }
 }
+
+.fight {
+  background: url("../../../../assets/backgrounds/game_background_3.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-clip: content-box;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

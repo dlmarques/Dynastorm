@@ -14,17 +14,9 @@ router.post("/getAllUsers", async (req, res) => {
       })
       .filter((user) => user.hp > 0)
       .filter((user) => {
-        const averageSkills =
-          user.strength + user.magic + user.armor + user.magicResist;
-        const userAverageSkills =
-          currentUser.strength +
-          currentUser.magic +
-          currentUser.armor +
-          currentUser.magicResist;
-        return (
-          averageSkills < userAverageSkills + userAverageSkills * 0.5 &&
-          averageSkills > userAverageSkills - userAverageSkills * 0.5
-        );
+        const currentLevel = String(currentUser.xp)[0];
+        const userLevel = String(user.xp)[0];
+        return Number(currentLevel) === Number(userLevel);
       })
       .map((user) => {
         return user;
@@ -44,232 +36,193 @@ router.post("/getEnemy", async (req, res) => {
   }
 });
 
+router.patch("/startFight", async (req, res) => {
+  const userId = jwt.decode(req.body.token, process.env.JWT_TOKEN);
+  const enemyId = req.body.id;
+  const currentUser = await User.findByIdAndUpdate(userId, {
+    $set: { fighting: true },
+  });
+  if (userId && enemyId) {
+    const enemy = await User.findById(enemyId);
+    await new Notification({
+      id: userId,
+      title: "Arenas",
+      description: `You start a fight with ${enemy.username}`,
+      category: "arenas",
+      read: false,
+    }).save();
+    await new Notification({
+      id: enemyId,
+      title: "Arenas",
+      description: `${currentUser.username} starts a fight with you!`,
+      category: "arenas",
+      read: false,
+    }).save();
+    res.send("started");
+  } else {
+    res.send("error");
+  }
+});
+
 router.patch("/attackEnemy", async (req, res) => {
   const id = jwt.decode(req.body.token, process.env.JWT_TOKEN);
   const enemy = await User.findById(req.body.id);
   const user = await User.findById(id);
-  //if user and enemy exists
-  if (user && enemy) {
-    if (user.hp > 0) {
-      //average skills
-      const enemyAverageSkills =
-        enemy.strength + enemy.magic + enemy.armor + enemy.magicResist;
-      const userAverageSkills =
-        user.strength + user.magic + user.armor + user.magicResist;
-      //if user is stronger than enemy
-      if (enemyAverageSkills < userAverageSkills) {
-        //overall difference between user and enemy
-        const diff = userAverageSkills - enemyAverageSkills;
-        //if diff is equal or more than 50%
-        if (diff >= userAverageSkills * 0.5) {
-          const userProb = [1, 2, 3, 4, 5, 6, 7, 8];
-          const enemyProb = [9, 10];
-          const random = Math.floor(Math.random() * 10 + 1);
-          if (userProb.includes(random)) {
-            if (enemy.money > 0) {
-              await User.findByIdAndUpdate(id, {
-                $set: { money: Math.round(user.money + enemy.money * 0.2) },
-              });
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { money: Math.round(enemy.money - enemy.money * 0.2) },
-              });
-            } else {
-              await User.findByIdAndUpdate(id, {
-                $set: { money: Math.round(user.money + 1000) },
-              });
-            }
-            await User.findByIdAndUpdate(req.body.id, { $set: { hp: 0 } });
-            res.send("user win");
-          } else if (enemyProb.includes(random)) {
-            if (user.money > 0) {
-              await User.findByIdAndUpdate(id, {
-                $set: { money: Math.round(user.money - user.money * 0.2) },
-              });
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { money: Math.round(enemy.money + user.money * 0.2) },
-              });
-            } else {
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { money: Math.round(enemy.money + 500) },
-              });
-            }
-            await User.findByIdAndUpdate(id, {
-              $set: { hp: user.hp - user.hp * 0.25 },
-            });
-            res.send("enemy win");
-          }
+  const type = req.body.attack;
+
+    if (type === "magic") {
+      const diff = user.magic - enemy.magicResist;
+      if (diff < 0) {
+        res.send("nothing happens on your attack");
+      } else if (diff === 0) {
+        if (enemy.hp >= 10) {
+          await User.findByIdAndUpdate(enemy._id, {
+            $set: { hp: enemy.hp - 10 },
+          });
         } else {
-          const userProb = [1, 2, 3, 4, 5, 6, 7];
-          const enemyProb = [8, 9, 10];
-          const random = Math.floor(Math.random() * 10 + 1);
-          if (userProb.includes(random)) {
-            if (enemy.money > 0) {
-              await User.findByIdAndUpdate(id, {
-                $set: { money: Math.round(user.money + enemy.money * 0.15) },
-              });
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { money: Math.round(enemy.money - enemy.money * 0.15) },
-              });
-            } else {
-              await User.findByIdAndUpdate(id, {
-                $set: { money: Math.round(user.money + 500) },
-              });
-            }
-            if (enemy.hp >= 50) {
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { hp: enemy.hp - enemy.hp * 0.5 },
-              });
-            } else {
-              await User.findByIdAndUpdate(req.body.id, { $set: { hp: 0 } });
-            }
-            res.send("user win");
-          } else if (enemyProb.includes(random)) {
-            if (user.money > 0) {
-              await User.findByIdAndUpdate(id, {
-                $set: { money: Math.round(user.money - user.money * 0.15) },
-              });
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { money: Math.round(enemy.money + user.money * 0.15) },
-              });
-            } else {
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { money: Math.round(enemy.money + 1000) },
-              });
-            }
-            await User.findByIdAndUpdate(id, {
-              $set: { hp: user.hp - user.hp * 0.35 },
-            });
-            res.send("enemy win");
-          }
+          await User.findByIdAndUpdate(enemy._id, { $set: { hp: 0 } });
         }
-        //if average skills are equal
-      } else if (enemyAverageSkills === userAverageSkills) {
-        const userProb = [1, 2, 3, 4, 5];
-        const enemyProb = [6, 7, 8, 9, 10];
-        const random = Math.floor(Math.random() * 10 + 1);
-        if (userProb.includes(random)) {
-          if (enemy.money > 0) {
-            await User.findByIdAndUpdate(id, {
-              $set: { money: Math.round(user.money + enemy.money * 0.1) },
-            });
-            await User.findByIdAndUpdate(req.body.id, {
-              $set: { money: Math.round(enemy.money - enemy.money * 0.1) },
+        res.send("you takes 10hp");
+      } else if (diff > 0 && diff < enemy.magicResist * 0.5) {
+        if (enemy.hp >= 25) {
+          await User.findByIdAndUpdate(enemy._id, {
+            $set: { hp: enemy.hp - 25 },
+          });
+        } else {
+          await User.findByIdAndUpdate(enemy._id, { $set: { hp: 0 } });
+        }
+        res.send("you takes 25hp");
+      } else if (diff > enemy.magicResist * 0.5) {
+        if (enemy.hp >= 50) {
+          await User.findByIdAndUpdate(enemy._id, {
+            $set: { hp: enemy.hp - 50 },
+          });
+        } else {
+          await User.findByIdAndUpdate(enemy._id, { $set: { hp: 0 } });
+        }
+        res.send("you takes 50hp");
+      }
+    } else if (type === "physical") {
+      const diff = user.strength - enemy.armor;
+      if (diff < 0) {
+        res.send("nothing happens on your attack");
+      } else if (diff === 0) {
+        if (enemy.hp >= 10) {
+          await User.findByIdAndUpdate(enemy._id, {
+            $set: { hp: enemy.hp - 10 },
+          });
+        } else {
+          await User.findByIdAndUpdate(enemy._id, { $set: { hp: 0 } });
+        }
+        res.send("you takes 10hp");
+      } else if (diff > 0 && diff < enemy.armor * 0.5) {
+        if (enemy.hp >= 25) {
+          await User.findByIdAndUpdate(enemy._id, {
+            $set: { hp: enemy.hp - 25 },
+          });
+        } else {
+          await User.findByIdAndUpdate(enemy._id, { $set: { hp: 0 } });
+        }
+        res.send("you takes 25hp");
+      } else if (diff > enemy.armor * 0.5) {
+        if (enemy.hp >= 50) {
+          await User.findByIdAndUpdate(enemy._id, {
+            $set: { hp: enemy.hp - 50 },
+          });
+        } else {
+          await User.findByIdAndUpdate(enemy._id, { $set: { hp: 0 } });
+        }
+        res.send("you takes 50hp");
+      }
+    } else {
+      res.send("attacks doesnt exists");
+    }
+
+
+  
+});
+
+router.patch("/counterAttack", async (req, res) => {
+  const id = jwt.decode(req.body.token, process.env.JWT_TOKEN);
+  const enemy = await User.findById(req.body.id);
+  const user = await User.findById(id);
+  const type = req.body.attack;
+
+
+    if (enemy.hp <= 0) {
+      res.send("You win");
+    } else if (user.hp <= 0) {
+      res.send(`${enemy.username} win`);
+    } else {
+      if (type === "magic") {
+        const diff =  enemy.magic - user.magicResist;
+        if (diff < 0) {
+          res.send("nothing happens on counter attack");
+        } else if (diff === 0) {
+          if (user.hp > 10) {
+            await User.findByIdAndUpdate(user._id, {
+              $set: { hp: user.hp - 10 },
             });
           } else {
-            await User.findByIdAndUpdate(id, {
-              $set: { money: Math.round(user.money + 500) },
-            });
+            await User.findByIdAndUpdate(user._id, { $set: { hp: 0 } });
+            res.send(`${enemy.username} win`);
           }
-          await User.findByIdAndUpdate(req.body.id, {
-            $set: { hp: enemy.hp - enemy.hp * 0.5 },
-          });
-          res.send("user win");
-        } else if (enemyProb.includes(random)) {
-          if (user.money > 0) {
-            await User.findByIdAndUpdate(id, {
-              $set: { money: Math.round(user.money - user.money * 0.1) },
-            });
-            await User.findByIdAndUpdate(req.body.id, {
-              $set: { money: Math.round(enemy.money + user.money * 0.1) },
+        } else if (diff > 0 && diff < user.magicResist * 0.5) {
+          if (user.hp > 25) {
+            await User.findByIdAndUpdate(user._id, {
+              $set: { hp: user.hp - 25 },
             });
           } else {
-            await User.findByIdAndUpdate(req.body.id, {
-              $set: { money: Math.round(enemy.money + 500) },
-            });
+            await User.findByIdAndUpdate(user._id, { $set: { hp: 0 } });
+            res.send(`${enemy.username} win`);
           }
-          await User.findByIdAndUpdate(id, {
-            $set: { hp: user.hp - user.hp * 0.5 },
-          });
-          res.send("enemy win");
+        } else if (diff > user.magicResist * 0.5) {
+          if (user.hp > 50) {
+            await User.findByIdAndUpdate(user._id, {
+              $set: { hp: user.hp - 50 },
+            });
+          } else {
+            await User.findByIdAndUpdate(user._id, { $set: { hp: 0 } });
+            res.send(`${enemy.username} win`);
+          }
         }
-      } else if (enemyAverageSkills > userAverageSkills) {
-        const diff = enemyAverageSkills - userAverageSkills;
-        if (diff >= enemyAverageSkills * 0.5) {
-          const enemyProb = [1, 2, 3, 4, 5, 6, 7, 8];
-          const userProb = [9, 10];
-          const random = Math.floor(Math.random() * 10 + 1);
-          if (enemyProb.includes(random)) {
-            if (user.money > 0) {
-              await User.findByIdAndUpdate(id, {
-                $set: { money: Math.round(user.money - user.money * 0.15) },
-              });
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { money: Math.round(enemy.money + user.money * 0.15) },
-              });
-            } else {
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { money: Math.round(enemy.money + 500) },
-              });
-            }
-            await User.findByIdAndUpdate(id, { $set: { hp: 0 } });
-            res.send("enemy win");
-          } else if (userProb.includes(random)) {
-            if (enemy.money > 0) {
-              await User.findByIdAndUpdate(id, {
-                $set: { money: Math.round(user.money + enemy.money * 0.15) },
-              });
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { money: Math.round(enemy.money - enemy.money * 0.15) },
-              });
-            } else {
-              await User.findByIdAndUpdate(id, {
-                $set: { money: user.money + 500 },
-              });
-            }
-            await User.findByIdAndUpdate(req.body.id, {
-              $set: { hp: enemy.hp - enemy.hp * 0.25 },
+      } else if (type === "physical") {
+        const diff = enemy.strength - user.armor;
+        if (diff < 0) {
+          res.send("nothing happen on counter attack");
+        } else if (diff === 0) {
+          if (user.hp > 10) {
+            await User.findByIdAndUpdate(user._id, {
+              $set: { hp: user.hp - 10 },
             });
-            res.send("user win");
+          } else {
+            await User.findByIdAndUpdate(user._id, { $set: { hp: 0 } });
+            res.send(`${enemy.username} win`);
           }
-        } else {
-          const enemyProb = [1, 2, 3, 4, 5, 6, 7];
-          const userProb = [8, 9, 10];
-          const random = Math.floor(Math.random() * 10 + 1);
-          if (userProb.includes(random)) {
-            if (enemy.money > 0) {
-              await User.findByIdAndUpdate(id, {
-                $set: { money: Math.round(user.money + enemy.money * 0.2) },
-              });
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { money: Math.round(enemy.money - enemy.money * 0.2) },
-              });
-            } else {
-              await User.findByIdAndUpdate(id, {
-                $set: { money: Math.round(user.money + 1000) },
-              });
-            }
-            await User.findByIdAndUpdate(req.body.id, {
-              $set: { hp: enemy.hp - enemy.hp * 0.35 },
+        } else if (diff > 0 && diff < user.armor * 0.5) {
+          if (user.hp > 25) {
+            await User.findByIdAndUpdate(user._id, {
+              $set: { hp: user.hp - 25 },
             });
-            res.send("user win");
-          } else if (enemyProb.includes(random)) {
-            if (user.money > 0) {
-              await User.findByIdAndUpdate(id, {
-                $set: { money: Math.round(user.money - user.money * 0.2) },
-              });
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { money: Math.round(enemy.money + user.money * 0.2) },
-              });
-            } else {
-              await User.findByIdAndUpdate(req.body.id, {
-                $set: { money: Math.round(enemy.money + 1000) },
-              });
-            }
-            if (user.hp >= 50) {
-              await User.findByIdAndUpdate(id, {
-                $set: { hp: user.hp - user.hp * 0.5 },
-              });
-            } else {
-              await User.findByIdAndUpdate(id, { $set: { hp: 0 } });
-            }
-            res.send("enemy win");
+          } else {
+            await User.findByIdAndUpdate(user._id, { $set: { hp: 0 } });
+            res.send(`${enemy.username} win`);
+          }
+        } else if (diff > user.armor * 0.5) {
+          if (user.hp > 50) {
+            await User.findByIdAndUpdate(user._id, {
+              $set: { hp: user.hp - 50 },
+            });
+          } else {
+            await User.findByIdAndUpdate(user._id, { $set: { hp: 0 } });
+            res.send(`${enemy.username} win`);
           }
         }
       }
     }
-  } else {
-    res.send("You don't have HP");
-  }
+  
+
+  
 });
 
 module.exports = router;

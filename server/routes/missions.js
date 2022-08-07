@@ -16,30 +16,36 @@ router.post("/getMissions", async (req, res) => {
 
 router.patch("/startMission", async (req, res) => {
   const id = jwt.decode(req.body.token, process.env.JWT_TOKEN);
-  const mission = await Missions.findByIdAndUpdate(req.body.id, {
-    $set: { status: "in progress", date: req.body.startedTime },
-  });
   const user = await User.findById(id);
-  async function endMission() {
-    await User.findByIdAndUpdate(id, {
-      $set: {
-        xp: user.xp + mission.xpBoost,
-        money: user.money + mission.money,
-      },
+  if (user.busy) {
+    res.send("busy");
+  } else {
+    const mission = await Missions.findByIdAndUpdate(req.body.id, {
+      $set: { status: "in progress", date: req.body.startedTime },
     });
-    await Missions.findByIdAndUpdate(req.body.id, {
-      $set: { status: "completed" },
-    });
-    new Notification({
-      id: id,
-      title: "Missions",
-      description: `You have completed the ${mission.missionName}`,
-      category: "missions",
-      read: false,
-    }).save();
-  }
-  if (mission && user) {
-    setTimeout(endMission, mission.duration * 60 * 1000);
+    await User.findByIdAndUpdate(id, { $set: { busy: true } });
+    async function endMission() {
+      await User.findByIdAndUpdate(id, {
+        $set: {
+          xp: user.xp + mission.xpBoost,
+          money: user.money + mission.money,
+        },
+      });
+      await Missions.findByIdAndUpdate(req.body.id, {
+        $set: { status: "completed" },
+      });
+      await User.findByIdAndUpdate(id, { $set: { busy: false } });
+      new Notification({
+        id: id,
+        title: "Missions",
+        description: `You have completed the ${mission.missionName}`,
+        category: "missions",
+        read: false,
+      }).save();
+    }
+    if (mission && user) {
+      setTimeout(endMission, mission.duration * 60 * 1000);
+    }
   }
 });
 

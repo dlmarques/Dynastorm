@@ -41,6 +41,7 @@ router.post("/register", async (req, res) => {
     perk: " ",
     currentBoss: 1,
     busy: false,
+    fighting: false,
   });
 
   try {

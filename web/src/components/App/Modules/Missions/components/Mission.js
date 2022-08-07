@@ -1,5 +1,6 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 import Countdown from "react-countdown";
 import "./mission.scss";
 import { userActions } from "../../../../../store/auth/user";
@@ -17,39 +18,45 @@ const Mission = ({
   startedTime,
 }) => {
   const dispatch = useDispatch();
-  const busy = useSelector((state) => state.user.user.busy);
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    axios
+      .post("http://localhost:3001/api/user/checkBusy", {
+        token: token,
+      })
+      .then((response) => setBusy(response.data));
+  }, []);
 
   const startMission = async () => {
-    if (busy) {
+    const token = localStorage.getItem("authToken");
+    if (!busy) {
+      setTimeout(() => {
+        dispatch(userActions.startMission());
+        dispatch(userActions.setBusy());
+      }, 500);
+      setTimeout(() => {
+        dispatch(userActions.startMission());
+        dispatch(userActions.stopBusy());
+      }, duration * 61 * 1000);
+      axios.patch("http://localhost:3001/api/missions/startMission", {
+        id: id,
+        token: token,
+        startedTime: Date.now(),
+      });
+    } else {
       dispatch(
         errorActions.setError(
           "You are busy right now, finish all pending tasks"
         )
       );
-    } else {
-      const token = localStorage.getItem("authToken");
-      dispatch(userActions.startMission());
-      dispatch(userActions.setBusy());
-      setTimeout(() => {
-        dispatch(userActions.startMission());
-        dispatch(userActions.stopBusy());
-      }, duration * 61 * 1000);
-      await fetch("http://localhost:3001/api/missions/startMission", {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({
-          id: id,
-          token: token,
-          startedTime: Date.now(),
-        }),
-      });
     }
   };
-
+  setTimeout(() => {
+    dispatch(userActions.startMission());
+    dispatch(userActions.stopBusy());
+  }, duration * 61 * 1000);
   return (
     <div className="mission">
       <div className="left">
