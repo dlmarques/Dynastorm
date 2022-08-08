@@ -3,11 +3,11 @@ import "animate.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../../../../store/auth/user";
-import { errorActions } from "../../../../../store/ui/error";
 import { battlesActions } from "../../../../../store/ui/battles";
 import Button from "../../../Components/Button/Button";
 import swords from "../../../../../assets/random-stuff/swords.png";
 import "./mid.scss";
+import { alertActions } from "../../../../../store/ui/alert";
 
 const Mid = () => {
   const dispatch = useDispatch();
@@ -56,13 +56,19 @@ const Mid = () => {
   const fightBoss = async () => {
     if (busy) {
       dispatch(
-        errorActions.setError(
-          "You are busy right now, finish all pending tasks"
-        )
+        alertActions.setAlert({
+          title: "Error",
+          message: "You are busy right now, finish all pending tasks",
+        })
       );
     } else {
       if (user.health <= 0) {
-        dispatch(errorActions.setError("You need HP to fight"));
+        dispatch(
+          alertActions.setAlert({
+            title: "Error",
+            message: "You need HP to fight",
+          })
+        );
       } else {
         dispatch(battlesActions.setIsActive());
         dispatch(battlesActions.setStatus("pending"));

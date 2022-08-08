@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { GiBiceps } from "react-icons/gi";
 import { RiMagicFill } from "react-icons/ri";
 import { BsShieldShaded } from "react-icons/bs";
 import { GiMagicPalm } from "react-icons/gi";
+import { FaInfoCircle } from "react-icons/fa";
 import { enemyActions } from "../../../../../store/auth/enemy";
-import { errorActions } from "../../../../../store/ui/error";
+import { alertActions } from "../../../../../store/ui/alert";
 import Stats from "../../../Layout/Sidebar/components/Stats";
 import styles from "./arena.module.scss";
 import Progress from "../../../Components/Progress/Progress";
 import Button from "../../../Components/Button/Button";
+import Tooltip from "../../../Components/Tooltip/Tooltip";
 
 const Arena = () => {
   const dispatch = useDispatch();
+  const [isVisible, setIsVisible] = useState(false);
   const enemy = useSelector((state) => state.enemy.enemy);
   const user = useSelector((state) => state.user.user);
 
@@ -26,7 +29,9 @@ const Arena = () => {
       });
       dispatch(enemyActions.startFight());
     } else {
-      dispatch(errorActions.setError("You don't have hp"));
+      dispatch(
+        alertActions.setAlert({ title: "Error", message: "You don't have hp" })
+      );
     }
   };
 
@@ -79,9 +84,17 @@ const Arena = () => {
           )}
         </div>
         {enemy.name && !enemy.fight ? (
-          <Button btn="arenasBtn" onClick={startFight}>
-            Start Fight
-          </Button>
+          <div className={styles.buttons}>
+            {" "}
+            <Button btn="arenasBtn" onClick={startFight}>
+              Start Fight
+            </Button>
+            <FaInfoCircle
+              onMouseEnter={() => setIsVisible(true)}
+              onMouseLeave={() => setIsVisible(false)}
+            />
+            {isVisible && <Tooltip info="30% of opponent money and 25XP" />}
+          </div>
         ) : null}
       </div>
     </div>

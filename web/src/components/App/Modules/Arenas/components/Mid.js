@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import styles from "./mid.module.scss";
 import { enemyActions } from "../../../../../store/auth/enemy";
-import { errorActions } from "../../../../../store/ui/error";
+import { alertActions } from "../../../../../store/ui/alert";
+import { modalActions } from "../../../../../store/ui/modal";
 
 const Mid = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,9 @@ const Mid = () => {
         })
         .then((response) => {
           if (response.data.includes("win")) {
-            dispatch(errorActions.setError(response.data));
+            dispatch(
+              alertActions.setAlert({ title: "Arenas", message: response.data })
+            );
             dispatch(enemyActions.cleanEnemy());
             dispatch(enemyActions.stopFight());
           }

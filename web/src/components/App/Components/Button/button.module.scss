@@ -159,6 +159,10 @@
   cursor: pointer;
   position: absolute;
   bottom: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 .arenasBtn-wait {
   background-color: rgb(163, 163, 163);
@@ -174,36 +178,4 @@
   cursor: pointer;
   position: absolute;
   bottom: 150px;
-}
-
-.arenasBtn-lose {
-  width: 30%;
-  height: 35px;
-  font-size: 20px;
-  font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  bottom: 150px;
-  outline: 3px solid rgb(164, 0, 0);
-  background-color: red;
-  color: #eee;
-}
-
-.arenasBtn-win {
-  width: 30%;
-  height: 35px;
-  font-size: 20px;
-  font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  bottom: 150px;
-  outline: 3px solid rgb(60, 255, 0);
-  background-color: rgb(5, 155, 0);
-  color: #eee;
 }

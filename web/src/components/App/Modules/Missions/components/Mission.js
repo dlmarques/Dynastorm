@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import Countdown from "react-countdown";
 import "./mission.scss";
 import { userActions } from "../../../../../store/auth/user";
-import { errorActions } from "../../../../../store/ui/error";
 import Button from "../../../Components/Button/Button";
+import { alertActions } from "../../../../../store/ui/alert";
 
 const Mission = ({
   id,
@@ -47,9 +47,10 @@ const Mission = ({
       });
     } else {
       dispatch(
-        errorActions.setError(
-          "You are busy right now, finish all pending tasks"
-        )
+        alertActions.setAlert({
+          title: "Error",
+          message: "You are busy right now, finish all pending tasks",
+        })
       );
     }
   };

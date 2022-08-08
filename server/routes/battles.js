@@ -134,8 +134,8 @@ router.post("/fightBoss", async (req, res) => {
         (boss.strength + boss.magic + boss.armor + boss.magicResist) * boss.hp;
       const averageUserSkills =
         (user.strength + user.magic + user.armor + user.magicResist) * user.hp;
-        await User.findByIdAndUpdate(id, {$set: {busy: true}})
-      try {   
+      await User.findByIdAndUpdate(id, { $set: { busy: true } });
+      try {
         if (averageBossSkills > averageUserSkills) {
           await User.findByIdAndUpdate(id, { $set: { hp: 0 } });
           new Notification({
@@ -146,7 +146,7 @@ router.post("/fightBoss", async (req, res) => {
             read: false,
           }).save();
           res.send("defeat");
-        await User.findByIdAndUpdate(id, {$set: {busy: false}})
+          await User.findByIdAndUpdate(id, { $set: { busy: false } });
         } else {
           if (boss.stat === "magic") {
             await User.findByIdAndUpdate(id, {
@@ -192,7 +192,7 @@ router.post("/fightBoss", async (req, res) => {
             category: "battles",
             read: false,
           }).save();
-        await User.findByIdAndUpdate(id, {$set: {busy: false}})
+          await User.findByIdAndUpdate(id, { $set: { busy: false } });
           res.send("win");
         }
       } catch (err) {

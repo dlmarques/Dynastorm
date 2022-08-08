@@ -4,7 +4,7 @@ import styles from "./player.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setLevel } from "../../../../../utils/Level";
 import { enemyActions } from "../../../../../store/auth/enemy";
-import { errorActions } from "../../../../../store/ui/error";
+import { alertActions } from "../../../../../store/ui/alert";
 
 const Player = ({ name, xp, avatar, id }) => {
   const dispatch = useDispatch();
@@ -58,7 +58,12 @@ const Player = ({ name, xp, avatar, id }) => {
           )
         );
     } else {
-      dispatch(errorActions.setError("You are busy, finish all pending tasks"));
+      dispatch(
+        alertActions.setAlert({
+          title: "Error",
+          message: "You are busy, finish all pending tasks",
+        })
+      );
     }
   };
 

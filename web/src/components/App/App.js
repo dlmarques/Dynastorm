@@ -15,7 +15,7 @@ import Welcome from "./Modules/Welcome/Welcome";
 import Delayed from "../../utils/Delayed";
 import MobileMenu from "./Layout/MobileMenu/MobileMenu";
 import Trigger from "./Components/Trigger/Trigger";
-import Error from "./Components/Error/Error";
+import Alert from "./Components/Alert/Alert";
 
 import { notificationsActions } from "../../store/ui/notifications";
 
@@ -28,7 +28,7 @@ const App = () => {
   const isNew = useSelector((state) => state.user.user.isNew);
   const mobileMenu = useSelector((state) => state.mobileMenu.isOpened);
   const change = useSelector((state) => state.shop.purchased);
-  const error = useSelector((state) => state.error.error);
+  const alert = useSelector((state) => state.alert.alert);
   const missions = useSelector((state) => state.user.missions);
   const enemy = useSelector((state) => state.enemy.enemy);
   const reload = useSelector((state) => state.enemy.reload);
@@ -151,7 +151,7 @@ const App = () => {
               <Trigger />
             </div>
           </div>
-          {error && <Error />}
+          {alert.title && <Alert />}
           {mobileMenu && <MobileMenu active={mobileMenu} />}
         </Delayed>
       )}

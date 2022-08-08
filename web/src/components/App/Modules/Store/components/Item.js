@@ -4,10 +4,10 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 import { shopSliceActions } from "../../../../../store/shop/shopSlice";
-import { errorActions } from "../../../../../store/ui/error";
 
 import Counter from "./Counter";
 import Product from "./Product";
+import { alertActions } from "../../../../../store/ui/alert";
 
 const Item = ({ img }) => {
   const dispatch = useDispatch();
@@ -45,7 +45,12 @@ const Item = ({ img }) => {
         console.error(err);
       }
     } else {
-      dispatch(errorActions.setError("You don't have enough money"));
+      dispatch(
+        alertActions.setAlert({
+          title: "Error",
+          message: "You don't have enough money",
+        })
+      );
     }
   };
 

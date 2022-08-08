@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "./item.scss";
 import { shopSliceActions } from "../../../../../store/shop/shopSlice";
-import { errorActions } from "../../../../../store/ui/error";
 import Button from "../../../Components/Button/Button";
+import { alertActions } from "../../../../../store/ui/alert";
 
 const HealerItem = ({ img, id }) => {
   const dispatch = useDispatch();
@@ -34,13 +34,16 @@ const HealerItem = ({ img, id }) => {
     });
     if (user.money < price) {
       dispatch(
-        errorActions.setError(
-          "You don't have enough money, wait until next day"
-        )
+        alertActions.setAlert({
+          title: "Error",
+          message: "You don't have enough money, wait until next day",
+        })
       );
     } else {
       if (user.health === 100) {
-        dispatch(errorActions.setError("Your HP is full"));
+        dispatch(
+          alertActions.setAlert({ title: "Error", message: "Your HP is full" })
+        );
       } else {
         try {
           const data = await response;

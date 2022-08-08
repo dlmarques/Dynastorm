@@ -65,20 +65,15 @@
     .buttons {
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content: center;
       width: 70%;
 
-      button {
-        width: 40%;
-        height: 40px;
-        border-radius: 15px;
-        outline: none;
-        border: none;
-        background-color: #eee;
-        font-size: 20px;
-        font-weight: 300;
-        font-family: "Kanit", sans-serif;
-        cursor: pointer;
+      svg {
+        position: absolute;
+        right: 20px;
+        bottom: 100px;
+        color: #eee;
+        font-size: 2.5rem;
       }
     }
   }

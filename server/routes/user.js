@@ -59,28 +59,30 @@ router.patch("/setPerk", async (req, res) => {
 
 router.post("/checkBusy", async (req, res) => {
   const id = jwt.decode(req.body.token, process.env.JWT_TOKEN);
-  const user = await User.findById(id)
-  if(user){
-    res.send(user.busy)
+  const user = await User.findById(id);
+  if (user) {
+    res.send(user.busy);
   }
-})
+});
 
 router.post("/checkFight", async (req, res) => {
   const id = jwt.decode(req.body.token, process.env.JWT_TOKEN);
-  const user = await User.findById(id)
-  if(user){
-    res.send(user.fighting)
+  const user = await User.findById(id);
+  if (user) {
+    res.send(user.fighting);
   }
-})
+});
 
 router.patch("/stopFight", async (req, res) => {
   const id = jwt.decode(req.body.token, process.env.JWT_TOKEN);
-  const user = await User.findById(id)
-  if(user){
-    await User.findByIdAndUpdate(id, {$set: {
-      fighting: false
-    }})
+  const user = await User.findById(id);
+  if (user) {
+    await User.findByIdAndUpdate(id, {
+      $set: {
+        fighting: false,
+      },
+    });
   }
-})
+});
 
 module.exports = router;

@@ -8,8 +8,8 @@ import Header from "../../App/Layout/Topbar/Header";
 import Input from "../../App/Components/Input/Input";
 import styles from "./register.module.css";
 import AvatarsBox from "./components/AvatarsBox";
-import { errorActions } from "../../../store/ui/error";
-import Error from "../../App/Components/Error/Error";
+import { alertActions } from "../../../store/ui/alert";
+import Alert from "../../App/Components/Alert/Alert";
 import { avatarActions } from "../../../store/ui/avatars";
 
 const Register = () => {
@@ -19,7 +19,7 @@ const Register = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [finished, setFinished] = useState(false);
-  const error = useSelector((state) => state.error.error);
+  const alert = useSelector((state) => state.alert.alert);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isShown = useSelector((state) => state.avatars.isShown);
 
@@ -48,7 +48,9 @@ const Register = () => {
       setFinished(true);
     } catch (err) {
       console.error(err);
-      dispatch(errorActions.setError(err.response.data));
+      dispatch(
+        alertActions.setAlert({ title: "Error", message: err.response.data })
+      );
     }
   };
 
@@ -56,7 +58,7 @@ const Register = () => {
     <>
       {isLoggedIn ? <Navigate to="/app/home" /> : null}
       {finished ? <Navigate to="/" /> : null}
-      <div className={!error ? styles.container : styles.blur}>
+      <div className={!alert.title ? styles.container : styles.blur}>
         <Header title="Dynastorm" />
         <div className={styles["register-container"]}>
           <form className={styles["form-control"]} onSubmit={registerHandler}>
@@ -105,7 +107,7 @@ const Register = () => {
           </form>
         </div>
       </div>
-      {error && <Error />}
+      {alert.title && <Alert />}
     </>
   );
 };
