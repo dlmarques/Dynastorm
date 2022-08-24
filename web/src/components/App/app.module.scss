@@ -11,6 +11,12 @@
       display: block;
     }
   }
+  .chat-trigger {
+    display: block;
+    @media (max-width: 1440px) {
+      display: none;
+    }
+  }
 }
 
 .content {

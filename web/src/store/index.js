@@ -11,6 +11,7 @@ import bossSlice from "./auth/bosses";
 import battlesSlice from "./ui/battles";
 import notificationsSlice from "./ui/notifications";
 import enemySlice from "./auth/enemy";
+import currentChatSlice from "./chat/currentChat";
 
 const store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ const store = configureStore({
     battles: battlesSlice.reducer,
     notifications: notificationsSlice.reducer,
     enemy: enemySlice.reducer,
+    chat: currentChatSlice.reducer,
   },
 });
 

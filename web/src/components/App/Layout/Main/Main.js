@@ -7,9 +7,10 @@ import Battles from "../../Modules/Battles/Battles";
 import Inventory from "../../Modules/Inventory/Inventory";
 import Healer from "../../Modules/Healer/Healer";
 import FeaturesBar from "../FeaturesBar/FeaturesBar";
+import Arenas from "../../Modules/Arenas/Arenas";
+import Chat from "../../Modules/Chat/Chat";
 
 import styles from "./main.module.scss";
-import Arenas from "../../Modules/Arenas/Arenas";
 
 const Main = () => {
   return (
@@ -25,6 +26,7 @@ const Main = () => {
             <Route path="arenas" element={<Arenas />} />
             <Route path="inventory" element={<Inventory />} />
             <Route path="healer" element={<Healer />} />
+            <Route path="chat" element={<Chat />} />
           </Routes>
         </div>
       </main>

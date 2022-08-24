@@ -1,0 +1,38 @@
+.footer {
+  width: 100%;
+  height: 70px;
+  background-color: #141414;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  input {
+    height: 35px;
+    width: 80%;
+    border-radius: 15px;
+    padding-left: 20px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-family: "Kanit", sans-serif;
+    font-weight: 300;
+  }
+
+  button {
+    height: 35px;
+    width: 10%;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: "Kanit", sans-serif;
+  }
+}

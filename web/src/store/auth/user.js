@@ -19,6 +19,7 @@ const userSlice = createSlice({
       currentBoss: null,
       busy: false,
       fighting: false,
+      id: "",
     },
     level: {
       level: null,
@@ -44,6 +45,7 @@ const userSlice = createSlice({
         state.user.perk = user.perk;
         state.user.currentBoss = user.currentBoss;
         state.user.busy = user.busy;
+        state.user.id = user.id;
       }
     },
     setLevel(state, action) {

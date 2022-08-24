@@ -6,6 +6,7 @@ export const links = [
   "arenas",
   "inventory",
   "healer",
+  "chat",
 ];
 
 export const activeLink = () => {};

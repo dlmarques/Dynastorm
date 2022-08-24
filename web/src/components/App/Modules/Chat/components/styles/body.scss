@@ -1,0 +1,44 @@
+.body {
+  width: 100%;
+  height: calc(100% - 230px);
+
+  .message__container {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    overflow-y: scroll;
+  }
+
+  .message__container > * {
+    margin-bottom: 10px;
+  }
+
+  .message__recipient {
+    background-color: #f5ccc2;
+    width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+  .message__sender {
+    background-color: rgb(194, 243, 194);
+    max-width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: auto;
+    font-size: 15px;
+  }
+  .message__chats > p {
+    font-size: 14px;
+    color: #eee;
+  }
+  .sender__name {
+    text-align: right;
+  }
+  .message__status {
+    position: fixed;
+    bottom: 50px;
+    font-size: 13px;
+    font-style: italic;
+  }
+}

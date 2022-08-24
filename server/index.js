@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
-const Boss = require("./models/Boss");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const http = require("http").Server(app);
+const jwt = require("jsonwebtoken");
+const Message = require("./models/Message");
 
 //import routes
 const authRoute = require("./routes/auth");
@@ -14,6 +16,7 @@ const missionsRoute = require("./routes/missions");
 const battlesRoute = require("./routes/battles");
 const notificationRoute = require("./routes/notification");
 const arenasRoute = require("./routes/arenas");
+const chatRoute = require("./routes/chat");
 
 dotenv.config();
 
@@ -28,6 +31,35 @@ mongoose.connect(
 //Middleware
 app.use(express.json());
 
+const socketIO = require("socket.io")(http, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
+socketIO.on("connection", (socket) => {
+  socket.on("message", async (data) => {
+    socketIO.emit('messageResponse', data);
+    const senderId = jwt.decode(data.sender, process.env.JWT_TOKEN);
+    if (data.sender.trim() && data.receiver.trim()) {
+      try {
+        await new Message({
+          senderId: senderId,
+          receiverId: data.receiver,
+          message: data.text,
+        }).save();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    console.log(data)
+  });
+
+  socket.on("disconnect", () => {
+    console.log("🔥: A user disconnected");
+  });
+});
+
 //route middlewares
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
@@ -37,5 +69,6 @@ app.use("/api/missions", missionsRoute);
 app.use("/api/battles", battlesRoute);
 app.use("/api/noti", notificationRoute);
 app.use("/api/arenas", arenasRoute);
+app.use("/api/chat", chatRoute);
 
-app.listen(3001, () => console.log("server running"));
+http.listen(3001, () => console.log("server running"));

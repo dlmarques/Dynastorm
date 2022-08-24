@@ -65,6 +65,7 @@ const App = () => {
             isNew: actualData.new,
             perk: actualData.perk,
             currentBoss: actualData.currentBoss,
+            id: actualData.id,
           })
         )
       );
