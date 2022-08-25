@@ -3,18 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const currentChatSlice = createSlice({
   name: "currentChat",
   initialState: {
-    user: {
-      name: "",
-      id: "",
-    },
+    user: {},
   },
   reducers: {
     setChat(state, action) {
-      const currentUser = action.payload;
-      state.user = {
-        name: currentUser.name,
-        id: currentUser.id,
-      };
+      state.user = action.payload;
     },
   },
 });

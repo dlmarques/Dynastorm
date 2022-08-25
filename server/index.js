@@ -6,7 +6,7 @@ const cors = require("cors");
 const http = require("http").Server(app);
 const jwt = require("jsonwebtoken");
 const Message = require("./models/Message");
-
+const socketIO = require("socket.io")
 //import routes
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
@@ -31,13 +31,8 @@ mongoose.connect(
 //Middleware
 app.use(express.json());
 
-const socketIO = require("socket.io")(http, {
-  cors: {
-    origin: "http://localhost:3000",
-  },
-});
 
-socketIO.on("connection", (socket) => {
+/* io.on("connection", (socket) => {
   socket.on("message", async (data) => {
     socketIO.emit('messageResponse', data);
     const senderId = jwt.decode(data.sender, process.env.JWT_TOKEN);
@@ -58,7 +53,7 @@ socketIO.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("🔥: A user disconnected");
   });
-});
+}); */
 
 //route middlewares
 app.use("/api/auth", authRoute);
@@ -72,3 +67,28 @@ app.use("/api/arenas", arenasRoute);
 app.use("/api/chat", chatRoute);
 
 http.listen(3001, () => console.log("server running"));
+
+const io = socketIO(http, {
+  cors: {
+    origin: "http://localhost:3000",
+    credentials: true,
+  },
+});
+
+
+global.onlineUsers = new Map();
+
+io.on("connection", (socket) => {
+  global.chatSocket = socket;
+
+  socket.on("add-user", (userId) => {
+    onlineUsers.set(userId, socket.id)
+  })
+
+  socket.on("send-msg", (data) => {
+    const sendUserSocket = onlineUsers.get(data.to);
+    if(sendUserSocket){
+      socket.to(sendUserSocket).emit("msg-recieve", data.message)
+    }
+  })
+})

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import socketIO from "socket.io-client";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { io } from "socket.io-client";
 
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
@@ -9,19 +10,54 @@ import styles from "./styles/box.module.scss";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
-  const socket = socketIO.connect("http://localhost:3001");
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const currentChat = useSelector((state) => state.chat.user);
+  const currentSender = useSelector((state) => state.sender.sender);
+
+  const socket = useRef();
 
   useEffect(() => {
-    socket.on("messageResponse", (data) => setMessages([...messages, data]));
-    console.log(messages);
-  }, [socket, messages]);
+    if (currentSender) {
+      socket.current = io("http://localhost:3001");
+      socket.current.emit("add-user", currentSender._id);
+    }
+  }, []);
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:3001/api/chat/getMessages", {
+        from: currentSender._id,
+        to: currentChat._id,
+      })
+      .then((response) => setMessages(response.data));
+  }, [currentChat]);
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("msg-recieve", (msg) => {
+        setArrivalMessage({ fromSelf: false, message: msg });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage]);
 
   return (
-    <div className={styles.box}>
-      <ChatHeader />
-      <ChatBody messages={messages} />
-      <ChatFooter socket={socket} />
-    </div>
+    <>
+      {currentChat._id && (
+        <div className={styles.box}>
+          <ChatHeader />
+          <ChatBody messages={messages} socket={socket} />
+          <ChatFooter
+            socket={socket}
+            setMessages={setMessages}
+            messages={messages}
+          />
+        </div>
+      )}
+    </>
   );
 };
 

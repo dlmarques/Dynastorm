@@ -18,6 +18,7 @@ import Trigger from "./Components/Trigger/Trigger";
 import Alert from "./Components/Alert/Alert";
 
 import { notificationsActions } from "../../store/ui/notifications";
+import { currentSenderActions } from "../../store/chat/currentSender";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ const App = () => {
       }),
     })
       .then((response) => response.json())
-      .then((actualData) =>
+      .then((actualData) => {
         dispatch(
           userActions.setUser({
             name: actualData.username,
@@ -67,8 +68,9 @@ const App = () => {
             currentBoss: actualData.currentBoss,
             id: actualData.id,
           })
-        )
-      );
+        );
+        dispatch(currentSenderActions.setSender(actualData));
+      });
     dispatch(
       userActions.setLevel({
         level: setLevel(user.xp),
