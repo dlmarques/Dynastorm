@@ -4,10 +4,14 @@ const currentChatSlice = createSlice({
   name: "currentChat",
   initialState: {
     user: {},
+    messageSent: 0,
   },
   reducers: {
     setChat(state, action) {
       state.user = action.payload;
+    },
+    sendMessage(state) {
+      ++state.messageSent;
     },
   },
 });

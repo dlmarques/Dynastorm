@@ -22,6 +22,7 @@ import { currentSenderActions } from "../../store/chat/currentSender";
 
 const App = () => {
   const dispatch = useDispatch();
+  const TWOSECONDS_MS = 2000;
   const [nextDay, setNextDay] = useState(false);
   const shouldFetch = useRef(true);
   const user = useSelector((state) => state.user.user);
@@ -110,18 +111,23 @@ const App = () => {
   }, [user.currentBoss]);
 
   useEffect(() => {
-    axios
-      .post("http://localhost:3001/api/noti/getNotifications", {
-        token: token,
-      })
-      .then((response) =>
-        response.data.map((notification) => {
-          if (!notification.read) {
-            dispatch(notificationsActions.addNotifications());
-          }
+    const interval = setInterval(() => {
+      axios
+        .post("http://localhost:3001/api/noti/getNotifications", {
+          token: token,
         })
-      );
-  }, [change, missions, battle, nextDay, enemy.fight, reload]);
+        .then((response) =>
+          response.data.map((notification) => {
+            if (!notification.read) {
+              dispatch(notificationsActions.addNotifications());
+              new Audio("../../assets/notification/notification.mp3");
+            }
+          })
+        );
+    }, TWOSECONDS_MS);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     axios.patch("http://localhost:3001/api/user/stopFight", {

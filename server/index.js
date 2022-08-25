@@ -4,9 +4,10 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const http = require("http").Server(app);
-const jwt = require("jsonwebtoken");
-const Message = require("./models/Message");
-const socketIO = require("socket.io")
+const socketIO = require("socket.io");
+
+const Notification = require("./models/Notification");
+
 //import routes
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
@@ -31,30 +32,6 @@ mongoose.connect(
 //Middleware
 app.use(express.json());
 
-
-/* io.on("connection", (socket) => {
-  socket.on("message", async (data) => {
-    socketIO.emit('messageResponse', data);
-    const senderId = jwt.decode(data.sender, process.env.JWT_TOKEN);
-    if (data.sender.trim() && data.receiver.trim()) {
-      try {
-        await new Message({
-          senderId: senderId,
-          receiverId: data.receiver,
-          message: data.text,
-        }).save();
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    console.log(data)
-  });
-
-  socket.on("disconnect", () => {
-    console.log("🔥: A user disconnected");
-  });
-}); */
-
 //route middlewares
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
@@ -75,20 +52,35 @@ const io = socketIO(http, {
   },
 });
 
-
 global.onlineUsers = new Map();
 
 io.on("connection", (socket) => {
   global.chatSocket = socket;
 
   socket.on("add-user", (userId) => {
-    onlineUsers.set(userId, socket.id)
-  })
+    onlineUsers.set(userId, socket.id);
+  });
 
-  socket.on("send-msg", (data) => {
+  socket.on("send-msg", async (data) => {
     const sendUserSocket = onlineUsers.get(data.to);
-    if(sendUserSocket){
-      socket.to(sendUserSocket).emit("msg-recieve", data.message)
+    if (sendUserSocket) {
+      socket.to(sendUserSocket).emit("dmsg-recieve", data.message);
+      const newMessage = await Notification.create({
+        id: data.from,
+        title: "Messages",
+        description: `You got a new message`,
+        category: "message",
+        read: false,
+      });
+      if (newMessage) console.log("notification sent");
     }
-  })
-})
+    const newMessage = await Notification.create({
+      id: data.to,
+      title: "Messages",
+      description: `You got a new message`,
+      category: "message",
+      read: false,
+    });
+    if (newMessage) console.log("notification sent");
+  });
+});

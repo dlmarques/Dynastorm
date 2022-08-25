@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { sendMessageRoute } from "../../../../../utils/APIRoutes";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./styles/footer.module.scss";
+import { currentChatActions } from "../../../../../store/chat/currentChat";
 
 const ChatFooter = ({ socket, setMessages, messages }) => {
+  const dispatch = useDispatch();
   const [message, setMessage] = useState("");
   const currentChat = useSelector((state) => state.chat.user);
   const currentSender = useSelector((state) => state.sender.sender);
@@ -25,6 +26,7 @@ const ChatFooter = ({ socket, setMessages, messages }) => {
     const msgs = [...messages];
     msgs.push({ fromSelf: true, message: message });
     setMessages(msgs);
+    dispatch(currentChatActions.sendMessage());
     setMessage("");
   };
 

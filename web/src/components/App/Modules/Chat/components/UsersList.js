@@ -15,6 +15,7 @@ const UsersList = () => {
       })
       .then((response) => setUsers(response.data));
   }, []);
+
   return (
     <div className={styles.list}>
       {users && users.map((user, id) => <User key={id} user={user} />)}

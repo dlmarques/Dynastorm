@@ -2,7 +2,6 @@ import React from "react";
 import "./notification.scss";
 
 const Notification = ({ title, description, category, read, date }) => {
-  console.log(new Date(date).getHours());
   return (
     <div className="notification">
       <img
