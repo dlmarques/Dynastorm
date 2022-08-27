@@ -6,6 +6,7 @@ import PerkImage from "../../Components/PerkImage/PerkImage";
 
 const Home = () => {
   const user = useSelector((state) => state.user.user);
+
   return (
     <div className={styles["home-container"]}>
       <h1>Welcome back {user && user.name}</h1>
@@ -17,7 +18,7 @@ const Home = () => {
           user={user}
         />
       </div>
-      <div className={styles.row}>Coming soon...</div>
+      <div className={styles.row}></div>
     </div>
   );
 };
