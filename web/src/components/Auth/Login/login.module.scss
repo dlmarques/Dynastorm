@@ -21,11 +21,11 @@
       font-size: 1.2rem;
       font-family: "Roboto Condensed", sans-serif;
       border-bottom: 1px solid grey;
-      padding-left: 10px;
       padding-bottom: 5px;
       transition: all 0.4s ease-in-out;
       &:focus {
         border-bottom: 1px solid #fff;
+        padding-left: 15px;
         &::placeholder {
           color: #fff;
         }

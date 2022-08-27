@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./app.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -7,15 +8,10 @@ import schedule from "node-schedule";
 import { userActions } from "../../store/auth/user";
 import { bossActions } from "../../store/auth/bosses";
 import { setLevel, setTier } from "../../utils/Level";
+import { links } from "./Layout/FeaturesBar/components/activeLink";
 
-import Main from "./Layout/Main/Main";
-import Sidebar from "./Layout/Sidebar/Sidebar";
-import Header from "./Layout/Topbar/Header";
-import Welcome from "./Modules/Welcome/Welcome";
-import Delayed from "../../utils/Delayed";
-import MobileMenu from "./Layout/MobileMenu/MobileMenu";
-import Trigger from "./Components/Trigger/Trigger";
-import Alert from "./Components/Alert/Alert";
+import Main from "../Layout/Main/Main";
+import Sidebar from "../Layout/Sidebar/Sidebar";
 
 import { notificationsActions } from "../../store/ui/notifications";
 import { currentSenderActions } from "../../store/chat/currentSender";
@@ -24,6 +20,8 @@ const App = () => {
   const dispatch = useDispatch();
   const TWOSECONDS_MS = 2000;
   const [nextDay, setNextDay] = useState(false);
+  const [changed, setChanged] = useState(0);
+  const [url, setUrl] = useState();
   const shouldFetch = useRef(true);
   const user = useSelector((state) => state.user.user);
   const battle = useSelector((state) => state.user.battles);
@@ -142,9 +140,13 @@ const App = () => {
     })
   );
 
+  useEffect(() => {
+    setUrl(window.location.href);
+  }, [changed]);
+
   return (
     <>
-      {isNew ? (
+      {/* {isNew ? (
         <Delayed>
           <Welcome />
         </Delayed>
@@ -163,7 +165,35 @@ const App = () => {
           {alert.title && <Alert />}
           {mobileMenu && <MobileMenu active={mobileMenu} />}
         </Delayed>
-      )}
+      )} */}
+      <div className={styles.app}>
+        <Sidebar app={true}>
+          <nav className={styles.nav}>
+            <ul>
+              {links &&
+                links.map((link, id) => (
+                  <li key={id}>
+                    <span className={styles.mask}>
+                      <Link
+                        data-title={link}
+                        className={
+                          url && url.includes(link)
+                            ? styles["link-active"]
+                            : styles["link"]
+                        }
+                        to={`/app/${link}`}
+                        onClick={() => setChanged(changed + 1)}
+                      >
+                        {link}
+                      </Link>
+                    </span>
+                  </li>
+                ))}
+            </ul>
+          </nav>
+        </Sidebar>
+        <Main background="app" />
+      </div>
     </>
   );
 };

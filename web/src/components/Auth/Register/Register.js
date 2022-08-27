@@ -6,8 +6,8 @@ import { authActions } from "../../../store/auth/auth";
 import styles from "./register.module.scss";
 import AvatarsBox from "./components/AvatarsBox";
 import { avatarActions } from "../../../store/ui/avatars";
-import Sidebar from "../Layout/Sidebar/Sidebar";
-import Main from "../Layout/Main/Main";
+import Sidebar from "../../Layout/Sidebar/Sidebar";
+import Main from "../../Layout/Main/Main";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -133,7 +133,7 @@ const Register = () => {
             ) : null}
           </form>
         </Sidebar>
-        <Main />
+        <Main background="auth" />
       </div>
     </>
   );

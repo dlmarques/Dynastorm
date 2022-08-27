@@ -5,8 +5,8 @@ import { Link, Navigate } from "react-router-dom";
 import styles from "./login.module.scss";
 import { authActions } from "../../../store/auth/auth";
 import { alertActions } from "../../../store/ui/alert";
-import Sidebar from "../Layout/Sidebar/Sidebar";
-import Main from "../Layout/Main/Main";
+import Sidebar from "../../Layout/Sidebar/Sidebar";
+import Main from "../../Layout/Main/Main";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -93,7 +93,7 @@ const Login = () => {
             </Link>
           </form>
         </Sidebar>
-        <Main />
+        <Main background="auth" />
       </div>
     </>
   );
