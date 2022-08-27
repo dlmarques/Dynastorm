@@ -1,12 +1,9 @@
 import React from "react";
 import styles from "./avatar.module.css";
 
-const Avatar = ({ image, setAvatar, icon }) => {
+const Avatar = ({ image, setAvatar }) => {
   return (
-    <div
-      className={icon === image ? styles["avatar-active"] : styles.avatar}
-      onClick={() => setAvatar(image)}
-    >
+    <div className={styles.avatar} onClick={() => setAvatar(image)}>
       <img src={image} alt="avatar" />
     </div>
   );

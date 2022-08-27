@@ -1,0 +1,24 @@
+.sidebar {
+  background-color: #0e0e0e;
+  height: 100vh;
+  width: 350px;
+  box-shadow: 0 0 15px 5px rgb(0 0 0 / 50%);
+  font-family: "Eagle Lake", cursive;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  h2 {
+    color: #ffffff;
+    text-align: center;
+    font-size: 2.25rem;
+    padding-top: 50px;
+  }
+  p {
+    height: 50px;
+    color: #ffffff;
+    font-family: "Roboto Condensed", sans-serif;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+}
