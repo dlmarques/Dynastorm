@@ -7,16 +7,7 @@ import { userActions } from "../../../../../store/auth/user";
 import Button from "../../../Components/Button/Button";
 import { alertActions } from "../../../../../store/ui/alert";
 
-const Mission = ({
-  id,
-  name,
-  description,
-  status,
-  xp,
-  money,
-  duration,
-  startedTime,
-}) => {
+const Mission = ({ id, name, status, xp, money, duration, startedTime }) => {
   const dispatch = useDispatch();
   const [busy, setBusy] = useState(false);
 
@@ -48,12 +39,12 @@ const Mission = ({
     } else {
       dispatch(
         alertActions.setAlert({
-          title: "Error",
           message: "You are busy right now, finish all pending tasks",
         })
       );
     }
   };
+
   setTimeout(() => {
     dispatch(userActions.startMission());
     dispatch(userActions.stopBusy());
@@ -61,9 +52,18 @@ const Mission = ({
   return (
     <div className="mission">
       <div className="left">
-        <h2>{name}</h2>
-        <h3>{description}</h3>
-        <h3>{duration} minute(s)</h3>
+        <h2
+          style={
+            status === "completed"
+              ? { textDecoration: "2px line-through" }
+              : null
+          }
+        >
+          {name}
+        </h2>
+        <h3>
+          This mission gives you {xp}xp and ${money}
+        </h3>
       </div>
       <div className="right">
         {status === "in progress" ? (
@@ -79,9 +79,7 @@ const Mission = ({
             Start
           </Button>
         )}
-        <h3>Rewards</h3>
-        <h3>{xp}XP</h3>
-        <h3>${money}</h3>
+        <h3>{duration} minute(s)</h3>
       </div>
     </div>
   );

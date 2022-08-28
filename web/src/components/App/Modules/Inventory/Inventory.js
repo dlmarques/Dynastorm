@@ -13,8 +13,7 @@ const Inventory = () => {
       .post("http://localhost:3001/api/inventory/getItems", {
         token: token,
       })
-      .then((response) => response.data)
-      .then((actualData) => setItems(actualData));
+      .then((response) => setItems(response.data));
   }, [change]);
 
   return (
@@ -28,6 +27,7 @@ const Inventory = () => {
             quantity={item.quantity}
             price={item.price}
             id={item._id}
+            keyname={item.keyname}
           />
         ))}
     </div>

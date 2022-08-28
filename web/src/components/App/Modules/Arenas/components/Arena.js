@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { GiBiceps } from "react-icons/gi";
-import { RiMagicFill } from "react-icons/ri";
-import { BsShieldShaded } from "react-icons/bs";
-import { GiMagicPalm } from "react-icons/gi";
+import styles from "./arena.module.scss";
 import { FaInfoCircle } from "react-icons/fa";
 import { enemyActions } from "../../../../../store/auth/enemy";
 import { alertActions } from "../../../../../store/ui/alert";
-import Stats from "../../../Layout/Sidebar/components/Stats";
-import styles from "./arena.module.scss";
 import Progress from "../../../Components/Progress/Progress";
 import Button from "../../../Components/Button/Button";
 import Tooltip from "../../../Components/Tooltip/Tooltip";
@@ -49,53 +44,27 @@ const Arena = () => {
             styles={styles.hp}
           />
         )}
-        <div className={styles.stats}>
-          {enemy.strength && (
-            <Stats
-              name="Strength"
-              styles={styles["stats-info"]}
-              icon={<GiBiceps style={{ color: "#ff8400" }} />}
-              value={Math.round(enemy.strength)}
-            />
-          )}
-          {enemy.magic && (
-            <Stats
-              name="Magic Power"
-              styles={styles["stats-info"]}
-              icon={<RiMagicFill style={{ color: "#ad27f5" }} />}
-              value={Math.round(enemy.magic)}
-            />
-          )}
-          {enemy.armor && (
-            <Stats
-              name="Armor"
-              styles={styles["stats-info"]}
-              icon={<BsShieldShaded style={{ color: "#fff" }} />}
-              value={Math.round(enemy.armor)}
-            />
-          )}
-          {enemy.magicResist && (
-            <Stats
-              name="Magic Resistance"
-              styles={styles["stats-info"]}
-              icon={<GiMagicPalm style={{ color: "#006eff" }} />}
-              value={Math.round(enemy.magicResist)}
-            />
-          )}
-        </div>
         {enemy.name && !enemy.fight ? (
           <div className={styles.buttons}>
-            {" "}
             <Button btn="arenasBtn" onClick={startFight}>
               Start Fight
             </Button>
             <FaInfoCircle
+              className={styles.info}
               onMouseEnter={() => setIsVisible(true)}
               onMouseLeave={() => setIsVisible(false)}
             />
             {isVisible && <Tooltip info="30% of opponent money and 25XP" />}
           </div>
         ) : null}
+        {enemy.name && (
+          <div className={styles.stats}>
+            <h4>Strength: {Math.floor(enemy.strength)}</h4>
+            <h4>Armor: {Math.floor(enemy.armor)}</h4>
+            <h4>Magic: {Math.floor(enemy.magic)}</h4>
+            <h4>Magic Resist: {Math.floor(enemy.magicResist)}</h4>
+          </div>
+        )}
       </div>
     </div>
   );

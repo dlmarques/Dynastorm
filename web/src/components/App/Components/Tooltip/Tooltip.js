@@ -1,8 +1,13 @@
 import React from "react";
 import "./tooltip.scss";
 
-const Tooltip = ({ info }) => {
-  return <div className="tooltip">{info && info}</div>;
+const Tooltip = ({ info, stat }) => {
+  return (
+    <div className="tooltip">
+      {info && info}
+      {stat && stat}
+    </div>
+  );
 };
 
 export default Tooltip;

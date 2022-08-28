@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./perk.module.scss";
 import { userActions } from "../../../../../store/auth/user";
@@ -22,19 +23,11 @@ const Perk = ({ image }) => {
 
   const setPerk = async () => {
     try {
-      fetch("http://localhost:3001/api/user/setPerk", {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({
-          username: user.name,
-          perk: perkName,
-        }),
+      axios.patch("http://localhost:3001/api/user/setPerk", {
+        username: user.name,
+        perk: perkName,
       });
-      fetch("http://localhost:3001/api/battles/createBosses");
+      axios.get("http://localhost:3001/api/battles/createBosses");
       dispatch(userActions.welcome());
       window.location.reload();
     } catch (error) {

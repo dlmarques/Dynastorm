@@ -1,10 +1,12 @@
 .home-container {
   color: #fff;
   font-size: 3rem;
-  padding-top: 10px;
+
+  height: 100%;
+
   h1 {
     height: 100px;
-    font-size: 3vw;
+    font-size: 3rem;
     font-weight: 500;
     text-align: center;
     @media (max-width: 1024px) {
@@ -12,34 +14,80 @@
     }
   }
 
-  .row {
+  .content {
+    width: 100%;
+    height: calc(100% - 100px);
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    padding: 20px 0 0 0;
-    height: 200px;
-    @media (max-width: 1024px) {
-      padding: 30px 0 0 0;
-    }
-    @media (max-width: 768px) {
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .img-container {
+    justify-content: space-between;
+    .col1 {
+      width: 50%;
+      height: 100%;
       display: flex;
-      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
+      .user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        img {
+          height: 150px;
+          border-radius: 100%;
+        }
+        .hp {
+          width: 90%;
+          height: 15px;
+          border-radius: 15px;
+          color: rgb(0, 255, 30);
+          background-color: rgb(0, 255, 30);
+        }
+
+        .hp::-webkit-progress-bar {
+          border-radius: 15px;
+        }
+
+        .hp::-webkit-progress-value {
+          border-radius: 15px;
+          background-color: rgb(0, 255, 30);
+        }
+        .hp::-moz-progress-bar {
+          border-radius: 15px;
+          color: rgb(0, 255, 30);
+        }
+
+        .grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          align-content: center;
+          justify-items: center;
+          grid-column-gap: 10px;
+          grid-row-gap: 10px;
+        }
+        p {
+          font-size: 1.3rem;
+          text-align: center;
+        }
+      }
+    }
+    .col2 {
+      margin-right: 20px;
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 100px;
+      .img-container {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+      }
       img {
-        height: 6vw;
+        height: 120px;
         border-radius: 50%;
-        @media (max-width: 1024px) {
-          height: 9vw;
-        }
-        @media (max-width: 768px) {
-          height: 90px;
-        }
       }
       p {
         font-weight: 300;

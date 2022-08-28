@@ -8,9 +8,9 @@ import Mid from "./components/Mid";
 const Battles = () => {
   const bosses = useSelector((state) => state.bosses.bosses);
   const user = useSelector((state) => state.user.user);
+
   return (
     <div className={styles["battles-container"]}>
-      <h1>Battles</h1>
       <div className={styles.content}>
         {bosses &&
           bosses

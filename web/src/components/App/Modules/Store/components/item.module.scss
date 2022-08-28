@@ -16,13 +16,14 @@
   }
   h2 {
     padding-top: 10px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #eee;
   }
   h3 {
     font-weight: 300;
     font-size: 1.1rem;
     color: #eee;
+    font-family: "Roboto Condensed", sans-serif;
   }
   h4 {
     color: #eee;
@@ -31,11 +32,11 @@
   .buy {
     height: 35px;
     width: 120px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 300;
-    border-radius: 15px;
-    font-family: "Kanit", sans-serif;
+    font-family: "Eagle Lake", cursive;
     border: none;
     outline: none;
+    cursor: pointer;
   }
 }

@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: 300px;
+  width: 400px;
   @media (max-width: 1024px) {
     padding: 50px 50px 10px 50px;
   }
@@ -29,8 +29,8 @@
   .stats {
     padding-top: 10px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row-gap: 30px;
+    grid-template-columns: 1fr;
+    justify-items: center;
     width: 100%;
     height: 200px;
     @media (max-width: 425px) {

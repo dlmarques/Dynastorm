@@ -14,8 +14,10 @@ const User = () => {
     <>
       {user.name && (
         <div className={styles.user}>
-          <img src={user.avatar} alt="boss" />
-          <h3>You</h3>
+          <div className={styles.header}>
+            <img src={user.avatar} alt="boss" />
+            <h3>You</h3>
+          </div>
           <Progress
             id="hp"
             min="0"
@@ -24,30 +26,10 @@ const User = () => {
             styles={styles.hp}
           />
           <div className={styles.stats}>
-            <Stats
-              name="Strength"
-              styles={styles["stats-info"]}
-              icon={<GiBiceps style={{ color: "#ff8400" }} />}
-              value={Math.round(user.strength)}
-            />
-            <Stats
-              name="Magic Power"
-              styles={styles["stats-info"]}
-              icon={<RiMagicFill style={{ color: "#ad27f5" }} />}
-              value={Math.round(user.magic)}
-            />
-            <Stats
-              name="Armor"
-              styles={styles["stats-info"]}
-              icon={<BsShieldShaded style={{ color: "#fff" }} />}
-              value={Math.round(user.armor)}
-            />
-            <Stats
-              name="Magic Resistance"
-              styles={styles["stats-info"]}
-              icon={<GiMagicPalm style={{ color: "#006eff" }} />}
-              value={Math.round(user.magicResist)}
-            />
+            <h4>Strength: {user.strength}</h4>
+            <h4>Armor: {user.armor}</h4>
+            <h4>Magic: {user.magic}</h4>
+            <h4>Magic Resist: {user.magicResist}</h4>
           </div>
         </div>
       )}

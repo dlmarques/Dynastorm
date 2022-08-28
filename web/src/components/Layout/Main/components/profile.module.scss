@@ -1,0 +1,29 @@
+.profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 20px 0 20px;
+  .notifications {
+    margin-left: 20px;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    img {
+      background-color: #0e0e0e;
+      height: 70px;
+      border-radius: 100%;
+    }
+
+    span {
+      .money {
+        color: #fff;
+        font-size: 1.25rem;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}

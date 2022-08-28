@@ -4,19 +4,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   width: 200px;
+
   @media (max-width: 1024px) {
     flex-direction: column;
     padding: 50px 50px 10px 50px;
-  }
-
-  .swords {
-    height: 125px;
-    padding-bottom: 25px;
-    @media (max-width: 1024px) {
-      display: none;
-    }
   }
 
   .animate__animated.animate__wobble.animate__infinite {
@@ -52,6 +45,7 @@
         h3 {
           font-weight: 500;
           text-transform: capitalize;
+          font-family: "Roboto Condensed", sans-serif;
         }
       }
     }
@@ -67,6 +61,7 @@
       h3 {
         font-weight: 500;
         text-transform: capitalize;
+        font-family: "Roboto Condensed", sans-serif;
       }
     }
   }

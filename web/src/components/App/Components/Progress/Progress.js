@@ -5,7 +5,7 @@ const Progress = (props) => {
   const [isVisible, setIsVisible] = useState(false);
   return (
     <>
-      {isVisible && <Tooltip info={props.value} />}
+      {isVisible && <Tooltip info={props.value} stat={props.stat} />}
       <label>{props.label}</label>
       <progress
         id={props.id}

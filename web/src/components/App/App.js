@@ -81,11 +81,11 @@ const App = () => {
   useEffect(() => {
     if (shouldFetch.current) {
       shouldFetch.current = false;
-      fetch("http://localhost:3001/api/battles/getBosses")
-        .then((response) => response.json())
+      axios
+        .get("http://localhost:3001/api/battles/getBosses")
         .then((actualData) =>
-          actualData.map((boss) => {
-            dispatch(
+          actualData.data.map((boss) => {
+            return dispatch(
               bossActions.addBosses({
                 id: boss._id,
                 boss: boss.boss,
@@ -146,26 +146,6 @@ const App = () => {
 
   return (
     <>
-      {/* {isNew ? (
-        <Delayed>
-          <Welcome />
-        </Delayed>
-      ) : (
-        <Delayed>
-          <div className={styles.container}>
-            <Header title="Dynastorm" user={user} />
-            <div className={styles.content}>
-              <Main />
-              <Sidebar />
-            </div>
-            <div className={styles["mobile-trigger"]}>
-              <Trigger />
-            </div>
-          </div>
-          {alert.title && <Alert />}
-          {mobileMenu && <MobileMenu active={mobileMenu} />}
-        </Delayed>
-      )} */}
       <div className={styles.app}>
         <Sidebar app={true}>
           <nav className={styles.nav}>
@@ -192,7 +172,7 @@ const App = () => {
             </ul>
           </nav>
         </Sidebar>
-        <Main background="app" />
+        <Main background="app" isNew={isNew} />
       </div>
     </>
   );

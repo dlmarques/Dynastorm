@@ -7,18 +7,16 @@ const { saveItemValidation } = require("../utils/validation");
 
 //Add item
 router.post("/addItem", async (req, res) => {
-  //Validate data before we a user
-  const { error } = saveItemValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+
 
   const id = jwt.decode(req.body.token, process.env.JWT_TOKEN);
-  const item = await Inventory.findOne({ itemName: req.body.itemName });
+  const item = await Inventory.findOne({ itemName: req.body.itemName, id: id });
   const user = await User.findOne({ _id: id });
 
   if (user.money < req.body.price) {
     res.send("You dont have enough money");
   } else {
-    if (item && req.body.itemName === item.itemName) {
+    if (item) {
       await Inventory.findOneAndUpdate(
         { itemName: req.body.itemName },
         { $set: { quantity: item.quantity + req.body.quantity } }
@@ -88,6 +86,7 @@ router.post("/addItem", async (req, res) => {
           quantity: req.body.quantity,
           price: req.body.price,
           boost: req.body.boost,
+          keyname: req.body.keyname,
         });
         await newItem.save();
         if (user) {

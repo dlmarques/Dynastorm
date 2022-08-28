@@ -25,6 +25,10 @@ const inventorySchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  keyname: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,

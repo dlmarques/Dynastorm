@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import Mission from "./components/Mission";
 import styles from "./missions.module.scss";
@@ -9,23 +10,15 @@ const Missions = () => {
   const level = useSelector((state) => state.user.level.level);
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    fetch("http://localhost:3001/api/missions/getMissions", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
+    axios
+      .post("http://localhost:3001/api/missions/getMissions", {
         token: token,
-      }),
-    })
-      .then((response) => response.json())
-      .then((actualData) => setMissions(actualData));
+      })
+      .then((response) => setMissions(response.data));
   }, [busy]);
+
   return (
     <div className={styles["missions-container"]}>
-      <h1>Missions</h1>
       {missions &&
         missions
           .filter((mission) => mission.level === level)

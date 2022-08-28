@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../../../../store/auth/user";
 import { battlesActions } from "../../../../../store/ui/battles";
 import Button from "../../../Components/Button/Button";
-import swords from "../../../../../assets/random-stuff/swords.png";
 import "./mid.scss";
 import { alertActions } from "../../../../../store/ui/alert";
 
@@ -83,15 +82,6 @@ const Mid = () => {
 
   return (
     <div className="mid">
-      <img
-        src={swords}
-        className={
-          isActive
-            ? "animate__animated animate__wobble animate__infinite swords"
-            : "swords"
-        }
-        alt="swords"
-      />
       <Button
         disabled={isActive}
         btn={
@@ -119,7 +109,6 @@ const Mid = () => {
             .filter((boss) => boss.boss === user.currentBoss)
             .map((boss) => (
               <>
-                <h3 className="rewards-title">Rewards</h3>
                 <div className="specialItem">
                   <img
                     src={require(`../../../../../assets/specialItems/${boss.specialItem}.png`)}

@@ -3,8 +3,7 @@
   height: 40px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
+
   border: none;
   cursor: pointer;
 }
@@ -14,8 +13,7 @@
   height: 40px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
+
   border: none;
   cursor: pointer;
 }
@@ -25,8 +23,7 @@
   height: 40px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
+
   border: none;
   cursor: pointer;
 }
@@ -36,8 +33,7 @@
   height: 40px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
+
   border: none;
   cursor: pointer;
 }
@@ -47,8 +43,7 @@
   height: 40px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
+  font-family: "Eagle Lake", cursive;
   border: none;
   cursor: pointer;
 }
@@ -56,13 +51,11 @@
 .inventoryBtn {
   width: 100%;
   height: 30px;
-  font-size: 20px;
+  font-size: 1.1rem;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
+  font-family: "Eagle Lake", cursive;
   border: none;
   cursor: pointer;
-
   @media (max-width: 425px) {
     font-size: 16px;
   }
@@ -71,10 +64,9 @@
 .healBtn {
   width: 90%;
   height: 35px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
+  font-family: "Eagle Lake", cursive;
   border: none;
   cursor: pointer;
 }
@@ -84,8 +76,7 @@
   height: 35px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
+  font-family: "Eagle Lake", cursive;
   border: none;
   cursor: pointer;
 
@@ -97,12 +88,11 @@
 }
 
 .btnBattle {
-  width: 90%;
+  width: 100%;
   height: 35px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
+  font-family: "Eagle Lake", cursive;
   border: none;
   cursor: pointer;
 }
@@ -111,12 +101,11 @@
   background-color: rgb(163, 163, 163);
   color: #777777;
   cursor: not-allowed;
-  width: 90%;
+  width: 100%;
   height: 35px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
+
   border: none;
   cursor: not-allowed;
 }
@@ -125,12 +114,11 @@
   outline: 3px solid rgb(60, 255, 0);
   background-color: rgb(5, 155, 0);
   color: #eee;
-  width: 90%;
+  width: 100%;
   height: 35px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
+
   border: none;
   cursor: not-allowed;
 }
@@ -138,27 +126,22 @@
   outline: 3px solid rgb(164, 0, 0);
   background-color: red;
   color: #eee;
-  width: 90%;
+  width: 100%;
   height: 35px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
   border: none;
   cursor: not-allowed;
 }
 
 .arenasBtn {
-  width: 30%;
+  width: 40%;
   height: 35px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
   border: none;
   cursor: pointer;
-  position: absolute;
-  bottom: 150px;
+  font-family: "Eagle Lake", cursive;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,8 +155,6 @@
   height: 35px;
   font-size: 20px;
   font-weight: 300;
-  font-family: "Kanit", sans-serif;
-  border-radius: 15px;
   border: none;
   cursor: pointer;
   position: absolute;

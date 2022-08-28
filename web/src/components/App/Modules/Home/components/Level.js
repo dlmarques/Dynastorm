@@ -16,6 +16,7 @@ const Level = () => {
         max={level.level * 100}
         value={user.xp}
         styles={styles.level}
+        stat="xp"
       />
     </div>
   );

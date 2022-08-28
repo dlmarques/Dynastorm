@@ -10,6 +10,7 @@ const Product = ({ img, item, setItem }) => {
             skill: "magic resistance",
             boost: 150,
             price: 500,
+            keyname: "BasicMagicResistance50",
           });
         } else if (img.includes("100")) {
           setItem({
@@ -17,6 +18,7 @@ const Product = ({ img, item, setItem }) => {
             skill: "magic resistance",
             boost: 200,
             price: 1000,
+            keyname: "UltimateMagicResistance100",
           });
         }
       } else if (img.includes("Magic")) {
@@ -26,6 +28,7 @@ const Product = ({ img, item, setItem }) => {
             skill: "magic",
             boost: 150,
             price: 500,
+            keyname: "MagicBook50",
           });
         } else if (img.includes("100")) {
           setItem({
@@ -33,6 +36,7 @@ const Product = ({ img, item, setItem }) => {
             skill: "magic",
             boost: 200,
             price: 1000,
+            keyname: "SuperMagic100",
           });
         }
       } else if (img.includes("Armor")) {
@@ -42,6 +46,7 @@ const Product = ({ img, item, setItem }) => {
             skill: "armor",
             boost: 150,
             price: 500,
+            keyname: "Armor50",
           });
         } else if (img.includes("100")) {
           setItem({
@@ -49,6 +54,7 @@ const Product = ({ img, item, setItem }) => {
             skill: "armor",
             boost: 200,
             price: 1000,
+            keyname: "SuperArmor100",
           });
         }
       } else if (img.includes("Strength")) {
@@ -58,6 +64,7 @@ const Product = ({ img, item, setItem }) => {
             skill: "strength",
             boost: 200,
             price: 1000,
+            keyname: "StrengthSkill50",
           });
         } else if (img.includes("50")) {
           setItem({
@@ -65,6 +72,7 @@ const Product = ({ img, item, setItem }) => {
             skill: "strength",
             boost: 150,
             price: 500,
+            keyname: "SuperStrength100",
           });
         }
       }

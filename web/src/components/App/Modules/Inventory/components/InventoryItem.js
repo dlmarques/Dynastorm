@@ -7,7 +7,7 @@ import { shopSliceActions } from "../../../../../store/shop/shopSlice";
 import { storeItems } from "../../../../../assets/storeItems/storeItems";
 import Button from "../../../Components/Button/Button";
 
-const InventoryItem = ({ name, skill, quantity, price, id }) => {
+const InventoryItem = ({ name, skill, quantity, price, id, keyname }) => {
   const dispatch = useDispatch();
   const sellItem = async () => {
     const token = localStorage.getItem("authToken");
@@ -28,7 +28,7 @@ const InventoryItem = ({ name, skill, quantity, price, id }) => {
       <div className={styles.img}>
         {storeItems &&
           storeItems
-            .filter((item) => item.includes(name.replace(/ /g, "")))
+            .filter((item) => item.includes(keyname.replace(/ /g, "")))
             .map((item, id) => <img key={id} src={item} alt="item" />)}
       </div>
       <div className={styles.text}>

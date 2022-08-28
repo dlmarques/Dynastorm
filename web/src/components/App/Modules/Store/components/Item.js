@@ -17,20 +17,22 @@ const Item = ({ img }) => {
     skill: null,
     boost: null,
     price: null,
+    keyname: null,
   });
   const user = useSelector((state) => state.user.user);
 
   const buyItem = async () => {
-    const authToken = localStorage.getItem("authToken");
+    const token = localStorage.getItem("authToken");
     const price = item.price * quantity;
 
     let response = axios.post("http://localhost:3001/api/inventory/addItem", {
-      token: authToken,
+      token,
       itemName: item.name,
       itemSkill: item.skill,
       quantity: quantity,
       price: price,
       boost: item.boost,
+      keyname: item.keyname,
     });
 
     if (user.money >= price) {
@@ -47,7 +49,6 @@ const Item = ({ img }) => {
     } else {
       dispatch(
         alertActions.setAlert({
-          title: "Error",
           message: "You don't have enough money",
         })
       );

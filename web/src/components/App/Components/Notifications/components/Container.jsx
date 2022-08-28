@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Notification from "./components/Notification";
-import "./notifications.scss";
-import { useDispatch } from "react-redux";
-import { notificationsActions } from "../../../../store/ui/notifications";
-import { BsArrowBarRight } from "react-icons/bs";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { notificationsActions } from "../../../../../store/ui/notifications";
+import { BiArrowToLeft } from "react-icons/bi";
+import styles from "./container.module.scss";
+import Notification from "./Notification";
 
-const Notifications = () => {
+const Container = () => {
   const dispatch = useDispatch();
   const [notifications, setNotifications] = useState();
+  const isVisible = useSelector((state) => state.notifications.isVisible);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -24,16 +25,24 @@ const Notifications = () => {
         token: token,
       });
     }, 3000);
-  }, []);
+  }, [isVisible]);
+
+  const closeNotifications = () => dispatch(notificationsActions.close());
 
   return (
-    <>
-      <div className="container">
-        <BsArrowBarRight
-          id="icon"
-          onClick={() => dispatch(notificationsActions.close())}
-        />
+    <div
+      className={
+        isVisible
+          ? styles.notificationsContainerActive
+          : styles.notificationsContainer
+      }
+    >
+      <div className={styles.icon}>
+        <BiArrowToLeft onClick={closeNotifications} />
+      </div>
+      <div className={styles.notificationsContent}>
         {notifications &&
+          isVisible &&
           notifications
             .sort((a, b) => {
               return new Date(b.date) - new Date(a.date);
@@ -43,14 +52,12 @@ const Notifications = () => {
                 key={id}
                 title={notification.title}
                 description={notification.description}
-                category={notification.category}
-                read={notification.read}
                 date={notification.date}
               />
             ))}
       </div>
-    </>
+    </div>
   );
 };
 
-export default Notifications;
+export default Container;
