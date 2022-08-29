@@ -8,6 +8,7 @@ import { alertActions } from "../../../../../store/ui/alert";
 import Progress from "../../../Components/Progress/Progress";
 import Button from "../../../Components/Button/Button";
 import Tooltip from "../../../Components/Tooltip/Tooltip";
+import { convert } from "../../../../../utils/numbersConvert";
 
 const Arena = () => {
   const dispatch = useDispatch();
@@ -49,20 +50,23 @@ const Arena = () => {
             <Button btn="arenasBtn" onClick={startFight}>
               Start Fight
             </Button>
-            <FaInfoCircle
-              className={styles.info}
-              onMouseEnter={() => setIsVisible(true)}
-              onMouseLeave={() => setIsVisible(false)}
-            />
+            <span>
+              <FaInfoCircle
+                className={styles.info}
+                onMouseEnter={() => setIsVisible(true)}
+                onMouseLeave={() => setIsVisible(false)}
+              />
+            </span>
+
             {isVisible && <Tooltip info="30% of opponent money and 25XP" />}
           </div>
         ) : null}
         {enemy.name && (
           <div className={styles.stats}>
-            <h4>Strength: {Math.floor(enemy.strength)}</h4>
-            <h4>Armor: {Math.floor(enemy.armor)}</h4>
-            <h4>Magic: {Math.floor(enemy.magic)}</h4>
-            <h4>Magic Resist: {Math.floor(enemy.magicResist)}</h4>
+            <h4>Strength: {convert(Math.floor(enemy.strength), 0)}</h4>
+            <h4>Armor: {convert(Math.floor(enemy.armor), 0)}</h4>
+            <h4>Magic: {convert(Math.floor(enemy.magic), 0)}</h4>
+            <h4>Magic Resist: {convert(Math.floor(enemy.magicResist), 0)}</h4>
           </div>
         )}
       </div>

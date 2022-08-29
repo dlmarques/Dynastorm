@@ -14,12 +14,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 768px) {
+    width: 100vw;
+  }
   .content {
     position: relative;
     background-color: #0e0e0e;
     height: 75%;
     width: 75%;
     opacity: 0.9;
+    overflow-y: auto;
+    @media (max-width: 768px) {
+      width: 90%;
+    }
 
     header {
       width: 100%;
@@ -27,7 +34,6 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      border-bottom: 1px solid #0e0e0e;
     }
     .container {
       width: 100%;

@@ -5,6 +5,9 @@
   justify-content: space-between;
   gap: 10px;
   padding: 0 20px 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
   .notifications {
     margin-left: 20px;
   }
@@ -12,6 +15,7 @@
   .info {
     display: flex;
     align-items: center;
+    gap: 10px;
     img {
       background-color: #0e0e0e;
       height: 70px;
@@ -23,6 +27,7 @@
         color: #fff;
         font-size: 1.25rem;
         letter-spacing: 1px;
+        user-select: none;
       }
     }
   }

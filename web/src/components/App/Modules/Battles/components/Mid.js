@@ -82,27 +82,6 @@ const Mid = () => {
 
   return (
     <div className="mid">
-      <Button
-        disabled={isActive}
-        btn={
-          status === "pending"
-            ? "btnBattlePending"
-            : status === "win"
-            ? "btnBattleWin"
-            : status === "defeat"
-            ? "btnBattleDefeat"
-            : "btnBattle"
-        }
-        onClick={fightBoss}
-      >
-        {status === "pending"
-          ? "Wait..."
-          : status === "win"
-          ? "You won!"
-          : status === "defeat"
-          ? "You lose!"
-          : "Fight!"}
-      </Button>
       <div className="rewards">
         {boss &&
           boss
@@ -126,6 +105,27 @@ const Mid = () => {
               </>
             ))}
       </div>
+      <Button
+        disabled={isActive}
+        btn={
+          status === "pending"
+            ? "btnBattlePending"
+            : status === "win"
+            ? "btnBattleWin"
+            : status === "defeat"
+            ? "btnBattleDefeat"
+            : "btnBattle"
+        }
+        onClick={fightBoss}
+      >
+        {status === "pending"
+          ? "Fighting..."
+          : status === "win"
+          ? "You won!"
+          : status === "defeat"
+          ? "You lose!"
+          : "Fight!"}
+      </Button>
     </div>
   );
 };

@@ -8,13 +8,15 @@ import schedule from "node-schedule";
 import { userActions } from "../../store/auth/user";
 import { bossActions } from "../../store/auth/bosses";
 import { setLevel, setTier } from "../../utils/Level";
-import { links } from "./Layout/FeaturesBar/components/activeLink";
+import { links } from "../../utils/links";
 
 import Main from "../Layout/Main/Main";
 import Sidebar from "../Layout/Sidebar/Sidebar";
+import Trigger from "../App/Components/Trigger/Trigger";
 
 import { notificationsActions } from "../../store/ui/notifications";
 import { currentSenderActions } from "../../store/chat/currentSender";
+import MobileMenu from "../Layout/MobileMenu/MobileMenu";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -172,7 +174,9 @@ const App = () => {
             </ul>
           </nav>
         </Sidebar>
+        <MobileMenu />
         <Main background="app" isNew={isNew} />
+        <Trigger />
       </div>
     </>
   );

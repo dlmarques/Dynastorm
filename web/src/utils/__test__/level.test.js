@@ -1,4 +1,4 @@
-import { setLevel, setTier } from "./Level";
+import { setLevel, setTier } from "../Level";
 
 describe("level functions", () => {
   test("setLevel function", () => {

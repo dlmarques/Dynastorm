@@ -1,12 +1,8 @@
 import React from "react";
 import styles from "./user.module.scss";
 import { useSelector } from "react-redux";
-import Stats from "../../../Layout/Sidebar/components/Stats";
+import { convert } from "../../../../../utils/numbersConvert";
 import Progress from "../../../Components/Progress/Progress";
-import { GiBiceps } from "react-icons/gi";
-import { RiMagicFill } from "react-icons/ri";
-import { BsShieldShaded } from "react-icons/bs";
-import { GiMagicPalm } from "react-icons/gi";
 
 const User = () => {
   const user = useSelector((state) => state.user.user);
@@ -26,10 +22,10 @@ const User = () => {
             styles={styles.hp}
           />
           <div className={styles.stats}>
-            <h4>Strength: {user.strength}</h4>
-            <h4>Armor: {user.armor}</h4>
-            <h4>Magic: {user.magic}</h4>
-            <h4>Magic Resist: {user.magicResist}</h4>
+            <h4>Strength: {convert(Math.floor(user.strength), 0)}</h4>
+            <h4>Armor: {convert(Math.floor(user.armor), 0)}</h4>
+            <h4>Magic: {convert(Math.floor(user.magic), 0)}</h4>
+            <h4>Magic Resist: {convert(Math.floor(user.magicResist), 0)}</h4>
           </div>
         </div>
       )}

@@ -1,12 +1,10 @@
 export const links = [
   "home",
   "store",
-  "missions",
   "battles",
-  "arenas",
+  "missions",
   "inventory",
+  "arenas",
   "healer",
   "chat",
 ];
-
-export const activeLink = () => {};

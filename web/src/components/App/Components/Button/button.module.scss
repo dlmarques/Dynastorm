@@ -85,6 +85,10 @@
     color: #777777;
     cursor: not-allowed;
   }
+
+  @media (max-width: 425px) {
+    width: 90%;
+  }
 }
 
 .btnBattle {

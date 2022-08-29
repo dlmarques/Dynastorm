@@ -12,8 +12,8 @@ const Healer = () => {
       <div className={styles["healer-info"]}>
         <img src={healer} className={styles.healer} alt="healer" />
         <h3>
-          Hi, I'm the Healer of the Dynastorm Village, here you can find some
-          food to regenerate your HP, or you can wait until the next day.
+          Hi, I'm the Healer of the Omenia Village, here you can find some food
+          to regenerate your HP, or you can wait until the next day.
         </h3>
       </div>
       <CountdownTimer />

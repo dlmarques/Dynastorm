@@ -1,0 +1,206 @@
+.mobileMenu {
+  background-color: #0e0e0e;
+  height: 100vh;
+  width: 0;
+  box-shadow: 0 0 15px 5px rgb(0 0 0 / 50%);
+  font-family: "Eagle Lake", cursive;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 99;
+  position: absolute;
+  -webkit-transition: width 1s ease-in-out;
+  -moz-transition: width 1s ease-in-out;
+  -o-transition: width 1s ease-in-out;
+  transition: width 1s ease-in-out;
+  header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2 {
+      color: #ffffff;
+      text-align: center;
+      font-size: 0rem;
+      padding-top: 50px;
+      -webkit-transition: font-size 1s ease-in-out;
+      -moz-transition: font-size 1s ease-in-out;
+      -o-transition: font-size 1s ease-in-out;
+      transition: font-size 1s ease-in-out;
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      svg {
+        color: #fff;
+        padding-top: 10px;
+        font-size: 0rem;
+        cursor: pointer;
+        -webkit-transition: font-size 1s ease-in-out;
+        -moz-transition: font-size 1s ease-in-out;
+        -o-transition: font-size 1s ease-in-out;
+        transition: font-size 1s ease-in-out;
+      }
+    }
+  }
+
+  p {
+    height: 50px;
+    color: #ffffff;
+    font-family: "Roboto Condensed", sans-serif;
+    text-align: center;
+    font-size: 0rem;
+    font-weight: 300;
+    padding-bottom: 50px;
+    -webkit-transition: font-size 1s ease-in-out;
+    -moz-transition: font-size 1s ease-in-out;
+    -o-transition: font-size 1s ease-in-out;
+    transition: font-size 1s ease-in-out;
+  }
+  .navMobileMenu {
+    width: 100%;
+    ul {
+      width: 100%;
+      padding: 0;
+      li {
+        padding-top: 15px;
+        width: 100%;
+        text-align: center;
+        .linkMobileMenu {
+          text-decoration: none;
+          color: #fff;
+          text-transform: capitalize;
+          font-size: 0rem;
+          z-index: -1;
+          transition: all 0.5s ease-in-out;
+          -webkit-transition: font-size 1s ease-in-out;
+          -moz-transition: font-size 1s ease-in-out;
+          -o-transition: font-size 1s ease-in-out;
+          transition: font-size 1s ease-in-out;
+        }
+        .link-activeMobileMenu {
+          text-decoration: none;
+          color: #fff;
+          text-transform: capitalize;
+          text-decoration: 1px line-through;
+          text-decoration-color: #fff;
+          font-size: 0rem;
+          z-index: -1;
+          transition: all 0.5s ease-in-out;
+          -webkit-transition: font-size 1s ease-in-out;
+          -moz-transition: font-size 1s ease-in-out;
+          -o-transition: font-size 1s ease-in-out;
+          transition: font-size 1s ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+.mobileMenuActive {
+  background-color: #0e0e0e;
+  height: 100vh;
+  width: 300px;
+  box-shadow: 0 0 15px 5px rgb(0 0 0 / 50%);
+  font-family: "Eagle Lake", cursive;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 99;
+  position: absolute;
+  -webkit-transition: width 1s ease-in-out;
+  -moz-transition: width 1s ease-in-out;
+  -o-transition: width 1s ease-in-out;
+  transition: width 1s ease-in-out;
+  header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2 {
+      color: #ffffff;
+      text-align: center;
+      font-size: 2.25rem;
+      padding-top: 50px;
+      -webkit-transition: font-size 1s ease-in-out;
+      -moz-transition: font-size 1s ease-in-out;
+      -o-transition: font-size 1s ease-in-out;
+      transition: font-size 1s ease-in-out;
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      svg {
+        color: #fff;
+        padding-top: 10px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        -webkit-transition: font-size 1s ease-in-out;
+        -moz-transition: font-size 1s ease-in-out;
+        -o-transition: font-size 1s ease-in-out;
+        transition: font-size 1s ease-in-out;
+      }
+    }
+  }
+
+  p {
+    height: 50px;
+    color: #ffffff;
+    font-family: "Roboto Condensed", sans-serif;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 300;
+    padding-bottom: 50px;
+    -webkit-transition: font-size 1s ease-in-out;
+    -moz-transition: font-size 1s ease-in-out;
+    -o-transition: font-size 1s ease-in-out;
+    transition: font-size 1s ease-in-out;
+  }
+
+  .navMobileMenu {
+    width: 100%;
+    ul {
+      width: 100%;
+      padding: 0;
+      li {
+        padding-top: 15px;
+        width: 100%;
+        text-align: center;
+        .linkMobileMenu {
+          text-decoration: none;
+          color: #fff;
+          text-transform: capitalize;
+          font-size: 1.3rem;
+          z-index: -1;
+          transition: all 0.5s ease-in-out;
+          -webkit-transition: font-size 1s ease-in-out;
+          -moz-transition: font-size 1s ease-in-out;
+          -o-transition: font-size 1s ease-in-out;
+          transition: font-size 1s ease-in-out;
+        }
+        .link-activeMobileMenu {
+          text-decoration: none;
+          color: #fff;
+          text-transform: capitalize;
+          text-decoration: 1px line-through;
+          text-decoration-color: #fff;
+          font-size: 1.3rem;
+          z-index: -1;
+          transition: all 0.5s ease-in-out;
+          -webkit-transition: font-size 1s ease-in-out;
+          -moz-transition: font-size 1s ease-in-out;
+          -o-transition: font-size 1s ease-in-out;
+          transition: font-size 1s ease-in-out;
+        }
+      }
+    }
+  }
+}

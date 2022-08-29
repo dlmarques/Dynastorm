@@ -13,9 +13,9 @@ const Sidebar = ({ children, app }) => {
   };
 
   return (
-    <div className={styles.sidebar}>
+    <div className={app ? styles.appSidebar : styles.sidebar}>
       <header>
-        <h2>Dynastorm</h2>
+        <h2>Omenia</h2>
         {app && <MdOutlineLogout onClick={endSession} />}
       </header>
       {children && children}

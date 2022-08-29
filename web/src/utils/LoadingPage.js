@@ -1,5 +1,5 @@
 import React from "react";
-import "./loading.css";
+import "./styles/loading.css";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const LoadingPage = () => {

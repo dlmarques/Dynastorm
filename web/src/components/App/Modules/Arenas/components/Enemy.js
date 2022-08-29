@@ -3,11 +3,7 @@ import axios from "axios";
 import styles from "./enemy.module.scss";
 import { useSelector } from "react-redux";
 import Progress from "../../../Components/Progress/Progress";
-import Stats from "../../../Layout/Sidebar/components/Stats";
-import { GiBiceps } from "react-icons/gi";
-import { RiMagicFill } from "react-icons/ri";
-import { BsShieldShaded } from "react-icons/bs";
-import { GiMagicPalm } from "react-icons/gi";
+import { convert } from "../../../../../utils/numbersConvert";
 
 const Enemy = () => {
   const enemy = useSelector((state) => state.enemy.enemy);
@@ -38,10 +34,10 @@ const Enemy = () => {
             styles={styles.hp}
           />
           <div className={styles.stats}>
-            <h4>Strength: {Math.floor(enemy.strength)}</h4>
-            <h4>Armor: {Math.floor(enemy.armor)}</h4>
-            <h4>Magic: {Math.floor(enemy.magic)}</h4>
-            <h4>Magic Resist: {Math.floor(enemy.magicResist)}</h4>
+            <h4>Strength: {convert(Math.floor(enemy.strength), 0)}</h4>
+            <h4>Armor: {convert(Math.floor(enemy.armor), 0)}</h4>
+            <h4>Magic: {convert(Math.floor(enemy.magic), 0)}</h4>
+            <h4>Magic Resist: {convert(Math.floor(enemy.magicResist), 0)}</h4>
           </div>
         </div>
       )}

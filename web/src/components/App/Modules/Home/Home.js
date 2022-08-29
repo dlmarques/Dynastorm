@@ -1,9 +1,8 @@
 import React from "react";
 import styles from "./home.module.scss";
 import { useSelector } from "react-redux";
-import Level from "./components/Level";
-import PerkImage from "../../Components/PerkImage/PerkImage";
 import Progress from "../../Components/Progress/Progress";
+import { convert } from "../../../../utils/numbersConvert";
 
 const Home = () => {
   const user = useSelector((state) => state.user.user);
@@ -12,7 +11,7 @@ const Home = () => {
     <div className={styles["home-container"]}>
       <h1>Welcome back {user && user.name}</h1>
       <div className={styles.content}>
-        <div className={styles.col1}>
+        <div className={styles.col}>
           <div className={styles.user}>
             <img src={user.avatar} alt="avatar" />
             <p>@{user.name}</p>
@@ -24,33 +23,29 @@ const Home = () => {
               value={user && user.health}
               styles={styles.hp}
             />
+            <p>
+              $<strong> {Math.floor(user.money)}</strong>
+            </p>
+
             <div className={styles.grid}>
               <p>
                 Strength <br />
-                {Math.floor(user.strength)}
+                <strong> {convert(Math.floor(user.strength), 0)}</strong>
               </p>
               <p>
                 Magic <br />
-                {Math.floor(user.magic)}
+                <strong> {convert(Math.floor(user.magic), 0)}</strong>
               </p>
               <p>
-                Magic Resist <br />
-                {Math.floor(user.magicResist)}
+                M. Resist <br />
+                <strong> {convert(Math.floor(user.magicResist), 0)}</strong>
               </p>
               <p>
                 Armor <br />
-                {Math.floor(user.armor)}
+                <strong> {convert(Math.floor(user.armor), 0)}</strong>
               </p>
             </div>
           </div>
-        </div>
-        <div className={styles.col2}>
-          <Level />
-          <PerkImage
-            styles={styles["img-container"]}
-            imageStyle={styles.perkImage}
-            user={user}
-          />
         </div>
       </div>
     </div>

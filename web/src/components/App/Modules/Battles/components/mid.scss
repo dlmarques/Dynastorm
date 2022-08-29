@@ -11,6 +11,10 @@
     flex-direction: column;
     padding: 50px 50px 10px 50px;
   }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 50px 20px 10px 20px;
+  }
 
   .animate__animated.animate__wobble.animate__infinite {
     --animate-duration: 5000ms;

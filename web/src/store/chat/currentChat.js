@@ -13,6 +13,9 @@ const currentChatSlice = createSlice({
     sendMessage(state) {
       ++state.messageSent;
     },
+    unselectChat(state) {
+      state.user = {};
+    },
   },
 });
 

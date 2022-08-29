@@ -1,26 +1,29 @@
 .home-container {
   color: #fff;
   font-size: 3rem;
-
   height: 100%;
 
   h1 {
     height: 100px;
-    font-size: 3rem;
+    font-size: 2.7rem;
     font-weight: 500;
     text-align: center;
-    @media (max-width: 1024px) {
-      font-size: 4.5vw;
+
+    @media (max-width: 1200px) {
+      font-size: 2.2rem;
+    }
+    @media (max-width: 1000px) {
+      font-size: 1.7rem;
     }
   }
 
   .content {
     width: 100%;
-    height: calc(100% - 100px);
+    height: calc(100% - 150px);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    .col1 {
+    justify-content: center;
+    .col {
       width: 50%;
       height: 100%;
       display: flex;
@@ -32,12 +35,17 @@
         align-items: center;
         gap: 15px;
         img {
-          height: 150px;
-          border-radius: 100%;
+          height: 140px;
+          @media (max-width: 1200px) {
+            height: 110px;
+          }
+          @media (max-width: 768px) {
+            padding-top: 25px;
+          }
         }
         .hp {
-          width: 90%;
-          height: 15px;
+          width: 160px;
+          height: 13px;
           border-radius: 15px;
           color: rgb(0, 255, 30);
           background-color: rgb(0, 255, 30);
@@ -58,44 +66,28 @@
 
         .grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(4, 1fr);
           align-content: center;
           justify-items: center;
           grid-column-gap: 10px;
           grid-row-gap: 10px;
+          width: 100%;
+          @media (max-width: 1200px) {
+            grid-template-columns: repeat(2, 1fr);
+            grid-column-gap: 30px;
+          }
         }
         p {
           font-size: 1.3rem;
           text-align: center;
-        }
-      }
-    }
-    .col2 {
-      margin-right: 20px;
-      width: 50%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 100px;
-      .img-container {
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: center;
-        justify-content: center;
-      }
-      img {
-        height: 120px;
-        border-radius: 50%;
-      }
-      p {
-        font-weight: 300;
-        padding-top: 10px;
-        font-size: 1.8rem;
-        text-transform: capitalize;
-        @media (max-width: 1024px) {
-          font-size: 3vw;
+
+          strong {
+            font-family: "Roboto Condensed", sans-serif;
+          }
+
+          @media (max-width: 1000px) {
+            font-size: 1.1rem;
+          }
         }
       }
     }
