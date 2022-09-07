@@ -17,7 +17,7 @@ const Profile = () => {
         <div className={styles.profile}>
           {user && (
             <>
-              {<Notifications />}
+              <Notifications />
               <div className={styles.info}>
                 <span>
                   <p

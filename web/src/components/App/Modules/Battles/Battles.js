@@ -12,6 +12,8 @@ const Battles = () => {
   return (
     <div className={styles["battles-container"]}>
       <div className={styles.content}>
+        <Character />
+        <Mid />
         {bosses &&
           bosses
             .filter((boss) => boss.boss === user.currentBoss)
@@ -30,8 +32,6 @@ const Battles = () => {
                 hp={boss.hp}
               />
             ))}
-        <Mid />
-        <Character />
       </div>
     </div>
   );

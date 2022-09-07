@@ -1,6 +1,5 @@
 .mid {
   height: 100%;
-  padding: 0px 20px 0px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,9 +7,18 @@
   gap: 50px;
   width: 300px;
   border-radius: 15px;
+  @media (max-width: 1440px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  @media (max-width: 425px) {
+    flex-direction: column;
+  }
 
   button {
-    width: 80%;
+    width: 200px;
     height: 45px;
     font-size: 1.2rem;
     font-weight: 300;
@@ -19,5 +27,11 @@
     outline: none;
     border: none;
     cursor: pointer;
+
+    @media (max-width: 1024px) {
+      width: 150px;
+      height: 40px;
+      font-size: 1rem;
+    }
   }
 }

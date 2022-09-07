@@ -11,6 +11,7 @@
   -moz-transition: width 1s ease-in-out;
   -o-transition: width 1s ease-in-out;
   transition: width 1s ease-in-out;
+  z-index: 99;
 }
 
 .notificationsContainerActive {
@@ -27,6 +28,7 @@
   -o-transition: width 1s ease-in-out;
   transition: width 1s ease-in-out;
   overflow-y: auto;
+  z-index: 99;
   @media (max-width: 450px) {
     width: 250px;
   }
