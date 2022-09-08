@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./avatarsbox.module.css";
+import styles from "./avatarsbox.module.scss";
 import Avatar from "./Avatar";
 import avatars from "../../../../assets/avatars/avatars";
 
