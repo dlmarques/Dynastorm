@@ -2,4 +2,11 @@
   height: 100%;
   width: 300px;
   overflow-y: auto;
+
+  @media (max-width: 1250px) {
+    width: 200px;
+  }
+  @media (max-width: 900px) {
+    width: 80px;
+  }
 }

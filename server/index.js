@@ -64,7 +64,7 @@ io.on("connection", (socket) => {
   socket.on("send-msg", async (data) => {
     const sendUserSocket = onlineUsers.get(data.to);
     if (sendUserSocket) {
-      socket.to(sendUserSocket).emit("dmsg-recieve", data.message);
+      socket.to(sendUserSocket).emit("msg-recieve", data.message);
       const newMessage = await Notification.create({
         id: data.from,
         title: "Messages",

@@ -1,4 +1,10 @@
 .box {
   width: calc(100% - 300px);
   height: 100%;
+  @media (max-width: 1250px) {
+    width: calc(100% - 200px);
+  }
+  @media (max-width: 900px) {
+    width: calc(100% - 80px);
+  }
 }

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./styles/footer.module.scss";
 import { currentChatActions } from "../../../../../store/chat/currentChat";
+import { FiSend } from "react-icons/fi";
 
 const ChatFooter = ({ socket, setMessages, messages }) => {
   const dispatch = useDispatch();
@@ -29,16 +30,26 @@ const ChatFooter = ({ socket, setMessages, messages }) => {
     dispatch(currentChatActions.sendMessage());
     setMessage("");
   };
+  const handleKeypress = (e) => {
+    if (e.keyCode === 13) {
+      handleSendMessage();
+    }
+  };
 
   return (
     <div className={styles.footer}>
-      <input
-        type="text"
-        placeholder="Write message"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      />
-      <button onClick={handleSendMessage}>Send</button>
+      <div className={styles.input}>
+        <input
+          type="text"
+          placeholder="Write message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={handleKeypress}
+        />
+        <button type="button" onClick={handleSendMessage}>
+          <FiSend />
+        </button>
+      </div>
     </div>
   );
 };
