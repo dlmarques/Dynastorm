@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLevel } from "../../../../../utils/Level";
 import { enemyActions } from "../../../../../store/auth/enemy";
 import { alertActions } from "../../../../../store/ui/alert";
+import { environment } from "../../../../../environment/environment";
 
 const Player = ({ name, xp, avatar, id }) => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const Player = ({ name, xp, avatar, id }) => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3001/api/user/checkBusy", {
+      .post(`${environment.apiUrl}/api/user/checkBusy`, {
         token: token,
       })
       .then((response) => setBusy(response.data));
@@ -26,7 +27,7 @@ const Player = ({ name, xp, avatar, id }) => {
     setPlayerLevel(setLevel(xp));
     setTimeout(() => {
       axios
-        .post("http://localhost:3001/api/arenas/getEnemy", {
+        .post(`${environment.apiUrl}/api/arenas/getEnemy`, {
           id: id,
         })
         .then((response) => dispatch(enemyActions.setHp(response.data.hp)));
@@ -36,7 +37,7 @@ const Player = ({ name, xp, avatar, id }) => {
   const selectEnemy = () => {
     if (!busy) {
       axios
-        .post("http://localhost:3001/api/arenas/getEnemy", {
+        .post(`${environment.apiUrl}/api/arenas/getEnemy`, {
           id: id,
         })
         .then((response) =>

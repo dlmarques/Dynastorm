@@ -5,6 +5,7 @@ import "./item.scss";
 import { shopSliceActions } from "../../../../../store/shop/shopSlice";
 import Button from "../../../Components/Button/Button";
 import { alertActions } from "../../../../../store/ui/alert";
+import { environment } from "../../../../../environment/environment";
 
 const HealerItem = ({ img, id }) => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const HealerItem = ({ img, id }) => {
 
   const healing = async () => {
     const token = localStorage.getItem("authToken");
-    const response = axios.patch("http://localhost:3001/api/healer/heal", {
+    const response = axios.patch(`${environment.apiUrl}/api/healer/heal`, {
       token: token,
       heal: heal,
       price: price,

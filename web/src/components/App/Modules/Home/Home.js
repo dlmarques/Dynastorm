@@ -1,53 +1,70 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./home.module.scss";
 import { useSelector } from "react-redux";
-import Progress from "../../Components/Progress/Progress";
 import { convert } from "../../../../utils/numbersConvert";
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const user = useSelector((state) => state.user.user);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+  }, []);
 
   return (
     <div className={styles["home-container"]}>
-      <h1>Welcome back {user && user.name}</h1>
-      <div className={styles.content}>
-        <div className={styles.col}>
-          <div className={styles.user}>
-            <img src={user.avatar} alt="avatar" />
-            <p>@{user.name}</p>
-            <Progress
-              stat="hp"
-              id="hp"
-              min="0"
-              max="100"
-              value={user && user.health}
-              styles={styles.hp}
-            />
-            <p>
-              $<strong> {Math.floor(user.money)}</strong>
-            </p>
+      {isLoading && <h1>Loading...</h1>}
+      {!isLoading && (
+        <>
+          <h1>Welcome back {user && user.name}</h1>
+          <div className={styles.content}>
+            <div className={styles.col}>
+              <div className={styles.user}>
+                <div className={styles.userInfo}>
+                  <img src={user.avatar} alt="avatar" />
+                  <div className={styles.text}>
+                    <p>@{user.name}</p>
+                    <div className={styles.stats}>
+                      <p className={styles.hpInfo}>
+                        HP
+                        <strong className={styles.hpValue}>
+                          {user.health}
+                        </strong>
+                      </p>
+                      <p className={styles.moneyInfo}>
+                        $
+                        <strong className={styles.moneyValue}>
+                          {Math.floor(user.money)}
+                        </strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
 
-            <div className={styles.grid}>
-              <p>
-                Strength <br />
-                <strong> {convert(Math.floor(user.strength), 0)}</strong>
-              </p>
-              <p>
-                Magic <br />
-                <strong> {convert(Math.floor(user.magic), 0)}</strong>
-              </p>
-              <p>
-                M. Resist <br />
-                <strong> {convert(Math.floor(user.magicResist), 0)}</strong>
-              </p>
-              <p>
-                Armor <br />
-                <strong> {convert(Math.floor(user.armor), 0)}</strong>
-              </p>
+                <div className={styles.grid}>
+                  <p>
+                    Strength <br />
+                    <strong> {convert(Math.floor(user.strength), 0)}</strong>
+                  </p>
+                  <p>
+                    Magic <br />
+                    <strong> {convert(Math.floor(user.magic), 0)}</strong>
+                  </p>
+                  <p>
+                    M. Resist <br />
+                    <strong> {convert(Math.floor(user.magicResist), 0)}</strong>
+                  </p>
+                  <p>
+                    Armor <br />
+                    <strong> {convert(Math.floor(user.armor), 0)}</strong>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };

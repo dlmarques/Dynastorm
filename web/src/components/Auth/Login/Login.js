@@ -7,14 +7,17 @@ import { authActions } from "../../../store/auth/auth";
 import { alertActions } from "../../../store/ui/alert";
 import Sidebar from "../../Layout/Sidebar/Sidebar";
 import Main from "../../Layout/Main/Main";
+import { environment } from "../../../environment/environment";
+import Alert from "../../App/Components/Alert/Alert";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [error, setError] = useState();
+  const error = useSelector((state) => state.alert.alert);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
+  console.log(error);
   useEffect(() => {
     localStorage.authToken
       ? dispatch(authActions.login())
@@ -24,7 +27,7 @@ const Login = () => {
   const loginHandler = async (e) => {
     e.preventDefault();
 
-    let response = axios.post("http://localhost:3001/api/auth/login", {
+    let response = axios.post(`${environment.apiUrl}/api/auth/login`, {
       email: email,
       password: password,
     });
@@ -35,20 +38,24 @@ const Login = () => {
       if (authToken) {
         localStorage.setItem("authToken", authToken);
         dispatch(authActions.login());
-      } else {
-        console.log("User/Password combination does not exist.");
         setEmail("");
         setPassword("");
-        dispatch(
-          alertActions.setAlert({
-            title: "Error",
-            message: response.data,
-          })
-        );
+      } else {
+        setEmail("");
+        setPassword("");
       }
     } catch (error) {
       console.error(error.response.data);
-      setError(error.response.data);
+      setTimeout(() => {
+        if (error) {
+          dispatch(
+            alertActions.setAlert({
+              title: "Error",
+              message: error.response.data,
+            })
+          );
+        }
+      }, 500);
     }
   };
 
@@ -80,7 +87,6 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            {error && <span>{error}</span>}
             <button
               data-testid="loginButton"
               type="submit"
@@ -92,6 +98,7 @@ const Login = () => {
               Create an account
             </Link>
           </form>
+          {error.message && <Alert />}
         </Sidebar>
         <Main background="auth" />
       </div>

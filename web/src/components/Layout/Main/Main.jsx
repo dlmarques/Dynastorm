@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import Container from "../../App/Components/Notifications/components/Container";
@@ -15,9 +15,16 @@ import Alert from "../../App/Components/Alert/Alert";
 
 import Profile from "./components/Profile";
 import styles from "./main.module.scss";
+import { useState } from "react";
 
 const Main = ({ background, isNew }) => {
+  const [url, setUrl] = useState();
   const alert = useSelector((state) => state.alert.alert);
+  const changed = useSelector((state) => state.user.changeRoute);
+
+  useEffect(() => {
+    setUrl(window.location.href);
+  }, [changed]);
 
   return (
     <main className={background === "app" ? styles.mainApp : styles.mainAuth}>

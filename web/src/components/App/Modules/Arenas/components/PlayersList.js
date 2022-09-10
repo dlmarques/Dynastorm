@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Player from "./Player";
 import { useSelector } from "react-redux";
+import { environment } from "../../../../../environment/environment";
 
 const PlayersList = () => {
   const [players, setPlayers] = useState();
@@ -10,7 +11,7 @@ const PlayersList = () => {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     axios
-      .post("http://localhost:3001/api/arenas/getAllUsers", {
+      .post(`${environment.apiUrl}/api/arenas/getAllUsers`, {
         token: token,
       })
       .then((response) => setPlayers(response.data));

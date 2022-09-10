@@ -5,6 +5,7 @@ import { IoIosNotifications } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { notificationsActions } from "../../../../store/ui/notifications";
+import { environment } from "../../../../environment/environment";
 
 const Notifications = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const Notifications = () => {
       dispatch(notificationsActions.open());
     }
     async function readNotifications() {
-      axios.patch("http://localhost:3001/api/noti/readNotification", {
+      axios.patch(`${environment.apiUrl}/api/noti/readNotification`, {
         token,
       });
       dispatch(notificationsActions.read());

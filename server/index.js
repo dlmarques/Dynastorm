@@ -6,6 +6,7 @@ const cors = require("cors");
 const http = require("http").Server(app);
 const socketIO = require("socket.io");
 
+
 const Notification = require("./models/Notification");
 
 //import routes
@@ -18,10 +19,21 @@ const battlesRoute = require("./routes/battles");
 const notificationRoute = require("./routes/notification");
 const arenasRoute = require("./routes/arenas");
 const chatRoute = require("./routes/chat");
+const testRoute = require("./routes/test");
 
 dotenv.config();
 
+/* const whitelist = ['http://localhost:3000', 'https://omenia.netlify.app/']
+
+const corsOptions = {
+  origin: whitelist,
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
+}
+ */
 app.use(cors());
+
+
 
 mongoose.connect(
   process.env.DB_CONNECT,
@@ -42,8 +54,10 @@ app.use("/api/battles", battlesRoute);
 app.use("/api/noti", notificationRoute);
 app.use("/api/arenas", arenasRoute);
 app.use("/api/chat", chatRoute);
+app.use("/api/test", testRoute);
 
-http.listen(3001, () => console.log("server running"));
+var port = process.env.PORT || 3001;
+http.listen(port, () => console.log(`server running on ${port}`));
 
 const io = socketIO(http, {
   cors: {

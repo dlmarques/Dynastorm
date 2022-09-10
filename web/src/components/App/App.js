@@ -9,6 +9,7 @@ import { userActions } from "../../store/auth/user";
 import { bossActions } from "../../store/auth/bosses";
 import { setLevel, setTier } from "../../utils/Level";
 import { links } from "../../utils/links";
+import { environment } from "../../environment/environment";
 
 import Main from "../Layout/Main/Main";
 import Sidebar from "../Layout/Sidebar/Sidebar";
@@ -22,15 +23,13 @@ const App = () => {
   const dispatch = useDispatch();
   const TWOSECONDS_MS = 2000;
   const [nextDay, setNextDay] = useState(false);
-  const [changed, setChanged] = useState(0);
+  const changed = useSelector((state) => state.user.chnageRoute);
   const [url, setUrl] = useState();
   const shouldFetch = useRef(true);
   const user = useSelector((state) => state.user.user);
   const battle = useSelector((state) => state.user.battles);
   const isNew = useSelector((state) => state.user.user.isNew);
-  const mobileMenu = useSelector((state) => state.mobileMenu.isOpened);
   const change = useSelector((state) => state.shop.purchased);
-  const alert = useSelector((state) => state.alert.alert);
   const missions = useSelector((state) => state.user.missions);
   const enemy = useSelector((state) => state.enemy.enemy);
   const reload = useSelector((state) => state.enemy.reload);
@@ -40,37 +39,29 @@ const App = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/auth/getUserData", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({
+    axios
+      .post(`${environment.apiUrl}/api/auth/getUserData`, {
         token: token,
-      }),
-    })
-      .then((response) => response.json())
-      .then((actualData) => {
+      })
+      .then((response) => {
         dispatch(
           userActions.setUser({
-            name: actualData.username,
-            avatar: actualData.avatar,
-            strength: actualData.strength,
-            armor: actualData.armor,
-            magic: actualData.magic,
-            magicResist: actualData.magicResist,
-            health: actualData.hp,
-            money: actualData.money,
-            xp: actualData.xp,
-            isNew: actualData.new,
-            perk: actualData.perk,
-            currentBoss: actualData.currentBoss,
-            id: actualData.id,
+            name: response.data.username,
+            avatar: response.data.avatar,
+            strength: response.data.strength,
+            armor: response.data.armor,
+            magic: response.data.magic,
+            magicResist: response.data.magicResist,
+            health: response.data.hp,
+            money: response.data.money,
+            xp: response.data.xp,
+            isNew: response.data.new,
+            perk: response.data.perk,
+            currentBoss: response.data.currentBoss,
+            id: response.data.id,
           })
         );
-        dispatch(currentSenderActions.setSender(actualData));
+        dispatch(currentSenderActions.setSender(response.data));
       });
     dispatch(
       userActions.setLevel({
@@ -84,7 +75,7 @@ const App = () => {
     if (shouldFetch.current) {
       shouldFetch.current = false;
       axios
-        .get("http://localhost:3001/api/battles/getBosses")
+        .get(`${environment.apiUrl}/api/battles/getBosses`)
         .then((actualData) =>
           actualData.data.map((boss) => {
             return dispatch(
@@ -113,7 +104,7 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       axios
-        .post("http://localhost:3001/api/noti/getNotifications", {
+        .post(`${environment.apiUrl}/api/noti/getNotifications`, {
           token: token,
         })
         .then((response) =>
@@ -130,7 +121,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    axios.patch("http://localhost:3001/api/user/stopFight", {
+    axios.patch(`${environment.apiUrl}/api/user/stopFight`, {
       token: token,
     });
   }, []);
@@ -145,6 +136,10 @@ const App = () => {
   useEffect(() => {
     setUrl(window.location.href);
   }, [changed]);
+
+  const changeRoute = () => {
+    dispatch(userActions.navigate());
+  };
 
   return (
     <>
@@ -164,7 +159,7 @@ const App = () => {
                             : styles["link"]
                         }
                         to={`/app/${link}`}
-                        onClick={() => setChanged(changed + 1)}
+                        onClick={changeRoute}
                       >
                         {link}
                       </Link>

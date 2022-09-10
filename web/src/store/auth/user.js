@@ -27,6 +27,7 @@ const userSlice = createSlice({
     },
     missions: 0,
     battles: 0,
+    changeRoute: 0,
   },
   reducers: {
     setUser(state, action) {
@@ -84,6 +85,9 @@ const userSlice = createSlice({
     },
     stopFight(state) {
       state.user.fighting = false;
+    },
+    navigate(state) {
+      ++state.changeRoute;
     },
   },
 });

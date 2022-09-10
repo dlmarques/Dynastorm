@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "./inventory.module.scss";
 import InventoryItem from "./components/InventoryItem";
 import { useSelector } from "react-redux";
+import { environment } from "../../../../environment/environment";
 
 const Inventory = () => {
   const [items, setItems] = useState();
@@ -10,7 +11,7 @@ const Inventory = () => {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     axios
-      .post("http://localhost:3001/api/inventory/getItems", {
+      .post(`${environment.apiUrl}/api/inventory/getItems`, {
         token: token,
       })
       .then((response) => setItems(response.data));

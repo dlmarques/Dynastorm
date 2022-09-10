@@ -4,6 +4,7 @@ import styles from "./enemy.module.scss";
 import { useSelector } from "react-redux";
 import Progress from "../../../Components/Progress/Progress";
 import { convert } from "../../../../../utils/numbersConvert";
+import { environment } from "../../../../../environment/environment";
 
 const Enemy = () => {
   const enemy = useSelector((state) => state.enemy.enemy);
@@ -12,7 +13,7 @@ const Enemy = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3001/api/arenas/getEnemy", {
+      .post(`${environment.apiUrl}/api/arenas/getEnemy`, {
         id: enemy.id,
       })
       .then((response) => setOpponent(response.data));

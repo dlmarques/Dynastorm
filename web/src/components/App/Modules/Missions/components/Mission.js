@@ -6,6 +6,7 @@ import "./mission.scss";
 import { userActions } from "../../../../../store/auth/user";
 import Button from "../../../Components/Button/Button";
 import { alertActions } from "../../../../../store/ui/alert";
+import { environment } from "../../../../../environment/environment";
 
 const Mission = ({ id, name, status, xp, money, duration, startedTime }) => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Mission = ({ id, name, status, xp, money, duration, startedTime }) => {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     axios
-      .post("http://localhost:3001/api/user/checkBusy", {
+      .post(`${environment.apiUrl}/api/user/checkBusy`, {
         token: token,
       })
       .then((response) => setBusy(response.data));
@@ -31,7 +32,7 @@ const Mission = ({ id, name, status, xp, money, duration, startedTime }) => {
         dispatch(userActions.startMission());
         dispatch(userActions.stopBusy());
       }, duration * 61 * 1000);
-      axios.patch("http://localhost:3001/api/missions/startMission", {
+      axios.patch(`${environment.apiUrl}/api/missions/startMission`, {
         id: id,
         token: token,
         startedTime: Date.now(),

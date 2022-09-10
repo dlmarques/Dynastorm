@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import Mission from "./components/Mission";
 import styles from "./missions.module.scss";
+import { environment } from "../../../../environment/environment";
 
 const Missions = () => {
   const [missions, setMissions] = useState();
@@ -11,7 +12,7 @@ const Missions = () => {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     axios
-      .post("http://localhost:3001/api/missions/getMissions", {
+      .post(`${environment.apiUrl}/api/missions/getMissions`, {
         token: token,
       })
       .then((response) => setMissions(response.data));

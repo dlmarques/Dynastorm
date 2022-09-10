@@ -6,12 +6,13 @@ import { useDispatch } from "react-redux";
 import { shopSliceActions } from "../../../../../store/shop/shopSlice";
 import { storeItems } from "../../../../../assets/storeItems/storeItems";
 import Button from "../../../Components/Button/Button";
+import { environment } from "../../../../../environment/environment";
 
 const InventoryItem = ({ name, skill, quantity, price, id, keyname }) => {
   const dispatch = useDispatch();
   const sellItem = async () => {
     const token = localStorage.getItem("authToken");
-    let fetch = axios.patch("http://localhost:3001/api/inventory/sellItem", {
+    let fetch = axios.patch(`${environment.apiUrl}/api/inventory/sellItem`, {
       token: token,
       id: id,
     });

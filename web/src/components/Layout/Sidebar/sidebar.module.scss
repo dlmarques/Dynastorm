@@ -8,22 +8,46 @@
   flex-direction: column;
   justify-content: space-between;
 
+  @media (max-width: 600px) {
+    width: 100vw;
+    height: 100vh;
+  }
+  @media (max-height: 730px) {
+    justify-content: center;
+  }
+
   header {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+
     h2 {
       color: #ffffff;
       text-align: center;
       font-size: 2.25rem;
       padding-top: 50px;
+      @media (max-height: 630px) {
+        padding-top: 30px;
+      }
+      @media (max-height: 500px) {
+        padding-top: 20px;
+        font-size: 2rem;
+      }
+      @media (max-height: 400px) {
+        font-size: 1.8rem;
+      }
     }
     svg {
       color: #fff;
       padding-top: 10px;
       font-size: 1.3rem;
       cursor: pointer;
+    }
+    @media (max-height: 730px) and (max-width: 600px) {
+      height: 15%;
+      position: absolute;
+      top: 0;
     }
   }
 
@@ -35,6 +59,13 @@
     font-size: 1rem;
     font-weight: 300;
     padding-bottom: 50px;
+    @media (max-height: 730px) {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      height: 20px;
+    }
   }
 }
 

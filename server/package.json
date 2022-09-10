@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
+    "build": "npm install",
     "test": "jest",
     "pretty": "prettier --write \"./**/*.{js,jsx,json,css,scss}\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
@@ -23,9 +27,23 @@
     "prettier": "^2.7.1"
   },
   "dependencies": {
+    "@babel/core": "^7.19.0",
     "firebase": "^9.9.3",
     "node-schedule": "^2.1.0",
+    "parse": "^3.4.4",
     "react-firebase-hooks": "^5.0.3",
-    "socket.io": "^4.5.1"
+    "socket.io": "^4.5.1",
+    "jsonwebtoken": "^8.5.1",
+    "cors": "^2.8.5",
+    "mongoose": "^6.4.3",
+    "nodemon": "^2.0.18",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jest": "^28.1.3",
+    "joi": "^17.6.0",
+    "prettier": "^2.7.1"
   }
 }

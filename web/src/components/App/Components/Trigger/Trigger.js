@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./trigger.scss";
 import "animate.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { mobileMenuActions } from "../../../../store/ui/mobileMenu";
 import { HiOutlineMenu } from "react-icons/hi";
 

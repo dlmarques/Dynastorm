@@ -8,6 +8,9 @@ import AvatarsBox from "./components/AvatarsBox";
 import { avatarActions } from "../../../store/ui/avatars";
 import Sidebar from "../../Layout/Sidebar/Sidebar";
 import Main from "../../Layout/Main/Main";
+import { environment } from "../../../environment/environment";
+import { alertActions } from "../../../store/ui/alert";
+import Alert from "../../App/Components/Alert/Alert";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -15,9 +18,9 @@ const Register = () => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [error, setError] = useState();
   const [finished, setFinished] = useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const error = useSelector((state) => state.alert.alert);
   const isShown = useSelector((state) => state.avatars.isShown);
 
   useEffect(() => {
@@ -39,7 +42,7 @@ const Register = () => {
   const registerHandler = async (e) => {
     e.preventDefault();
 
-    let response = axios.post("http://localhost:3001/api/auth/register", {
+    let response = axios.post(`${environment.apiUrl}/api/auth/register`, {
       username: username,
       email: email,
       password: password,
@@ -51,7 +54,16 @@ const Register = () => {
       setFinished(true);
     } catch (err) {
       console.error(err);
-      setError(err.response.data);
+      setTimeout(() => {
+        if (err) {
+          dispatch(
+            alertActions.setAlert({
+              title: "Error",
+              message: err.response.data,
+            })
+          );
+        }
+      }, 500);
     }
   };
   return (
@@ -61,7 +73,7 @@ const Register = () => {
       <div className={styles.register}>
         <Sidebar>
           <form className={styles.registerForm} onSubmit={registerHandler}>
-            <h4>{isShown ? "Select an avatar" : "Sign up"}</h4>
+            <h4>{!isShown && "Sign up"}</h4>
             <button
               type="button"
               data-testid="registerButton"
@@ -78,11 +90,7 @@ const Register = () => {
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className={
-                error && error.includes("username")
-                  ? styles["register-input-error"]
-                  : styles["register-input"]
-              }
+              className={styles["register-input"]}
               autoComplete="off"
             />
             <input
@@ -93,11 +101,7 @@ const Register = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={
-                error && error.includes("email")
-                  ? styles["register-input-error"]
-                  : styles["register-input"]
-              }
+              className={styles["register-input"]}
               autoComplete="off"
             />
             <input
@@ -108,11 +112,7 @@ const Register = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={
-                error && error.includes("password")
-                  ? styles["register-input-error"]
-                  : styles["register-input"]
-              }
+              className={styles["register-input"]}
             />
             <button
               data-testid="registerButton"
@@ -121,9 +121,11 @@ const Register = () => {
             >
               Sign up
             </button>
-            <Link to="/" className={styles["register-link"]}>
-              Already have an account
-            </Link>
+            {!isShown && (
+              <Link to="/" className={styles["register-link"]}>
+                Already have an account
+              </Link>
+            )}
             {isShown ? (
               <AvatarsBox
                 data-testid="avatars"
@@ -132,6 +134,7 @@ const Register = () => {
               />
             ) : null}
           </form>
+          {error.message && <Alert />}
         </Sidebar>
         <Main background="auth" />
       </div>

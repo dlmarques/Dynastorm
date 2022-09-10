@@ -6,11 +6,26 @@
     justify-content: center;
     align-items: center;
     gap: 50px;
-    height: 60%;
+    height: 65%;
+
+    @media (max-height: 800px) {
+      gap: 30px;
+      height: 70%;
+    }
+    @media (max-height: 500px) {
+      padding-top: 20px;
+    }
 
     h4 {
       color: #fff;
       font-size: 1.5rem;
+      @media (max-height: 550px) {
+        padding-top: 20px;
+        font-size: 1.1rem;
+      }
+      @media (max-height: 500px) {
+        display: none;
+      }
     }
 
     .register-input {
@@ -23,12 +38,16 @@
       border-bottom: 1px solid grey;
       padding-bottom: 5px;
       transition: all 0.4s ease-in-out;
+      border-radius: 0;
       &:focus {
         padding-left: 15px;
         border-bottom: 1px solid #fff;
         &::placeholder {
           color: #fff;
         }
+      }
+      @media (max-height: 550px) {
+        height: 15px;
       }
     }
 
@@ -70,6 +89,10 @@
         background-color: #fff;
         color: #0e0e0e;
       }
+      @media (max-height: 550px) {
+        height: 30px;
+        font-size: 13px;
+      }
     }
     .register-link {
       color: #fff;
@@ -78,6 +101,9 @@
       font-family: "Eagle Lake", cursive;
       &:hover {
         text-decoration: underline;
+      }
+      @media (max-height: 550px) {
+        font-size: 13px;
       }
     }
   }

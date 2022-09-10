@@ -7,6 +7,7 @@ import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
 import ChatHeader from "./ChatHeader";
 import styles from "./styles/box.module.scss";
+import { environment } from "../../../../../environment/environment";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
@@ -25,7 +26,7 @@ const ChatBox = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3001/api/chat/getMessages", {
+      .post(`${environment.apiUrl}/api/chat/getMessages`, {
         from: currentSender._id,
         to: currentChat._id,
       })

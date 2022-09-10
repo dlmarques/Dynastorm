@@ -8,6 +8,7 @@ import { shopSliceActions } from "../../../../../store/shop/shopSlice";
 import Counter from "./Counter";
 import Product from "./Product";
 import { alertActions } from "../../../../../store/ui/alert";
+import { environment } from "../../../../../environment/environment";
 
 const Item = ({ img }) => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const Item = ({ img }) => {
     const token = localStorage.getItem("authToken");
     const price = item.price * quantity;
 
-    let response = axios.post("http://localhost:3001/api/inventory/addItem", {
+    let response = axios.post(`${environment.apiUrl}/api/inventory/addItem`, {
       token,
       itemName: item.name,
       itemSkill: item.skill,

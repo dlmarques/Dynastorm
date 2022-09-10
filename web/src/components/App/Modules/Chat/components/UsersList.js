@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "./styles/list.module.scss";
 
 import User from "./User";
+import { environment } from "../../../../../environment/environment";
 
 const UsersList = () => {
   const [users, setUsers] = useState();
@@ -10,7 +11,7 @@ const UsersList = () => {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     axios
-      .post("http://localhost:3001/api/chat/conn", {
+      .post(`${environment.apiUrl}/api/chat/conn`, {
         token,
       })
       .then((response) => setUsers(response.data));

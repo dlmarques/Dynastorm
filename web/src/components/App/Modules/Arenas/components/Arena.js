@@ -9,6 +9,7 @@ import Progress from "../../../Components/Progress/Progress";
 import Button from "../../../Components/Button/Button";
 import Tooltip from "../../../Components/Tooltip/Tooltip";
 import { convert } from "../../../../../utils/numbersConvert";
+import { environment } from "../../../../../environment/environment";
 
 const Arena = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Arena = () => {
   const startFight = () => {
     if (user.health > 0) {
       const token = localStorage.getItem("authToken");
-      axios.patch("http://localhost:3001/api/arenas/startFight", {
+      axios.patch(`${environment.apiUrl}/api/arenas/startFight`, {
         id: enemy.id,
         token: token,
       });

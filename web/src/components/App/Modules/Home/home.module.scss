@@ -34,37 +34,80 @@
         flex-direction: column;
         align-items: center;
         gap: 15px;
-        img {
-          height: 140px;
-          @media (max-width: 1200px) {
-            height: 110px;
-          }
-          @media (max-width: 768px) {
-            padding-top: 25px;
-          }
-        }
-        .hp {
-          width: 160px;
-          height: 13px;
-          border-radius: 15px;
-          color: rgb(0, 255, 30);
-          background-color: rgb(0, 255, 30);
-        }
 
-        .hp::-webkit-progress-bar {
-          border-radius: 15px;
-        }
+        .userInfo {
+          display: flex;
+          img {
+            height: 140px;
+            @media (max-width: 1200px) {
+              height: 110px;
+            }
+            @media (max-width: 768px) {
+              padding-top: 25px;
+            }
+          }
 
-        .hp::-webkit-progress-value {
-          border-radius: 15px;
-          background-color: rgb(0, 255, 30);
-        }
-        .hp::-moz-progress-bar {
-          border-radius: 15px;
-          color: rgb(0, 255, 30);
+          .text {
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            .stats {
+              display: flex;
+              align-items: center;
+              gap: 20px;
+              .hpInfo {
+                color: rgb(255, 0, 0);
+                font-size: 1.4rem;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                .hpValue {
+                  color: #fff;
+                  font-size: 1.3rem;
+                }
+              }
+
+              .moneyInfo {
+                color: rgb(0, 255, 30);
+                font-size: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                .moneyValue {
+                  color: #fff;
+                  font-size: 1.3rem;
+                }
+              }
+            }
+
+            .hp {
+              width: 160px;
+              height: 13px;
+              border-radius: 15px;
+              color: rgb(0, 255, 30);
+              background-color: rgb(0, 255, 30);
+            }
+
+            .hp::-webkit-progress-bar {
+              border-radius: 15px;
+            }
+
+            .hp::-webkit-progress-value {
+              border-radius: 15px;
+              background-color: rgb(0, 255, 30);
+            }
+            .hp::-moz-progress-bar {
+              border-radius: 15px;
+              color: rgb(0, 255, 30);
+            }
+          }
         }
 
         .grid {
+          padding-left: 20px;
+          padding-top: 20px;
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           align-content: center;

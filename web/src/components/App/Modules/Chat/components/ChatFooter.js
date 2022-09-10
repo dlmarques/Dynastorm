@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./styles/footer.module.scss";
 import { currentChatActions } from "../../../../../store/chat/currentChat";
 import { FiSend } from "react-icons/fi";
+import { environment } from "../../../../../environment/environment";
 
 const ChatFooter = ({ socket, setMessages, messages }) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const ChatFooter = ({ socket, setMessages, messages }) => {
       message: message,
     });
 
-    axios.post("http://localhost:3001/api/chat/addMessage", {
+    axios.post(`${environment.apiUrl}/api/chat/addMessage`, {
       from: currentSender._id,
       to: currentChat._id,
       message: message,

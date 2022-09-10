@@ -14,7 +14,25 @@ router.get("/isLoggedIn", verifyToken, (req, res) => {
 router.post("/register", async (req, res) => {
   //Validate data before we a user
   const { error } = registerValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  
+  if(error){
+    if (error.details[0].message.includes("username")) {
+      return res.status(400).send('Username is required');
+     }
+     if (error.details[0].message.includes("avatar")) {
+        return res.status(400).send('Avatar is required');
+     }
+     if (
+       error.details[0].message.includes("email")
+     ) {
+       return res.status(400).send('Email is required');
+     }
+     if(error.details[0].message.includes("password")){
+       return res.status(400).send('Password is required');
+     }
+  }
+
+ 
 
   //Checking if user is already in the database
   const emailExist = await User.findOne({ email: req.body.email });
@@ -266,17 +284,26 @@ router.post("/register", async (req, res) => {
 
 //LOGIN
 router.post("/login", async (req, res) => {
+  
   //Validate data before we a user
   const { error } = loginValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if(error){
+    if(error.details[0].message.includes('email')){
+      return res.status(400).send("Email is required");
+    }
+    if(error.details[0].message.includes('password')){
+      return res.status(400).send("Password is required");
+    }
+  }
+  
 
   //Checking if the email exists
   const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send("Email is not found");
+  if (!user) return res.status(400).send("Email or password is incorrect");
 
   //Password is correct
   const validPass = await bcrypt.compare(req.body.password, user.password);
-  if (!validPass) return res.status(400).send("Invalid password");
+  if (!validPass) return res.status(400).send("Email or password is incorrect");
 
   //Create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.JWT_TOKEN);

@@ -7,6 +7,7 @@ import { battlesActions } from "../../../../../store/ui/battles";
 import Button from "../../../Components/Button/Button";
 import "./mid.scss";
 import { alertActions } from "../../../../../store/ui/alert";
+import { environment } from "../../../../../environment/environment";
 
 const Mid = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Mid = () => {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     axios
-      .post("http://localhost:3001/api/user/checkBusy", {
+      .post(`${environment.apiUrl}/api/user/checkBusy`, {
         token: token,
       })
       .then((response) => setBusy(response.data));
@@ -28,7 +29,7 @@ const Mid = () => {
   const request = () => {
     const token = localStorage.getItem("authToken");
     axios
-      .post("http://localhost:3001/api/battles/fightBoss", {
+      .post(`${environment.apiUrl}/api/battles/fightBoss`, {
         token: token,
         bossId: boss
           .filter((boss) => boss.boss === user.currentBoss)

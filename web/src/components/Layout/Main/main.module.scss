@@ -4,6 +4,10 @@
   background-size: cover;
   height: 100vh;
   width: calc(100vw - 350px);
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 }
 .mainApp {
   background-image: url("../../../assets/backgrounds/background-app");

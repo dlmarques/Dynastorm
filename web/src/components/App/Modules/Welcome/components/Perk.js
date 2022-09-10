@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./perk.module.scss";
 import { userActions } from "../../../../../store/auth/user";
+import { environment } from "../../../../../environment/environment";
 
 const Perk = ({ image }) => {
   const dispatch = useDispatch();
@@ -23,11 +24,11 @@ const Perk = ({ image }) => {
 
   const setPerk = async () => {
     try {
-      axios.patch("http://localhost:3001/api/user/setPerk", {
+      axios.patch(`${environment.apiUrl}/api/user/setPerk`, {
         username: user.name,
         perk: perkName,
       });
-      axios.get("http://localhost:3001/api/battles/createBosses");
+      axios.get(`${environment.apiUrl}/api/battles/createBosses`);
       dispatch(userActions.welcome());
       window.location.reload();
     } catch (error) {

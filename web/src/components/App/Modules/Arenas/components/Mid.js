@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./mid.module.scss";
 import { enemyActions } from "../../../../../store/auth/enemy";
 import { alertActions } from "../../../../../store/ui/alert";
-import { modalActions } from "../../../../../store/ui/modal";
+import { environment } from "../../../../../environment/environment";
 
 const Mid = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const Mid = () => {
     const token = localStorage.getItem("authToken");
     setStatus(true);
     axios
-      .patch("http://localhost:3001/api/arenas/attackEnemy", {
+      .patch(`${environment.apiUrl}/api/arenas/attackEnemy`, {
         token: token,
         id: enemy.id,
         attack: attack,
@@ -23,7 +23,7 @@ const Mid = () => {
       .then((response) => console.log(response.data));
     setTimeout(() => {
       axios
-        .patch("http://localhost:3001/api/arenas/counterAttack", {
+        .patch(`${environment.apiUrl}/api/arenas/counterAttack`, {
           token: token,
           id: enemy.id,
           attack: attack,

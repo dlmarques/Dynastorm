@@ -5,6 +5,7 @@ import { notificationsActions } from "../../../../../store/ui/notifications";
 import { BiArrowToLeft } from "react-icons/bi";
 import styles from "./container.module.scss";
 import Notification from "./Notification";
+import { environment } from "../../../../../environment/environment";
 
 const Container = () => {
   const dispatch = useDispatch();
@@ -14,14 +15,14 @@ const Container = () => {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     axios
-      .post("http://localhost:3001/api/noti/getNotifications", {
+      .post(`${environment.apiUrl}/api/noti/getNotifications`, {
         token: token,
       })
       .then((response) => setNotifications(response.data));
     setTimeout(() => {
       dispatch(notificationsActions.deleteNotifications());
       const token = localStorage.getItem("authToken");
-      axios.patch("http://localhost:3001/api/noti/readNotification", {
+      axios.patch(`${environment.apiUrl}/api/noti/readNotification`, {
         token: token,
       });
     }, 3000);
