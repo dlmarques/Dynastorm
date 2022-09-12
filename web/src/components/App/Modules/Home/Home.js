@@ -19,6 +19,9 @@ const Home = () => {
         <>
           <h1>Welcome back {user && user.name}</h1>
           <div className={styles.content}>
+            <div className={styles.colComingSoon}>
+              <h6>Coming soon...</h6>
+            </div>
             <div className={styles.col}>
               <div className={styles.user}>
                 <div className={styles.userInfo}>

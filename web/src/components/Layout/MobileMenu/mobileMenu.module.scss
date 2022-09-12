@@ -70,6 +70,18 @@
         padding-top: 15px;
         width: 100%;
         text-align: center;
+        @media (max-height: 600px) {
+          padding-top: 12px;
+        }
+        @media (max-height: 510px) {
+          padding-top: 8px;
+        }
+        @media (max-height: 475px) {
+          padding-top: 6px;
+        }
+        @media (max-height: 450px) {
+          padding-top: 4px;
+        }
         .linkMobileMenu {
           text-decoration: none;
           color: #fff;
@@ -130,6 +142,9 @@
       -moz-transition: font-size 1s ease-in-out;
       -o-transition: font-size 1s ease-in-out;
       transition: font-size 1s ease-in-out;
+      @media (max-height: 450px) {
+        font-size: 1.75rem;
+      }
     }
 
     .icons {
@@ -147,6 +162,9 @@
         -moz-transition: font-size 1s ease-in-out;
         -o-transition: font-size 1s ease-in-out;
         transition: font-size 1s ease-in-out;
+        @media (max-height: 450px) {
+          font-size: 1.2rem;
+        }
       }
     }
   }
@@ -174,6 +192,18 @@
         padding-top: 15px;
         width: 100%;
         text-align: center;
+        @media (max-height: 600px) {
+          padding-top: 12px;
+        }
+        @media (max-height: 510px) {
+          padding-top: 8px;
+        }
+        @media (max-height: 475px) {
+          padding-top: 6px;
+        }
+        @media (max-height: 450px) {
+          padding-top: 4px;
+        }
         .linkMobileMenu {
           text-decoration: none;
           color: #fff;
@@ -185,6 +215,12 @@
           -moz-transition: font-size 1s ease-in-out;
           -o-transition: font-size 1s ease-in-out;
           transition: font-size 1s ease-in-out;
+          @media (max-height: 600px) {
+            font-size: 1rem;
+          }
+          @media (max-height: 450px) {
+            font-size: 0.85rem;
+          }
         }
         .link-activeMobileMenu {
           text-decoration: none;
@@ -199,6 +235,12 @@
           -moz-transition: font-size 1s ease-in-out;
           -o-transition: font-size 1s ease-in-out;
           transition: font-size 1s ease-in-out;
+          @media (max-height: 600px) {
+            font-size: 1rem;
+          }
+          @media (max-height: 450px) {
+            font-size: 0.85rem;
+          }
         }
       }
     }
