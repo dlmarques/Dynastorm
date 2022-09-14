@@ -19,6 +19,7 @@ const Inventory = () => {
 
   return (
     <div className={styles["inventory-container"]}>
+      {items && items.length < 1 && <h4>Empty</h4>}
       {items &&
         items.map((item, id) => (
           <InventoryItem

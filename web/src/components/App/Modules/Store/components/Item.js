@@ -62,7 +62,7 @@ const Item = ({ img }) => {
       <Counter quantity={quantity} setQuantity={setQuantity} />
       <div className={styles.buy}>
         <button className={styles.buy} onClick={buyItem}>
-          Buy {item.price && `$${item.price * quantity}`}
+          {item.price && `$${item.price * quantity}`}
         </button>
       </div>
     </div>

@@ -35,17 +35,19 @@ const Arena = () => {
   return (
     <div className={styles.container}>
       <div className={styles.enemy}>
-        {enemy.avatar && <img src={enemy.avatar} alt="enemy avatar" />}
-        <h2>{enemy.name && `@${enemy.name}`}</h2>
-        {enemy.name && (
-          <Progress
-            id="hp"
-            min="0"
-            max="100"
-            value={enemy.health}
-            styles={styles.hp}
-          />
+        {enemy.avatar && (
+          <div className={styles.header}>
+            <img src={enemy.avatar} alt="enemy avatar" />
+            <Progress
+              id="hp"
+              min="0"
+              max="100"
+              value={enemy.health}
+              styles={styles.hp}
+            />
+          </div>
         )}
+        <h2>{enemy.name && `@${enemy.name}`}</h2>
         {enemy.name && !enemy.fight ? (
           <div className={styles.buttons}>
             <Button btn="arenasBtn" onClick={startFight}>

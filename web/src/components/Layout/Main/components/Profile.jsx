@@ -23,7 +23,7 @@ const Profile = () => {
                   onMouseLeave={() => setIsVisible(false)}
                   className={styles.money}
                 >
-                  ${convert(user.money, 0)}
+                  ${user.money}
                 </p>
                 {isVisible && <Tooltip info={`$${user.money}`} />}
               </span>

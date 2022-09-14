@@ -65,9 +65,6 @@
     @media (max-height: 600px) and (max-width: 768px) {
       padding-top: 120px;
     }
-    @media (max-height: 600px) and (max-width: 550px) {
-      padding-top: 80px;
-    }
 
     .col {
       width: 50%;
@@ -81,7 +78,7 @@
       @media (max-width: 375px) {
         padding-top: 200px;
       }
-      @media (max-width: 375px) and (max-height: 550px) {
+      @media (max-width: 375px) and (max-height: 560px) {
         padding-top: 220px;
       }
       .user {
