@@ -41,29 +41,43 @@ const Register = () => {
 
   const registerHandler = async (e) => {
     e.preventDefault();
-
-    let response = axios.post(`${environment.apiUrl}/api/auth/register`, {
-      username: username,
-      email: email,
-      password: password,
-      avatar: avatar,
-    });
-
-    try {
-      await response;
-      setFinished(true);
-    } catch (err) {
-      console.error(err);
-      setTimeout(() => {
-        if (err) {
-          dispatch(
-            alertActions.setAlert({
-              title: "Error",
-              message: err.response.data,
-            })
-          );
-        }
-      }, 500);
+    if (username.length < 6) {
+      dispatch(
+        alertActions.setAlert({
+          title: "Error",
+          message: "Username should have 6 char",
+        })
+      );
+    } else if (password.length > 6) {
+      dispatch(
+        alertActions.setAlert({
+          title: "Error",
+          message: "Password is too weak",
+        })
+      );
+    } else {
+      let response = axios.post(`${environment.apiUrl}/api/auth/register`, {
+        username: username,
+        email: email,
+        password: password,
+        avatar: avatar,
+      });
+      try {
+        await response;
+        setFinished(true);
+      } catch (err) {
+        console.error(err);
+        setTimeout(() => {
+          if (err) {
+            dispatch(
+              alertActions.setAlert({
+                title: "Error",
+                message: err.response.data,
+              })
+            );
+          }
+        }, 500);
+      }
     }
   };
   return (

@@ -15,9 +15,9 @@ const Alert = () => {
   return (
     <div className={styles.errorContainer}>
       <h2>{alert && alert.message}.</h2>
-      <Button btn="errorBtn" onClick={closeAlert}>
+      <button class={styles.btn} onClick={closeAlert}>
         Close
-      </Button>
+      </button>
     </div>
   );
 };
