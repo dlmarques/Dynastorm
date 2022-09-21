@@ -12,11 +12,12 @@ router.get("/isLoggedIn", verifyToken, (req, res) => {
 
 //Register
 router.post("/register", async (req, res) => {
+
   //Validate data before we a user
   const { error } = registerValidation(req.body);
   
-  if(error){
-    if (error.details[0].message.includes("username")) {
+  if (error){
+  if (error.details[0].message.includes("username")) {
       return res.status(400).send('Username is required');
      }
      if (error.details[0].message.includes("avatar")) {
@@ -28,11 +29,13 @@ router.post("/register", async (req, res) => {
        return res.status(400).send('Email is required');
      }
      if(error.details[0].message.includes("password")){
-       return res.status(400).send('Password is required');
-     }
-  }
-
+      return res.status(400).send('Password must have at least 8 characters with one uppercase, one lowercase, one number and a special character');
+    } 
+  } 
  
+  
+  const usernameExist = await User.findOne({ username: req.body.username });
+  if (usernameExist) return res.status(400).send("Username already exists");
 
   //Checking if user is already in the database
   const emailExist = await User.findOne({ email: req.body.email });

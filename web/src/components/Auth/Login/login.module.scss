@@ -63,6 +63,9 @@
         background-color: #fff;
         color: #0e0e0e;
       }
+      &:disabled {
+        pointer-events: none;
+      }
     }
     .register-link {
       color: #fff;
@@ -71,6 +74,9 @@
       font-family: "Eagle Lake", cursive;
       &:hover {
         text-decoration: underline;
+      }
+      &:disabled {
+        text-decoration: none;
       }
     }
   }

@@ -15,8 +15,8 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    max: 1024,
-    min: 6,
+    min: 8,
+    validate: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,1024}$/
   },
   avatar: {
     type: String,

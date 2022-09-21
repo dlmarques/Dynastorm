@@ -34,7 +34,6 @@ const Register = () => {
   };
 
   const selectAvatar = (avatar) => {
-    console.log(avatar);
     setAvatar(avatar);
     dispatch(avatarActions.toggle());
   };
@@ -45,14 +44,14 @@ const Register = () => {
       dispatch(
         alertActions.setAlert({
           title: "Error",
-          message: "Username should have 6 char",
+          message: "Username should have 6 characters",
         })
       );
-    } else if (password.length > 6) {
+    } else if (password.length < 8) {
       dispatch(
         alertActions.setAlert({
           title: "Error",
-          message: "Password is too weak",
+          message: "Password should have 8 characters",
         })
       );
     } else {
@@ -93,6 +92,7 @@ const Register = () => {
               data-testid="registerButton"
               className={styles["register-btn"]}
               onClick={avatarBoxHandler}
+              disabled={error.message}
             >
               Choose an avatar
             </button>
@@ -106,6 +106,7 @@ const Register = () => {
               onChange={(e) => setUsername(e.target.value)}
               className={styles["register-input"]}
               autoComplete="off"
+              disabled={error.message}
             />
             <input
               data-testid="emailInput"
@@ -117,6 +118,7 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
               className={styles["register-input"]}
               autoComplete="off"
+              disabled={error.message}
             />
             <input
               data-testid="passwordInput"
@@ -127,11 +129,13 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={styles["register-input"]}
+              disabled={error.message}
             />
             <button
               data-testid="registerButton"
               type="submit"
               className={styles["register-btn"]}
+              disabled={error.message}
             >
               Sign up
             </button>

@@ -17,7 +17,6 @@ const Login = () => {
   const error = useSelector((state) => state.alert.alert);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  console.log(error);
   useEffect(() => {
     localStorage.authToken
       ? dispatch(authActions.login())
@@ -76,6 +75,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               autoComplete="off"
+              disabled={error.message}
             />
             <input
               className={styles["login-input"]}
@@ -86,15 +86,21 @@ const Login = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              disabled={error.message}
             />
             <button
               data-testid="loginButton"
               type="submit"
               className={styles["login-btn"]}
+              disabled={error.message}
             >
               Sign in
             </button>
-            <Link to="/register" className={styles["register-link"]}>
+            <Link
+              to={!error.message && "/register"}
+              className={styles["register-link"]}
+              disabled={error.message}
+            >
               Create an account
             </Link>
           </form>

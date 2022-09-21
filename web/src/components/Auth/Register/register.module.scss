@@ -89,6 +89,9 @@
         background-color: #fff;
         color: #0e0e0e;
       }
+      &:disabled {
+        pointer-events: none;
+      }
       @media (max-height: 550px) {
         height: 30px;
         font-size: 13px;
