@@ -17,9 +17,9 @@ const Register = () => {
   const [avatar, setAvatar] = useState(
     "/static/media/3.86fa27a73e100c2c1a95.png"
   );
-  const [username, setUsername] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [finished, setFinished] = useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const error = useSelector((state) => state.alert.alert);
@@ -50,6 +50,7 @@ const Register = () => {
           message: "Username should have 6 characters",
         })
       );
+      console.log(error);
     } else if (password.length < 8) {
       dispatch(
         alertActions.setAlert({
@@ -57,6 +58,7 @@ const Register = () => {
           message: "Password should have 8 characters",
         })
       );
+      console.log(error);
     } else {
       let response = axios.post(`${environment.apiUrl}/api/auth/register`, {
         username: username,
@@ -156,7 +158,7 @@ const Register = () => {
               />
             ) : null}
           </form>
-          {error & error.message && <Alert />}
+          {error && error.message && <Alert />}
         </Sidebar>
         <Main background="auth" />
       </div>
