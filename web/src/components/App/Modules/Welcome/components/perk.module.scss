@@ -11,10 +11,13 @@
 }
 
 .perk-container img {
-  height: 250px;
+  height: 200px;
   cursor: pointer;
   border-radius: 30px;
   transition: all 0.3s ease-in-out;
+  @media (max-width: 1440px) {
+    height: 150px;
+  }
 }
 .perk-container img:hover {
   opacity: 0.6;
@@ -28,6 +31,9 @@
   text-align: center;
   text-transform: capitalize;
   user-select: none;
+  @media (max-width: 1440px) {
+    font-size: 1.5rem;
+  }
 }
 
 .perk-container h4 {
@@ -36,4 +42,9 @@
   font-weight: 500;
   user-select: none;
   text-align: center;
+  width: 350px;
+  @media (max-width: 1440px) {
+    font-size: 1rem;
+    width: 200px;
+  }
 }

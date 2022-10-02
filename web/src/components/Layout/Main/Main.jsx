@@ -23,10 +23,12 @@ const Main = ({ background, isNew }) => {
     <main className={background === "app" ? styles.mainApp : styles.mainAuth}>
       {background === "app" && (
         <div className={styles.content}>
-          <header>
-            <Profile />
-          </header>
-          <div className={styles.container}>
+          {!isNew && (
+            <header className={isNew ? styles.welcomeHeader : styles.appHeader}>
+              <Profile />
+            </header>
+          )}
+          <div className={isNew ? styles.welcomeContainer : styles.container}>
             {isNew ? (
               <Welcome />
             ) : (

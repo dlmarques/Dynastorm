@@ -149,7 +149,7 @@ const App = () => {
             <ul>
               {links &&
                 links.map((link, id) => (
-                  <li key={id}>
+                  <li key={id} className={isNew && styles.disabled}>
                     <span className={styles.mask}>
                       <Link
                         data-title={link}

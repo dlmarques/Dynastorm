@@ -13,6 +13,7 @@ import notificationsSlice from "./ui/notifications";
 import enemySlice from "./auth/enemy";
 import currentChatSlice from "./chat/currentChat";
 import currentSenderSlice from "./chat/currentSender";
+import welcomeSlice from "./ui/welcome";
 
 const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
     bosses: bossSlice.reducer,
     alert: alertSlice.reducer,
     modal: modalSlice.reducer,
+    welcome: welcomeSlice.reducer,
     avatars: avatarSlice.reducer,
     mobileMenu: mobileMenu.reducer,
     shop: shopSlice.reducer,

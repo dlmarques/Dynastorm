@@ -6,6 +6,9 @@
     ul {
       width: 100%;
       padding: 0;
+      .disabled {
+        pointer-events: none;
+      }
       li {
         padding-top: 15px;
         width: 100%;
