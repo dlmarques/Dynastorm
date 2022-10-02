@@ -1,6 +1,3 @@
-/* eslint-disable testing-library/prefer-screen-queries */
-/* eslint-disable jest/valid-expect */
-/* eslint-disable testing-library/await-async-utils */
 import { render, screen, waitFor } from "@testing-library/react";
 import Login from "./Login";
 import { createMemoryHistory } from "history";
@@ -10,7 +7,20 @@ import { Router } from "react-router-dom";
 
 describe("Login component", () => {
   //create mock store
-  const intialState = { error: false, auth: false };
+  const intialState = {
+    error: {
+      title: "test",
+      message: "test message",
+    },
+    auth: false,
+    alert: {
+      title: "test",
+      message: "test message",
+    },
+    user: {
+      isNew: false,
+    },
+  };
   const mockStore = configureStore();
   let store = mockStore(intialState);
 

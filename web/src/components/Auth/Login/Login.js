@@ -75,7 +75,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               autoComplete="off"
-              disabled={error.message}
+              disabled={error && error.message}
             />
             <input
               className={styles["login-input"]}
@@ -86,25 +86,27 @@ const Login = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              disabled={error.message}
+              disabled={error && error.message}
             />
             <button
               data-testid="loginButton"
               type="submit"
               className={styles["login-btn"]}
-              disabled={error.message}
+              disabled={error && error.message}
             >
               Sign in
             </button>
-            <Link
-              to={!error.message && "/register"}
-              className={styles["register-link"]}
-              disabled={error.message}
-            >
-              Create an account
-            </Link>
+            {error && !error.message && (
+              <Link
+                to="/register"
+                className={styles["register-link"]}
+                disabled={error && error.message}
+              >
+                Create an account
+              </Link>
+            )}
           </form>
-          {error.message && <Alert />}
+          {error && error.message && <Alert />}
         </Sidebar>
         <Main background="auth" />
       </div>

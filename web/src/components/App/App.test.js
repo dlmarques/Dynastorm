@@ -1,6 +1,3 @@
-/* eslint-disable testing-library/prefer-screen-queries */
-/* eslint-disable jest/valid-expect */
-/* eslint-disable testing-library/await-async-utils */
 import { render, screen, waitFor } from "@testing-library/react";
 import App from "./App";
 import { createMemoryHistory } from "history";
@@ -11,10 +8,37 @@ import { Router } from "react-router-dom";
 describe("App component", () => {
   //create mock store
   const user = {
-    isNew: false,
+    user: {
+      isNew: false,
+    },
     name: "user",
   };
-  const intialState = { user: user };
+  const shop = {
+    purchased: false,
+  };
+  const enemy = {
+    enemy: {},
+  };
+  const mobileMenu = {
+    isOpened: false,
+  };
+  const alert = {
+    title: "test",
+    message: "test message",
+  };
+  const notifications = {
+    newNotifications: {},
+  };
+
+  const intialState = {
+    user: user,
+    shop: shop,
+    enemy: enemy,
+    mobileMenu: mobileMenu,
+    alert: alert,
+    notifications: notifications,
+  };
+
   const mockStore = configureStore();
   let store = mockStore(intialState);
 
@@ -28,7 +52,7 @@ describe("App component", () => {
         </Provider>
       </Router>
     );
-    const title = await screen.findByText("dynastorm", { exact: false });
+    const title = await screen.findByTestId("logo");
     waitFor(() => expect(title).toBeInTheDocument());
   });
 });

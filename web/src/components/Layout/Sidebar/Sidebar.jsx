@@ -15,7 +15,7 @@ const Sidebar = ({ children, app }) => {
   return (
     <div className={app ? styles.appSidebar : styles.sidebar}>
       <header>
-        <h2>Omenia</h2>
+        <h2 data-testid="logo">Omenia</h2>
         {app && <MdOutlineLogout onClick={endSession} />}
       </header>
       {children && children}

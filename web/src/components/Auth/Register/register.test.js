@@ -1,6 +1,3 @@
-/* eslint-disable testing-library/prefer-screen-queries */
-/* eslint-disable jest/valid-expect */
-/* eslint-disable testing-library/await-async-utils */
 import { render, screen, waitFor } from "@testing-library/react";
 import Register from "./Register";
 import userEvent from "@testing-library/user-event";
@@ -10,8 +7,19 @@ import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
 
 describe("Register component", () => {
-  //create mock store
-  const intialState = { error: false, auth: false, avatars: false };
+  const intialState = {
+    auth: {
+      isLoggedin: false,
+    },
+    avatars: false,
+    alert: {
+      alert: {
+        title: "test title",
+        message: "test message",
+      },
+    },
+    error: {},
+  };
   const mockStore = configureStore();
   let store = mockStore(intialState);
 
@@ -51,7 +59,7 @@ describe("Register component", () => {
     );
 
     //Act
-    const avatarButton = screen.getByText("Select an avatar", { exact: false });
+    const avatarButton = screen.getByText("Choose an avatar", { exact: false });
     userEvent.click(avatarButton);
 
     //Assert

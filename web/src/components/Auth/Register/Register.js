@@ -89,10 +89,10 @@ const Register = () => {
             <h4>{!isShown && "Sign up"}</h4>
             <button
               type="button"
-              data-testid="registerButton"
+              data-testid="avatarButton"
               className={styles["register-btn"]}
               onClick={avatarBoxHandler}
-              disabled={error.message}
+              disabled={error & error.message}
             >
               Choose an avatar
             </button>
@@ -106,7 +106,7 @@ const Register = () => {
               onChange={(e) => setUsername(e.target.value)}
               className={styles["register-input"]}
               autoComplete="off"
-              disabled={error.message}
+              disabled={error & error.message}
             />
             <input
               data-testid="emailInput"
@@ -118,7 +118,7 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
               className={styles["register-input"]}
               autoComplete="off"
-              disabled={error.message}
+              disabled={error & error.message}
             />
             <input
               data-testid="passwordInput"
@@ -129,13 +129,13 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={styles["register-input"]}
-              disabled={error.message}
+              disabled={error & error.message}
             />
             <button
               data-testid="registerButton"
               type="submit"
               className={styles["register-btn"]}
-              disabled={error.message}
+              disabled={error & error.message}
             >
               Sign up
             </button>
@@ -152,7 +152,7 @@ const Register = () => {
               />
             ) : null}
           </form>
-          {error.message && <Alert />}
+          {error & error.message && <Alert />}
         </Sidebar>
         <Main background="auth" />
       </div>

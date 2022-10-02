@@ -15,16 +15,9 @@ import Alert from "../../App/Components/Alert/Alert";
 
 import Profile from "./components/Profile";
 import styles from "./main.module.scss";
-import { useState } from "react";
 
 const Main = ({ background, isNew }) => {
-  const [url, setUrl] = useState();
   const alert = useSelector((state) => state.alert.alert);
-  const changed = useSelector((state) => state.user.changeRoute);
-
-  useEffect(() => {
-    setUrl(window.location.href);
-  }, [changed]);
 
   return (
     <main className={background === "app" ? styles.mainApp : styles.mainAuth}>
@@ -38,19 +31,19 @@ const Main = ({ background, isNew }) => {
               <Welcome />
             ) : (
               <Routes>
-                <Route path="home" element={<Home />} />
-                <Route path="store" element={<Store />} />
-                <Route path="missions" element={<Missions />} />
-                <Route path="battles" element={<Battles />} />
-                <Route path="arenas" element={<Arenas />} />
-                <Route path="inventory" element={<Inventory />} />
-                <Route path="healer" element={<Healer />} />
-                <Route path="chat" element={<Chat />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/store" element={<Store />} />
+                <Route path="/missions" element={<Missions />} />
+                <Route path="/battles" element={<Battles />} />
+                <Route path="/arenas" element={<Arenas />} />
+                <Route path="/inventory" element={<Inventory />} />
+                <Route path="/healer" element={<Healer />} />
+                <Route path="/chat" element={<Chat />} />
               </Routes>
             )}
           </div>
           <Container />
-          {alert.message && <Alert />}
+          {alert && alert.message && <Alert />}
         </div>
       )}
     </main>
