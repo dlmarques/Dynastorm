@@ -74,6 +74,36 @@
       background-color: #fff;
       font-family: "Roboto Condensed", sans-serif;
     }
+    .avatar-btn {
+      background-color: transparent;
+      border: none;
+      outline: 1px solid #fff;
+      color: #fff;
+      font-family: "Eagle Lake", cursive;
+      width: 235px;
+      height: 40px;
+      cursor: pointer;
+      transition: all 0.4s ease-in-out;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      img {
+        height: 30px;
+      }
+      &:hover {
+        background-color: #fff;
+        color: #0e0e0e;
+      }
+      &:disabled {
+        pointer-events: none;
+      }
+      @media (max-height: 550px) {
+        height: 30px;
+        font-size: 13px;
+      }
+    }
     .register-btn {
       background-color: transparent;
       border: none;

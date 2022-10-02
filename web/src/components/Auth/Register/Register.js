@@ -14,7 +14,9 @@ import Alert from "../../App/Components/Alert/Alert";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const [avatar, setAvatar] = useState();
+  const [avatar, setAvatar] = useState(
+    "/static/media/3.86fa27a73e100c2c1a95.png"
+  );
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -31,6 +33,7 @@ const Register = () => {
 
   const avatarBoxHandler = () => {
     dispatch(avatarActions.toggle());
+    console.log(avatar);
   };
 
   const selectAvatar = (avatar) => {
@@ -90,10 +93,11 @@ const Register = () => {
             <button
               type="button"
               data-testid="avatarButton"
-              className={styles["register-btn"]}
+              className={styles["avatar-btn"]}
               onClick={avatarBoxHandler}
               disabled={error & error.message}
             >
+              {avatar && <img src={avatar} alt="default avatar" />}
               Choose an avatar
             </button>
             <input
