@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import Container from "../../App/Components/Notifications/components/Container";
