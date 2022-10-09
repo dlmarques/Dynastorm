@@ -60,7 +60,7 @@ const Item = ({ img }) => {
     <div className={styles.item}>
       <Product img={img} quantity={quantity} item={item} setItem={setItem} />
       <Counter quantity={quantity} setQuantity={setQuantity} />
-      <div className={styles.buy}>
+      <div>
         <button className={styles.buy} onClick={buyItem}>
           {item.price && `$${item.price * quantity}`}
         </button>

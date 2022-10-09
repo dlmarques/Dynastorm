@@ -21,16 +21,6 @@
           z-index: -1;
           transition: all 0.5s ease-in-out;
         }
-        .link-active {
-          text-decoration: none;
-          color: #fff;
-          text-transform: capitalize;
-          text-decoration: 1px line-through;
-          text-decoration-color: #fff;
-          font-size: 1.3rem;
-          z-index: -1;
-          transition: all 0.5s ease-in-out;
-        }
       }
     }
   }

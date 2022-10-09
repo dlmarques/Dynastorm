@@ -6,7 +6,12 @@
   justify-content: center;
   gap: 20px;
   width: 250px;
-
+  @media (max-width: 1650px) {
+    width: 100px;
+  }
+  @media (max-width: 1350px) {
+    width: 25%;
+  }
   @media (max-width: 1024px) {
     flex-direction: column;
     padding: 50px 50px 10px 50px;

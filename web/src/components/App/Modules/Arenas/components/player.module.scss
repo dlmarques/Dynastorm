@@ -11,7 +11,7 @@
   img {
     height: 100px;
     @media (max-width: 1200px) {
-      height: 70px;
+      height: 60px;
     }
   }
 
@@ -29,6 +29,9 @@
       color: #eee;
       font-weight: 300;
       font-family: "Roboto Condensed", sans-serif;
+    }
+    @media (max-width: 1024px) {
+      display: none;
     }
   }
 }

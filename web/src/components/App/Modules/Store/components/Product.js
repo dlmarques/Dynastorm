@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const Product = ({ img, item, setItem }) => {
+  const [boost, setBoost] = useState();
+
   useEffect(() => {
     if (img) {
       if (img.includes("Resistance")) {
@@ -79,12 +81,20 @@ const Product = ({ img, item, setItem }) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (item.boost === 150) {
+      setBoost(50);
+    } else if (item.boost === 200) {
+      setBoost(100);
+    }
+  }, []);
+
   return (
     <>
       <img src={img} alt="store item" />
       <h2>{item.name}</h2>
       <h3>
-        Increase your {item.skill} by {item.boost}%
+        Increase your {item.skill} by {boost}%
       </h3>
     </>
   );

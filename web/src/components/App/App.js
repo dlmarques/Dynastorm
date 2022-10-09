@@ -29,7 +29,7 @@ const App = () => {
   const user = useSelector((state) => state.user.user);
   const battle = useSelector((state) => state.user.battles);
   const isNew = useSelector((state) => state.user.user.isNew);
-  const change = useSelector((state) => state.shop.purchased);
+  const bought = useSelector((state) => state.shop.purchased);
   const missions = useSelector((state) => state.user.missions);
   const enemy = useSelector((state) => state.enemy.enemy);
   const reload = useSelector((state) => state.enemy.reload);
@@ -69,7 +69,7 @@ const App = () => {
         tier: setTier(user.xp),
       })
     );
-  }, [change, missions, battle, nextDay, enemy.fight, reload]);
+  }, [bought, missions, battle, nextDay, enemy.fight, reload]);
 
   useEffect(() => {
     if (shouldFetch.current) {
@@ -153,11 +153,7 @@ const App = () => {
                     <span className={styles.mask}>
                       <Link
                         data-title={link}
-                        className={
-                          url && url.includes(link)
-                            ? styles["link-active"]
-                            : styles["link"]
-                        }
+                        className={styles["link"]}
                         to={`/app/${link}`}
                         onClick={changeRoute}
                       >

@@ -1,11 +1,11 @@
 .opponent {
-  padding: 10px 50px 10px 50px;
+  padding: 10px 0 10px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: 400px;
+  width: 350px;
   @media (max-width: 1350px) {
     padding: 50px 50px 10px 50px;
   }
