@@ -13,6 +13,22 @@ export const setLevel = (xp) => {
     return 6;
   } else if (xp <= 1400) {
     return 7;
+  } else if (xp <= 1600) {
+    return 8;
+  } else if (xp <= 1800) {
+    return 9;
+  } else if (xp <= 2000) {
+    return 10;
+  } else if (xp <= 2200) {
+    return 11;
+  } else if (xp <= 2400) {
+    return 12;
+  } else if (xp <= 2600) {
+    return 13;
+  } else if (xp <= 2800) {
+    return 14;
+  } else if (xp <= 3000) {
+    return 15;
   }
 };
 

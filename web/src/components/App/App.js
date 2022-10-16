@@ -24,7 +24,6 @@ const App = () => {
   const TWOSECONDS_MS = 2000;
   const [nextDay, setNextDay] = useState(false);
   const changed = useSelector((state) => state.user.chnageRoute);
-  const [url, setUrl] = useState();
   const shouldFetch = useRef(true);
   const user = useSelector((state) => state.user.user);
   const battle = useSelector((state) => state.user.battles);
@@ -132,10 +131,6 @@ const App = () => {
       tier: setTier(user.xp),
     })
   );
-
-  useEffect(() => {
-    setUrl(window.location.href);
-  }, [changed]);
 
   const changeRoute = () => {
     dispatch(userActions.navigate());
