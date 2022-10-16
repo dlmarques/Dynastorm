@@ -28,11 +28,7 @@ const HealerItem = ({ img, id }) => {
 
   const healing = async () => {
     const token = localStorage.getItem("authToken");
-    const response = axios.patch(`${environment.apiUrl}/api/healer/heal`, {
-      token: token,
-      heal: heal,
-      price: price,
-    });
+
     if (user.money < price) {
       dispatch(
         alertActions.setAlert({
@@ -41,6 +37,11 @@ const HealerItem = ({ img, id }) => {
         })
       );
     } else {
+      const response = axios.patch(`${environment.apiUrl}/api/healer/heal`, {
+        token: token,
+        heal: heal,
+        price: price,
+      });
       if (user.health === 100) {
         dispatch(
           alertActions.setAlert({ title: "Error", message: "Your HP is full" })

@@ -19,18 +19,13 @@ const battlesRoute = require("./routes/battles");
 const notificationRoute = require("./routes/notification");
 const arenasRoute = require("./routes/arenas");
 const chatRoute = require("./routes/chat");
-const testRoute = require("./routes/test");
+const shopRoute = require("./routes/shop");
+
+
 
 dotenv.config();
 
-/* const whitelist = ['http://localhost:3000', 'https://omenia.netlify.app/']
 
-const corsOptions = {
-  origin: whitelist,
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
-}
- */
 app.use(cors());
 
 
@@ -40,6 +35,9 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true },
   async () => console.log("connected to DB")
 );
+
+
+
 
 //Middleware
 app.use(express.json());
@@ -54,9 +52,10 @@ app.use("/api/battles", battlesRoute);
 app.use("/api/noti", notificationRoute);
 app.use("/api/arenas", arenasRoute);
 app.use("/api/chat", chatRoute);
-app.use("/api/test", testRoute);
+app.use("/api/shop", shopRoute);
 
-var port = process.env.PORT || 3001;
+
+const port = process.env.PORT || 3001;
 http.listen(port, () => console.log(`server running on ${port}`));
 
 const io = socketIO(http, {

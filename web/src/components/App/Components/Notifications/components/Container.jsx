@@ -25,7 +25,7 @@ const Container = () => {
       axios.patch(`${environment.apiUrl}/api/noti/readNotification`, {
         token: token,
       });
-    }, 3000);
+    }, 5000);
   }, [isVisible]);
 
   const closeNotifications = () => dispatch(notificationsActions.close());

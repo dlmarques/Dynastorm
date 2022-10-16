@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styles from "./home.module.scss";
 import { useSelector } from "react-redux";
 import { convert } from "../../../../utils/numbersConvert";
+import Item from "./Shop/Item";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [items, setItems] = useState();
   const user = useSelector((state) => state.user.user);
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
     }, 600);
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/shop/getShopItems")
+      .then((res) => setItems(res.data));
   }, []);
 
   return (
@@ -19,8 +28,16 @@ const Home = () => {
         <>
           <h1>Welcome back {user && user.name}</h1>
           <div className={styles.content}>
-            <div className={styles.colComingSoon}>
-              <h6>Coming soon...</h6>
+            <div className={styles.shopContainer}>
+              <div className={styles.shop}>
+                {items.map((item) => (
+                  <Item
+                    id={item.id}
+                    price={item.priceInCents}
+                    name={item.description}
+                  />
+                ))}
+              </div>
             </div>
             <div className={styles.col}>
               <div className={styles.user}>
