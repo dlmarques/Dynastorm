@@ -4,6 +4,7 @@ import styles from "./home.module.scss";
 import { useSelector } from "react-redux";
 import { convert } from "../../../../utils/numbersConvert";
 import Item from "./Shop/Item";
+import { environment } from "../../../../environment/environment";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,10 +18,10 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/shop/getShopItems")
+      .get(`${environment.apiUrl}/api/shop/getShopItems`)
       .then((res) => setItems(res.data));
   }, []);
-
+  console.log(items);
   return (
     <div className={styles["home-container"]}>
       {isLoading && <h1>Loading...</h1>}
