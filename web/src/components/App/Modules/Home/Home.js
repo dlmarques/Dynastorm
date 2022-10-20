@@ -30,13 +30,14 @@ const Home = () => {
           <div className={styles.content}>
             <div className={styles.shopContainer}>
               <div className={styles.shop}>
-                {items.map((item) => (
-                  <Item
-                    id={item.id}
-                    price={item.priceInCents}
-                    name={item.description}
-                  />
-                ))}
+                {items &&
+                  items.map((item) => (
+                    <Item
+                      id={item.id}
+                      price={item.priceInCents}
+                      name={item.description}
+                    />
+                  ))}
               </div>
             </div>
             <div className={styles.col}>
