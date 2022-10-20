@@ -2,11 +2,12 @@ import React from "react";
 import axios from "axios";
 import Button from "../../../Components/Button/Button";
 import styles from "./item.module.scss";
+import { environment } from "../../../../../environment/environment";
 
 const Item = ({ id, name, price }) => {
   const checkout = () => {
     axios
-      .post("http://localhost:3001/api/shop/checkout", {
+      .post(`${environment.apiUrl}/api/shop/checkout`, {
         item: [{ id: id, quantity: 1 }],
       })
       .then((res) => {
