@@ -20,6 +20,7 @@ const notificationRoute = require("./routes/notification");
 const arenasRoute = require("./routes/arenas");
 const chatRoute = require("./routes/chat");
 const shopRoute = require("./routes/shop");
+const settingsRoute = require("./routes/settings");
 
 
 
@@ -53,6 +54,7 @@ app.use("/api/noti", notificationRoute);
 app.use("/api/arenas", arenasRoute);
 app.use("/api/chat", chatRoute);
 app.use("/api/shop", shopRoute);
+app.use("/api/settings", settingsRoute);
 
 
 const port = process.env.PORT || 3001;
