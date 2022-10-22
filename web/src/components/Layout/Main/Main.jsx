@@ -15,6 +15,7 @@ import Alert from "../../App/Components/Alert/Alert";
 
 import Profile from "./components/Profile";
 import styles from "./main.module.scss";
+import Settings from "../../App/Modules/Settings/Settings";
 
 const Main = ({ background, isNew }) => {
   const alert = useSelector((state) => state.alert.alert);
@@ -41,6 +42,7 @@ const Main = ({ background, isNew }) => {
                 <Route path="/inventory" element={<Inventory />} />
                 <Route path="/healer" element={<Healer />} />
                 <Route path="/chat" element={<Chat />} />
+                <Route path="/settings" element={<Settings />} />
               </Routes>
             )}
           </div>

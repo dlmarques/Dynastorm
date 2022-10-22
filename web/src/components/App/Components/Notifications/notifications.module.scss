@@ -1,9 +1,11 @@
 .notifications {
+  padding-left: 20px;
   position: relative;
   z-index: 98;
   svg {
     color: #fff;
     font-size: 2rem;
+    cursor: pointer;
   }
 
   .redDot {

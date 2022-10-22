@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Notifications from "../../../App/Components/Notifications/Notifications";
 import styles from "./profile.module.scss";
@@ -16,8 +17,9 @@ const Profile = () => {
               <span>
                 <p className={styles.money}>${Math.floor(user.money)}</p>
               </span>
-
-              <img src={user && user.avatar} alt="avatar" />
+              <Link to="/app/settings">
+                <img src={user && user.avatar} alt="avatar" />
+              </Link>
             </div>
           </>
         )}
