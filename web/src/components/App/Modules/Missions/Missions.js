@@ -10,7 +10,7 @@ const Missions = () => {
   const busy = useSelector((state) => state.user.missions);
   const level = useSelector((state) => state.user.level.level);
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     axios
       .post(`${environment.apiUrl}/api/missions/getMissions`, {
         token: token,

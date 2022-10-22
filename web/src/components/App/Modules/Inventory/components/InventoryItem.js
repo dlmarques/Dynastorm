@@ -11,7 +11,7 @@ import { environment } from "../../../../../environment/environment";
 const InventoryItem = ({ name, skill, quantity, price, id, keyname }) => {
   const dispatch = useDispatch();
   const sellItem = async () => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     let fetch = axios.patch(`${environment.apiUrl}/api/inventory/sellItem`, {
       token: token,
       id: id,

@@ -6,6 +6,8 @@ const alertSlice = createSlice({
     alert: {
       title: null,
       message: null,
+      confirm: false,
+      confirmed: false,
     },
   },
   reducers: {
@@ -14,12 +16,19 @@ const alertSlice = createSlice({
       state.alert = {
         title: alert.title,
         message: alert.message,
+        confirm: alert.confirm,
+        request: alert.request,
       };
     },
     deleteAlert(state) {
       state.alert = {
         title: null,
         message: null,
+      };
+    },
+    confirm(state) {
+      state.alert = {
+        confirmed: true,
       };
     },
   },

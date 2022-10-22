@@ -18,7 +18,7 @@ const Mid = () => {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     axios
       .post(`${environment.apiUrl}/api/user/checkBusy`, {
         token: token,
@@ -27,7 +27,7 @@ const Mid = () => {
   }, []);
 
   const request = () => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     axios
       .post(`${environment.apiUrl}/api/battles/fightBoss`, {
         token: token,

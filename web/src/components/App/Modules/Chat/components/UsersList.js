@@ -9,7 +9,7 @@ const UsersList = () => {
   const [users, setUsers] = useState();
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     axios
       .post(`${environment.apiUrl}/api/chat/conn`, {
         token,

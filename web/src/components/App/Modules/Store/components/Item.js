@@ -23,7 +23,7 @@ const Item = ({ img }) => {
   const user = useSelector((state) => state.user.user);
 
   const buyItem = async () => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     const price = item.price * quantity;
 
     let response = axios.post(`${environment.apiUrl}/api/inventory/addItem`, {
@@ -38,11 +38,8 @@ const Item = ({ img }) => {
 
     if (user.money >= price) {
       try {
-        const registerResponse = await response;
+        await response;
         dispatch(shopSliceActions.buy());
-        if (registerResponse.data === "success") {
-          console.log("success");
-        }
         setQuantity(1);
       } catch (err) {
         console.error(err);

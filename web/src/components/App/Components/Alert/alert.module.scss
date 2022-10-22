@@ -1,7 +1,7 @@
 .errorContainer {
   background-color: #0e0e0e;
-  height: 200px;
-  width: 400px;
+  height: 250px;
+  width: 600px;
   z-index: 99;
   position: absolute;
   display: flex;
@@ -45,5 +45,12 @@
       background-color: #fff;
       color: #0e0e0e;
     }
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
   }
 }

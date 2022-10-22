@@ -21,7 +21,7 @@ const Home = () => {
       .get(`${environment.apiUrl}/api/shop/getShopItems`)
       .then((res) => setItems(res.data));
   }, []);
-  console.log(items);
+
   return (
     <div className={styles["home-container"]}>
       {isLoading && <h1>Loading...</h1>}

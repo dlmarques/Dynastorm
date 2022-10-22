@@ -13,7 +13,7 @@ const Container = () => {
   const isVisible = useSelector((state) => state.notifications.isVisible);
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     axios
       .post(`${environment.apiUrl}/api/noti/getNotifications`, {
         token: token,
@@ -21,7 +21,7 @@ const Container = () => {
       .then((response) => setNotifications(response.data));
     setTimeout(() => {
       dispatch(notificationsActions.deleteNotifications());
-      const token = localStorage.getItem("authToken");
+      const token = sessionStorage.getItem("authToken");
       axios.patch(`${environment.apiUrl}/api/noti/readNotification`, {
         token: token,
       });

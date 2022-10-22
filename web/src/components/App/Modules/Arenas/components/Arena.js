@@ -19,7 +19,7 @@ const Arena = () => {
 
   const startFight = () => {
     if (user.health > 0) {
-      const token = localStorage.getItem("authToken");
+      const token = sessionStorage.getItem("authToken");
       axios.patch(`${environment.apiUrl}/api/arenas/startFight`, {
         id: enemy.id,
         token: token,

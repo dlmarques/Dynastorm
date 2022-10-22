@@ -10,7 +10,6 @@ const Opponent = ({ bossName, stats, hp, boss, id }) => {
         <img
           src={require(`../../../../../assets/bosses/${boss}.png`)}
           alt="boss"
-          onClick={() => console.log(id)}
         />
         <Progress id="hp" min="0" max="100" value={hp && hp} styles="hp" />
       </div>

@@ -27,7 +27,7 @@ const HealerItem = ({ img, id }) => {
   }, []);
 
   const healing = async () => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
 
     if (user.money < price) {
       dispatch(
@@ -48,11 +48,10 @@ const HealerItem = ({ img, id }) => {
         );
       } else {
         try {
-          const data = await response;
-          console.log(data);
+          await response;
           dispatch(shopSliceActions.buy());
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       }
     }

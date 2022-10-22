@@ -1,11 +1,71 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import Button from "../../Components/Button/Button";
 import styles from "./settings.module.scss";
+import { environment } from "../../../../environment/environment";
+import { alertActions } from "../../../../store/ui/alert";
 
 const Settings = () => {
+  const dispatch = useDispatch();
+  const [password, setPassword] = useState();
+  const [newPassword, setNewPassword] = useState();
   const user = useSelector((state) => state.user.user);
-  console.log(user);
+  const alert = useSelector((state) => state.alert.alert);
+
+  useEffect(() => {
+    if (alert.confirmed) {
+      deleteAccount();
+    }
+  }, [alert.confirmed]);
+
+  const changePassword = () => {
+    const token = sessionStorage.getItem("authToken");
+    axios
+      .patch(`${environment.apiUrl}/api/settings/changePassword`, {
+        token,
+        password,
+        newPassword,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          sessionStorage.removeItem("authToken");
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        dispatch(
+          alertActions.setAlert({
+            message: err.response.data,
+          })
+        );
+      });
+  };
+
+  const deleteAccount = () => {
+    const token = sessionStorage.getItem("authToken");
+
+    axios
+      .post(`${environment.apiUrl}/api/settings/deleteAccount`, {
+        token: token,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          sessionStorage.removeItem("authToken");
+          window.location.reload();
+        }
+      });
+  };
+
+  const confirmDelete = () => {
+    dispatch(
+      alertActions.setAlert({
+        message: "Are you sure do you want delete your account?",
+        confirm: true,
+      })
+    );
+  };
+
   return (
     <div className={styles["settings-container"]}>
       <img src={user.avatar} alt="avatar" />
@@ -24,16 +84,24 @@ const Settings = () => {
           id="password"
           name="password"
           placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+          autoComplete="off"
         />
         <input
           type="password"
           id="newPassword"
           name="newPassword"
           placeholder="New Password"
+          onChange={(e) => setNewPassword(e.target.value)}
+          autoComplete="off"
         />
       </div>
-      <Button btn="changePasswordBtn">Change password</Button>
-      <span id={styles.delete}>Delete account</span>
+      <Button btn="changePasswordBtn" onClick={() => changePassword()}>
+        Change password
+      </Button>
+      <span id={styles.delete} onClick={() => confirmDelete()}>
+        Delete account
+      </span>
     </div>
   );
 };

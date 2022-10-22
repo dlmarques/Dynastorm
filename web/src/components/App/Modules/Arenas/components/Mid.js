@@ -12,7 +12,7 @@ const Mid = () => {
   const enemy = useSelector((state) => state.enemy.enemy);
 
   const attack = async (attack) => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     setStatus(true);
     axios
       .patch(`${environment.apiUrl}/api/arenas/attackEnemy`, {
@@ -20,7 +20,7 @@ const Mid = () => {
         id: enemy.id,
         attack: attack,
       })
-      .then((response) => console.log(response.data));
+      .then((response) => response.data);
     setTimeout(() => {
       axios
         .patch(`${environment.apiUrl}/api/arenas/counterAttack`, {

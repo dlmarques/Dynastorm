@@ -32,7 +32,7 @@ const App = () => {
   const missions = useSelector((state) => state.user.missions);
   const enemy = useSelector((state) => state.enemy.enemy);
   const reload = useSelector((state) => state.enemy.reload);
-  const token = localStorage.getItem("authToken");
+  const token = sessionStorage.getItem("authToken");
   schedule.scheduleJob("0 0 * * *", () => {
     setNextDay(!nextDay);
   });

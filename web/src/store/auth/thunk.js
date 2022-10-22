@@ -1,8 +1,8 @@
 import { authActions } from "./auth";
 
 export const logout = (dispatch) => {
-  localStorage.removeItem("authToken");
-  if (!localStorage.getItem("authToken")) {
+  sessionStorage.removeItem("authToken");
+  if (!sessionStorage.getItem("authToken")) {
     dispatch(authActions.logout());
   }
 };

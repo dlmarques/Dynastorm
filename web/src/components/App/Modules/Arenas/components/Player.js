@@ -13,7 +13,7 @@ const Player = ({ name, xp, avatar, id }) => {
   const reload = useSelector((state) => state.enemy.reload);
   const enemy = useSelector((state) => state.enemy.enemy);
   const [busy, setBusy] = useState(false);
-  const token = localStorage.getItem("authToken");
+  const token = sessionStorage.getItem("authToken");
 
   useEffect(() => {
     axios

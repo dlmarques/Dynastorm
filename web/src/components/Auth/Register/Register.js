@@ -26,14 +26,13 @@ const Register = () => {
   const isShown = useSelector((state) => state.avatars.isShown);
 
   useEffect(() => {
-    localStorage.authToken
+    sessionStorage.authToken
       ? dispatch(authActions.login())
       : dispatch(authActions.logout());
   }, []);
 
   const avatarBoxHandler = () => {
     dispatch(avatarActions.toggle());
-    console.log(avatar);
   };
 
   const selectAvatar = (avatar) => {
@@ -50,7 +49,7 @@ const Register = () => {
           message: "Username should have 6 characters",
         })
       );
-      console.log(error);
+      console.errorconsole.log(error);
     } else if (password.length < 8) {
       dispatch(
         alertActions.setAlert({
@@ -58,7 +57,7 @@ const Register = () => {
           message: "Password should have 8 characters",
         })
       );
-      console.log(error);
+      console.error(error);
     } else {
       let response = axios.post(`${environment.apiUrl}/api/auth/register`, {
         username: username,

@@ -18,7 +18,7 @@ const Login = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   useEffect(() => {
-    localStorage.authToken
+    sessionStorage.authToken
       ? dispatch(authActions.login())
       : dispatch(authActions.logout());
   }, []);
@@ -35,7 +35,7 @@ const Login = () => {
       const loginResponse = await response;
       const authToken = loginResponse.data.authToken;
       if (authToken) {
-        localStorage.setItem("authToken", authToken);
+        sessionStorage.setItem("authToken", authToken);
         dispatch(authActions.login());
         setEmail("");
         setPassword("");

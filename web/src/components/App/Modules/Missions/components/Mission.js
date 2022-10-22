@@ -13,7 +13,7 @@ const Mission = ({ id, name, status, xp, money, duration, startedTime }) => {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     axios
       .post(`${environment.apiUrl}/api/user/checkBusy`, {
         token: token,
@@ -22,7 +22,7 @@ const Mission = ({ id, name, status, xp, money, duration, startedTime }) => {
   }, []);
 
   const startMission = async () => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     if (!busy) {
       setTimeout(() => {
         dispatch(userActions.startMission());

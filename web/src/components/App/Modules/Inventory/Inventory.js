@@ -9,7 +9,7 @@ const Inventory = () => {
   const [items, setItems] = useState();
   const change = useSelector((state) => state.shop.purchased);
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     axios
       .post(`${environment.apiUrl}/api/inventory/getItems`, {
         token: token,

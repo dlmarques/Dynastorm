@@ -15,7 +15,7 @@ const Notifications = () => {
   const isVisible = useSelector((state) => state.notifications.isVisible);
 
   const toggleNotifications = () => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     if (isVisible) {
       dispatch(notificationsActions.close());
     } else {

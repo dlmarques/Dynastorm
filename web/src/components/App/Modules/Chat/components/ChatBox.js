@@ -39,7 +39,6 @@ const ChatBox = () => {
         setArrivalMessage({ fromSelf: false, message: msg });
       });
     }
-    console.log("arrived");
   }, []);
 
   useEffect(() => {

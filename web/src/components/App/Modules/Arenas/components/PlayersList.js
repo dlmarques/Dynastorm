@@ -9,7 +9,7 @@ const PlayersList = () => {
   const enemy = useSelector((state) => state.enemy.enemy);
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     axios
       .post(`${environment.apiUrl}/api/arenas/getAllUsers`, {
         token: token,
