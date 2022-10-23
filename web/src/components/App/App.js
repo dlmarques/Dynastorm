@@ -18,12 +18,12 @@ import Trigger from "../App/Components/Trigger/Trigger";
 import { notificationsActions } from "../../store/ui/notifications";
 import { currentSenderActions } from "../../store/chat/currentSender";
 import MobileMenu from "../Layout/MobileMenu/MobileMenu";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const dispatch = useDispatch();
   const TWOSECONDS_MS = 2000;
   const [nextDay, setNextDay] = useState(false);
-  const changed = useSelector((state) => state.user.chnageRoute);
   const shouldFetch = useRef(true);
   const user = useSelector((state) => state.user.user);
   const battle = useSelector((state) => state.user.battles);
@@ -150,7 +150,7 @@ const App = () => {
                         data-title={link}
                         className={styles["link"]}
                         to={`/app/${link}`}
-                        onClick={changeRoute}
+                        onClick={() => changeRoute}
                       >
                         {link}
                       </Link>
@@ -162,6 +162,7 @@ const App = () => {
         </Sidebar>
         <MobileMenu />
         <Main background="app" isNew={isNew} />
+        <ToastContainer />
         <Trigger />
       </div>
     </>

@@ -7,6 +7,7 @@ import { userActions } from "../../../../../store/auth/user";
 import Button from "../../../Components/Button/Button";
 import { alertActions } from "../../../../../store/ui/alert";
 import { environment } from "../../../../../environment/environment";
+import { toast } from "react-toastify";
 
 const Mission = ({ id, name, status, xp, money, duration, startedTime }) => {
   const dispatch = useDispatch();
@@ -24,6 +25,16 @@ const Mission = ({ id, name, status, xp, money, duration, startedTime }) => {
   const startMission = async () => {
     const token = sessionStorage.getItem("authToken");
     if (!busy) {
+      toast.info(
+        "You have start a mission, you are busy from now until the mission ends",
+        {
+          position: toast.POSITION.TOP_RIGHT,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        }
+      );
       setTimeout(() => {
         dispatch(userActions.startMission());
         dispatch(userActions.setBusy());
@@ -31,6 +42,13 @@ const Mission = ({ id, name, status, xp, money, duration, startedTime }) => {
       setTimeout(() => {
         dispatch(userActions.startMission());
         dispatch(userActions.stopBusy());
+        toast.success("Mission completed", {
+          position: toast.POSITION.TOP_RIGHT,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       }, duration * 61 * 1000);
       axios.patch(`${environment.apiUrl}/api/missions/startMission`, {
         id: id,
@@ -63,7 +81,7 @@ const Mission = ({ id, name, status, xp, money, duration, startedTime }) => {
           {name}
         </h2>
         <h3>
-          This mission gives you {xp}xp and ${money}
+          This mission gives you {xp}xp and OC{money}
         </h3>
       </div>
       <div className="right">
@@ -76,7 +94,7 @@ const Mission = ({ id, name, status, xp, money, duration, startedTime }) => {
             Completed
           </Button>
         ) : (
-          <Button btn="missionBtn" onClick={startMission}>
+          <Button btn="missionBtn" onClick={() => startMission}>
             Start
           </Button>
         )}

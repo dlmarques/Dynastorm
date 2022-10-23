@@ -95,7 +95,7 @@ const Register = () => {
               type="button"
               data-testid="avatarButton"
               className={styles["avatar-btn"]}
-              onClick={avatarBoxHandler}
+              onClick={() => avatarBoxHandler}
               disabled={error & error.message}
             >
               {avatar && <img src={avatar} alt="default avatar" />}

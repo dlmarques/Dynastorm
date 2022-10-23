@@ -6,10 +6,10 @@ const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 const bodyParser = require('body-parser');
 
 const storeItems = new Map([
-  [1, {id: 1, priceInCents: 100, name: "Buy in-game $1000", description: '$1000' }],
-  [2, {id: 2, priceInCents: 200, name: "Buy in-game $2000", description: '$2000' }],
-  [3, {id: 3, priceInCents: 500, name: "Buy in-game $5000", description: '$5000' }],
-  [4, {id: 4, priceInCents: 1000, name: "Buy in-game $10000", description: '$10000' }],
+  [1, {id: 1, priceInCents: 100, name: "Buy in-game $1000", description: 'OC1000' }],
+  [2, {id: 2, priceInCents: 200, name: "Buy in-game $2000", description: 'OC2000' }],
+  [3, {id: 3, priceInCents: 500, name: "Buy in-game $5000", description: 'OC5000' }],
+  [4, {id: 4, priceInCents: 1000, name: "Buy in-game $10000", description: 'OC10000' }],
 ]);
 
 router.get("/getShopItems", (req, res) => {

@@ -10,6 +10,7 @@ import Button from "../../../Components/Button/Button";
 import Tooltip from "../../../Components/Tooltip/Tooltip";
 import { convert } from "../../../../../utils/numbersConvert";
 import { environment } from "../../../../../environment/environment";
+import { toast } from "react-toastify";
 
 const Arena = () => {
   const dispatch = useDispatch();
@@ -25,10 +26,24 @@ const Arena = () => {
         token: token,
       });
       dispatch(enemyActions.startFight());
+      toast.info(`You start a fight against ${enemy.name}`, {
+        position: toast.POSITION.TOP_RIGHT,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+      });
     } else {
       dispatch(
         alertActions.setAlert({ title: "Error", message: "You don't have hp" })
       );
+      toast.error(`An error occurred`, {
+        position: toast.POSITION.TOP_RIGHT,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+      });
     }
   };
 
@@ -50,7 +65,7 @@ const Arena = () => {
         <h2>{enemy.name && `@${enemy.name}`}</h2>
         {enemy.name && !enemy.fight ? (
           <div className={styles.buttons}>
-            <Button btn="arenasBtn" onClick={startFight}>
+            <Button btn="arenasBtn" onClick={() => startFight}>
               Start Fight
             </Button>
             <span>

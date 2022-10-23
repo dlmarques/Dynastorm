@@ -69,7 +69,7 @@ const Player = ({ name, xp, avatar, id }) => {
   };
 
   return (
-    <div className={styles.player} onClick={selectEnemy}>
+    <div className={styles.player} onClick={() => selectEnemy}>
       <img src={avatar} alt="avatar" />
       <div className={styles.text}>
         <h2>{name}</h2>

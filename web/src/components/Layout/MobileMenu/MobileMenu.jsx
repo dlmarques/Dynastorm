@@ -37,8 +37,8 @@ const MobileMenu = () => {
       <header>
         <h2>Omenia</h2>
         <div className={styles.icons}>
-          <MdOutlineLogout onClick={endSession} />
-          <BiArrowToLeft onClick={closeMenu} />
+          <MdOutlineLogout onClick={() => endSession} />
+          <BiArrowToLeft onClick={() => closeMenu} />
         </div>
       </header>
       <nav className={styles.navMobileMenu}>
@@ -55,7 +55,7 @@ const MobileMenu = () => {
                         : styles["linkMobileMenu"]
                     }
                     to={`/app/${link}`}
-                    onClick={handleClick}
+                    onClick={() => handleClick}
                   >
                     {link}
                   </Link>

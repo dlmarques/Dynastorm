@@ -6,6 +6,7 @@ import { shopSliceActions } from "../../../../../store/shop/shopSlice";
 import Button from "../../../Components/Button/Button";
 import { alertActions } from "../../../../../store/ui/alert";
 import { environment } from "../../../../../environment/environment";
+import { toast } from "react-toastify";
 
 const HealerItem = ({ img, id }) => {
   const dispatch = useDispatch();
@@ -50,8 +51,21 @@ const HealerItem = ({ img, id }) => {
         try {
           await response;
           dispatch(shopSliceActions.buy());
+          toast.success(`Successfuly healed`, {
+            position: toast.POSITION.TOP_RIGHT,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
         } catch (error) {
-          console.error(error);
+          toast.error(`An error occurred`, {
+            position: toast.POSITION.TOP_RIGHT,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
         }
       }
     }
@@ -61,8 +75,8 @@ const HealerItem = ({ img, id }) => {
     <div className="item">
       <img src={img} alt="food" />
       <h2>Heal {heal}%</h2>
-      <Button onClick={healing} btn="healBtn">
-        Buy: ${price}
+      <Button onClick={() => healing()} btn="healBtn">
+        Buy: OC{price}
       </Button>
     </div>
   );

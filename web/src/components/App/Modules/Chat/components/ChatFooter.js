@@ -47,7 +47,7 @@ const ChatFooter = ({ socket, setMessages, messages }) => {
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeypress}
         />
-        <button type="button" onClick={handleSendMessage}>
+        <button type="button" onClick={() => handleSendMessage}>
           <FiSend />
         </button>
       </div>

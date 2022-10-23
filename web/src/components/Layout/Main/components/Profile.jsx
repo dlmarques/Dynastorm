@@ -15,7 +15,7 @@ const Profile = () => {
             <Notifications />
             <div className={styles.info}>
               <span>
-                <p className={styles.money}>${Math.floor(user.money)}</p>
+                <p className={styles.money}>OC{Math.floor(user.money)}</p>
               </span>
               <Link to="/app/settings">
                 <img src={user && user.avatar} alt="avatar" />

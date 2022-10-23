@@ -34,7 +34,7 @@ const Welcome = () => {
             </div>
 
             <div className={styles.nextArrow}>
-              <GiWideArrowDunk onClick={nextStep} />
+              <GiWideArrowDunk onClick={() => nextStep} />
             </div>
           </div>
         </div>

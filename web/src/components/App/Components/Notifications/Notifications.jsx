@@ -32,7 +32,7 @@ const Notifications = () => {
 
   return (
     <div className={styles.notifications}>
-      <IoIosNotifications onClick={toggleNotifications} />
+      <IoIosNotifications onClick={() => toggleNotifications} />
       {newNotifications && <div className={styles.redDot}></div>}
     </div>
   );

@@ -15,7 +15,7 @@ const Trigger = () => {
   };
 
   return (
-    <div className="trigger" onClick={handler}>
+    <div className="trigger" onClick={() => handler}>
       <HiOutlineMenu
         className={
           openMenu ? "animate__animated animate__rotateIn" : "menu-trigger"

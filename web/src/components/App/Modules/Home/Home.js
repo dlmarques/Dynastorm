@@ -55,7 +55,7 @@ const Home = () => {
                         </strong>
                       </p>
                       <p className={styles.moneyInfo}>
-                        $
+                        OC
                         <strong className={styles.moneyValue}>
                           {Math.floor(user.money)}
                         </strong>

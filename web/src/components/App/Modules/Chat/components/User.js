@@ -16,14 +16,14 @@ const User = ({ user }) => {
 
   return (
     <>
-      <div className={styles.user} onClick={selectChat}>
+      <div className={styles.user} onClick={() => selectChat}>
         {user && (
           <>
             <img src={user.avatar} alt="avatar" /> <h4>{user.username}</h4>
           </>
         )}
       </div>
-      <div className={styles.userMobile} onClick={selectChat}>
+      <div className={styles.userMobile} onClick={() => selectChat}>
         {user && (
           <div
             onMouseEnter={() => setIsVisible(true)}

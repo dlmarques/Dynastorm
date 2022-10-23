@@ -9,6 +9,8 @@ import Counter from "./Counter";
 import Product from "./Product";
 import { alertActions } from "../../../../../store/ui/alert";
 import { environment } from "../../../../../environment/environment";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Item = ({ img }) => {
   const dispatch = useDispatch();
@@ -41,6 +43,13 @@ const Item = ({ img }) => {
         await response;
         dispatch(shopSliceActions.buy());
         setQuantity(1);
+        toast.success("Success", {
+          position: toast.POSITION.TOP_RIGHT,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       } catch (err) {
         console.error(err);
       }
@@ -51,6 +60,13 @@ const Item = ({ img }) => {
         })
       );
     }
+    toast.error("An error occurred", {
+      position: toast.POSITION.TOP_RIGHT,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "dark",
+    });
   };
 
   return (
@@ -58,8 +74,8 @@ const Item = ({ img }) => {
       <Product img={img} quantity={quantity} item={item} setItem={setItem} />
       <Counter quantity={quantity} setQuantity={setQuantity} />
       <div>
-        <button className={styles.buy} onClick={buyItem}>
-          {item.price && `$${item.price * quantity}`}
+        <button className={styles.buy} onClick={() => buyItem}>
+          {item.price && `OC${item.price * quantity}`}
         </button>
       </div>
     </div>

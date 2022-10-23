@@ -8,7 +8,7 @@ import Button from "../../../Components/Button/Button";
 import "./mid.scss";
 import { alertActions } from "../../../../../store/ui/alert";
 import { environment } from "../../../../../environment/environment";
-
+import { toast } from "react-toastify";
 const Mid = () => {
   const dispatch = useDispatch();
   const boss = useSelector((state) => state.bosses.bosses);
@@ -43,11 +43,25 @@ const Mid = () => {
             dispatch(battlesActions.setStatus("win"));
             dispatch(userActions.defeatBoss());
             dispatch(userActions.battle());
+            toast.success("You win", {
+              position: toast.POSITION.TOP_RIGHT,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            });
           }, 5000);
         } else {
           setTimeout(() => {
             dispatch(battlesActions.setStatus("defeat"));
             dispatch(userActions.battle());
+            toast.error("You lose", {
+              position: toast.POSITION.TOP_RIGHT,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "dark",
+            });
           }, 5000);
         }
       });
@@ -117,7 +131,7 @@ const Mid = () => {
             ? "btnBattleDefeat"
             : "btnBattle"
         }
-        onClick={fightBoss}
+        onClick={() => fightBoss}
       >
         {status === "pending"
           ? "Fighting..."

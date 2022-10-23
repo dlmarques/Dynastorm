@@ -94,7 +94,7 @@ const Product = ({ img, item, setItem }) => {
       <img src={img} alt="store item" />
       <h2>{item.name}</h2>
       <h3>
-        Increase your {item.skill} by {boost}%
+        Increase your {item.skill} by {boost && boost}%
       </h3>
     </>
   );
