@@ -5,6 +5,7 @@ import Button from "../../Components/Button/Button";
 import styles from "./settings.module.scss";
 import { environment } from "../../../../environment/environment";
 import { alertActions } from "../../../../store/ui/alert";
+import { toast } from "react-toastify";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -29,11 +30,27 @@ const Settings = () => {
       })
       .then((res) => {
         if (res.status === 200) {
-          sessionStorage.removeItem("authToken");
-          window.location.reload();
+          toast.success(`Changed, you will be redirected to login`, {
+            position: toast.POSITION.TOP_RIGHT,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          });
+          setTimeout(() => {
+            sessionStorage.removeItem("authToken");
+            window.location.reload();
+          }, 5000);
         }
       })
       .catch((err) => {
+        toast.error(`An error occurred`, {
+          position: toast.POSITION.TOP_RIGHT,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
         dispatch(
           alertActions.setAlert({
             message: err.response.data,
@@ -54,6 +71,15 @@ const Settings = () => {
           sessionStorage.removeItem("authToken");
           window.location.reload();
         }
+      })
+      .catch((err) => {
+        toast.error(`An error occurred`, {
+          position: toast.POSITION.TOP_RIGHT,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+        });
       });
   };
 
