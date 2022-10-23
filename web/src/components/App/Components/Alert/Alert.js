@@ -15,7 +15,6 @@ const Alert = () => {
     dispatch(alertActions.confirm());
   };
 
-  console.log(alert);
   return (
     <div className={styles.errorContainer}>
       <h2>{alert && alert.message}</h2>
