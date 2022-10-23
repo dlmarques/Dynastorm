@@ -9,7 +9,7 @@ export function convert(number, decPlaces) {
     if (size <= number) {
       number = Math.round((number * decPlaces) / size) / decPlaces;
 
-      if (number == 1000 && i < abbrev.length - 1) {
+      if (number === 1000 && i < abbrev.length - 1) {
         number = 1;
         i++;
       }

@@ -150,7 +150,7 @@ const App = () => {
                         data-title={link}
                         className={styles["link"]}
                         to={`/app/${link}`}
-                        onClick={() => changeRoute}
+                        onClick={() => changeRoute()}
                       >
                         {link}
                       </Link>

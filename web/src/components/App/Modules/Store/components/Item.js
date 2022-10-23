@@ -74,7 +74,7 @@ const Item = ({ img }) => {
       <Product img={img} quantity={quantity} item={item} setItem={setItem} />
       <Counter quantity={quantity} setQuantity={setQuantity} />
       <div>
-        <button className={styles.buy} onClick={() => buyItem}>
+        <button className={styles.buy} onClick={() => buyItem()}>
           {item.price && `OC${item.price * quantity}`}
         </button>
       </div>

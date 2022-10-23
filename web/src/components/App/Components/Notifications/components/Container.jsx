@@ -39,7 +39,7 @@ const Container = () => {
       }
     >
       <div className={styles.icon}>
-        <BiArrowToLeft onClick={() => closeNotifications} />
+        <BiArrowToLeft onClick={() => closeNotifications()} />
       </div>
       <div className={styles.notificationsContent}>
         {notifications &&

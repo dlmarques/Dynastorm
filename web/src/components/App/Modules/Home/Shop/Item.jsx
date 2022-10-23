@@ -28,7 +28,7 @@ const Item = ({ id, name, price }) => {
     <div className={styles.shopItem}>
       <img src={require("../../../../../assets/coins/coin.png")} alt="coin" />
       <p>{name}</p>
-      <Button onClick={() => checkout} btn="shopBtn">{`$${
+      <Button onClick={() => checkout()} btn="shopBtn">{`$${
         price * 0.01
       }`}</Button>
     </div>

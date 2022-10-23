@@ -54,7 +54,7 @@ const InventoryItem = ({ name, skill, quantity, price, id, keyname }) => {
         </h1>
         <h2>{skill}</h2>
         <h3>Qt: {quantity}</h3>
-        <Button btn="inventoryBtn" onClick={() => sellItem}>
+        <Button btn="inventoryBtn" onClick={() => sellItem()}>
           Sell: OC{price / 2}
         </Button>
       </div>

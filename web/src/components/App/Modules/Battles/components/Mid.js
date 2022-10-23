@@ -131,7 +131,7 @@ const Mid = () => {
             ? "btnBattleDefeat"
             : "btnBattle"
         }
-        onClick={() => fightBoss}
+        onClick={() => fightBoss()}
       >
         {status === "pending"
           ? "Fighting..."

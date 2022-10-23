@@ -14,9 +14,9 @@ const Counter = ({ quantity, setQuantity }) => {
 
   return (
     <div className={styles.counter}>
-      <button onClick={() => decrement}>-</button>
+      <button onClick={() => decrement()}>-</button>
       <h4>{quantity}</h4>
-      <button onClick={() => increment}>+</button>
+      <button onClick={() => increment()}>+</button>
     </div>
   );
 };

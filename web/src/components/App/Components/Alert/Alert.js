@@ -20,7 +20,7 @@ const Alert = () => {
     <div className={styles.errorContainer}>
       <h2>{alert && alert.message}</h2>
       <div className={styles.buttons}>
-        <button class={styles.btn} onClick={() => closeAlert}>
+        <button class={styles.btn} onClick={() => closeAlert()}>
           Close
         </button>
         {alert.confirm && (

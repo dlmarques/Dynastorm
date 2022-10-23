@@ -8,7 +8,7 @@ const Button = (props) => {
       role={props.role}
       className={styles[props.btn]}
       type={props.type}
-      onClick={props.onClick}
+      onClick={() => props.onClick()}
       disabled={props.disabled}
     >
       {props.children}

@@ -38,7 +38,7 @@ const Perk = ({ image }) => {
 
   return (
     <div className={styles["perk-container"]}>
-      <img src={image} alt="skill_image" onClick={() => setPerk} />
+      <img src={image} alt="skill_image" onClick={() => setPerk()} />
       <h3>{perkName === "magicResist" ? "magic resist" : perkName}</h3>
       <h4>
         Increase {perkName === "magicResist" ? "magic resist" : perkName} by 50%

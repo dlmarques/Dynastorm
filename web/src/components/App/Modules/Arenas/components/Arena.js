@@ -65,7 +65,7 @@ const Arena = () => {
         <h2>{enemy.name && `@${enemy.name}`}</h2>
         {enemy.name && !enemy.fight ? (
           <div className={styles.buttons}>
-            <Button btn="arenasBtn" onClick={() => startFight}>
+            <Button btn="arenasBtn" onClick={() => startFight()}>
               Start Fight
             </Button>
             <span>

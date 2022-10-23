@@ -23,7 +23,7 @@ const Arenas = () => {
     <div className={styles.container}>
       {enemy.fight ? (
         <div className={styles.fight}>
-          <BiArrowToLeft className={styles.exit} onClick={() => stopFight} />
+          <BiArrowToLeft className={styles.exit} onClick={() => stopFight()} />
           <Enemy />
           <Mid />
           <User />

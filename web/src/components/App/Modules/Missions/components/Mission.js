@@ -94,7 +94,7 @@ const Mission = ({ id, name, status, xp, money, duration, startedTime }) => {
             Completed
           </Button>
         ) : (
-          <Button btn="missionBtn" onClick={() => startMission}>
+          <Button btn="missionBtn" onClick={() => startMission()}>
             Start
           </Button>
         )}
