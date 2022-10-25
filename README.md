@@ -68,7 +68,7 @@ The client is deployed in Netlify, and server is deployed in Heroku.
 
 ## Authors
 
-* [**Daniel Marques**](https://github.com/PurpleBooth)
+* [**Daniel Marques**](https://dlmarques.com)
 
 
 ## Acknowledgments
