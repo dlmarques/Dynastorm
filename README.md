@@ -70,6 +70,9 @@ The client is deployed in Netlify, and server is deployed in Heroku.
 
 * [**Daniel Marques**](https://dlmarques.com)
 
+## License
+
+Copyright © 2022 dlmarques. All rights reserved.
 
 ## Acknowledgments
 
