@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: "https://omenia.onrender.com",
+  apiUrl: "https://omenia-server.onrender.com",
 };
